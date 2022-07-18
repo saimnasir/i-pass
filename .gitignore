@@ -370,3 +370,4 @@ MigrationBackup/
 /src/app/Koctas.Ustabilir.AdminPanel/appsettings.local.json
 /src/app/Koctas.Ustabilir.NotificationService/appsettings.Local.json
 /src/app/Patika.AuthenticationServer/appsettings.Local.json
+/src/client/.angular/cache/
