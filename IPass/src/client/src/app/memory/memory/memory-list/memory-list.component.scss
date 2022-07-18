@@ -1,0 +1,114 @@
+.mat-row:hover {
+  background: unset;
+  cursor: unset;
+}
+
+table {
+  width: 100%;
+}
+
+td,
+th {
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 200px;
+}
+
+.mat-header-cell {
+  color: brown;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.mat-header-row {
+  background: #EAF6F6;
+}
+
+.mat-paginator {
+
+  background: #EAF6F6;
+}
+
+
+.card-header {
+  background: radial-gradient(circle, rgba(149, 162, 228, 0.8883928571428571) 0%, rgba(228, 230, 158, 1) 39%, rgba(173, 240, 233, 0.7147233893557423) 100%);
+}
+
+.card-content {
+  background: #EAF6F6;
+  height: 74.5vh;
+}
+
+.mat-elevation-z1 {
+  background: #EAF6F6;
+}
+
+.example-container {
+  position: relative;
+}
+
+.example-table-container {
+  position: relative;
+  min-height: 200px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-rate-limit-reached {
+  max-width: 360px;
+  text-align: center;
+}
+
+section {
+  display: table;
+}
+
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+section {
+  display: table;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+.example-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}

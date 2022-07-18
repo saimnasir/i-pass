@@ -1,0 +1,118 @@
+.drawer-icon {
+  font-size: 2.05em;
+}
+
+.layout-wrapper {
+  .layout-topbar {
+    height: $topBarHeight;
+    background-color: $topbarBgColor;
+    border-bottom: 1px solid #ebebeb;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 999;
+
+    .menu-btn {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 10px 8px;
+
+      i {
+        font-size: 1.45em;
+        color: $topbarButtonTextColor;
+
+        &:hover {
+          color: $sidebarBgColor;
+        }
+      }
+    }
+
+    .logo {
+      display: inline-block;
+      margin: 0px 10px 0 15px;
+      width: 32px;
+      cursor: pointer;
+      max-height: 30px;
+      outline: 0;
+      //filter: brightness(0) invert(1);
+    }
+
+    .top-button {
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      height: 48px;
+      width: 48px !important;
+      color: $topbarButtonTextColor;
+
+      i {
+        font-size: 1.3em;
+      }
+    }
+
+    button:focus {
+      outline: none !important;
+    }
+
+    .profile-info {
+      float: right;
+      color: $topbarTextColor;
+      line-height: 1em;
+      margin-left: 10px;
+      padding-top: 3px;
+
+      span {
+        font-size: 0.8em;
+      }
+    }
+
+    .profile-photo {
+      margin: 0px 10px;
+      padding: 0px;
+      float: right;
+      cursor: pointer;
+    }
+
+    .topbar-button {
+      background: $topbarButtonBgColor;
+      border: none;
+      border-radius: 0;
+      outline: none;
+      color: $topbarButtonTextColor;
+      height: $topBarHeight;
+      min-width: $topBarHeight;
+      float: right;
+      display: block;
+      font-size: 1em;
+
+      i {
+        font-size: 1.2em;
+      }
+
+      .p-button-icon-right {
+        width: 1em;
+        height: 1em;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .layout-wrapper {
+    .layout-topbar {
+      .topbar-button {
+        .p-button-text {
+          display: none;
+        }
+
+        .p-button-icon-right {
+          right: 50%;
+          margin-right: -.6em;
+        }
+      }
+    }
+  }
+}

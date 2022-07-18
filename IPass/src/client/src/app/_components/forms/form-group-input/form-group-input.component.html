@@ -1,0 +1,11 @@
+<mat-form-field class="example-form-field" appearance="outline">
+    <mat-label>Phone</mat-label>
+    <input matInput [type]="type" [formControlName]="formControlName" [name]="formControlName" [required]="required"
+        [disabled]="readOnly" [min]="min" [max]="max" (keyup)="valueChange.emit(value)"
+        [placeholder]="placeholder ? (placeholder) : (label)">
+    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+    </button>
+    <mat-hint *ngIf="!value" align="start">Enter phone.</mat-hint>
+    <mat-error align="start">Please enter a valid phone number!</mat-error>
+</mat-form-field>

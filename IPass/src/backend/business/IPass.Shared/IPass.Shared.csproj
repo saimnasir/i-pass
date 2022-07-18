@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Delegates\**" />
+    <EmbeddedResource Remove="Delegates\**" />
+    <None Remove="Delegates\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Patika\Patika.IdentityServer.Shared\Patika.IdentityServer.Shared.csproj" />
+    <ProjectReference Include="..\Patika\Patika.Shared\Patika.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
+
+</Project>

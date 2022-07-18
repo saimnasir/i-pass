@@ -1,0 +1,45 @@
+<mat-card class="mem-card mat-elevation-z8 ">
+    <mat-card-header class="card-header ">
+        <mat-card-title>Organization Types</mat-card-title>
+        <mat-card-subtitle>Work, Online Sale, Banks etc.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+        <div class=" mat-elevation-z1"> 
+    <table mat-table [dataSource]="dataSource"  matSort >
+ 
+        <!-- title -->
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by title"> {{'title'}}</th>
+            <td mat-cell *matCellDef="let memory">
+                <span>{{memory.title}}</span>
+            </td>
+        </ng-container>
+       
+        <!-- Action -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef [style.width]="'50px'">
+                <button mat-icon-button aria-label="Add memory" [routerLink]="['/organization-types/add']">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" color="primary">add</mat-icon>
+                </button>
+            </th>
+            <td mat-cell *matCellDef="let memory" >
+                <button mat-icon-button aria-label="Update memory" [routerLink]="['/organization-types/edit/'+memory.id]"
+                    [title]="'Edit'">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+    <div class="mt-1" *ngIf="!organizationTypes|| organizationTypes.length === 0">
+        <label>No Data</label>
+    </div>
+</div> 
+</mat-card-content>
+<!-- <mat-card-footer class="card-footer">
+
+</mat-card-footer> -->
+</mat-card>

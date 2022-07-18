@@ -1,0 +1,40 @@
+<mat-card class="example-card">
+  <mat-card-header class="card-header ">
+    <mat-card-title>
+      <div *ngIf="isNew">
+        <h2>Create Organization Type</h2>
+      </div>
+      <div *ngIf="!isNew">
+        <h2>Update Organization Type</h2>
+      </div>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <div *ngIf="!isNew">
+        <div><span>{{title}} </span></div>
+      </div>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="card-content">
+
+    <mat-grid-list cols="1" rowHeight="60px">
+      <mat-grid-tile>
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput type="text" [(ngModel)]="model.title" required>
+          <button *ngIf="model.title" matSuffix mat-icon-button aria-label="Clear" (click)="model.title=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-hint>Başlık giriniz.</mat-hint>
+          <mat-error>Lütfen başlık giriniz</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-card-actions class="card-footer">
+      <div class="example-button-row">
+        <button mat-raised-button color="primary" (click)="save()">Kaydet</button>
+      </div>
+    </mat-card-actions>
+  </mat-card-footer>
+</mat-card> 

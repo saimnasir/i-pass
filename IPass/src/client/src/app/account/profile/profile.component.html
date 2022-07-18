@@ -1,0 +1,113 @@
+﻿<mat-tab-group>
+    <mat-tab label="Profile">
+        <mat-card class="example-card">
+            <mat-card-header class="card-header ">
+                <mat-card-subtitle>
+                    Edit Your Profile
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="card-content">
+
+                <mat-grid-list cols="2" rowHeight="60px">
+
+                    <mat-grid-tile>
+                        <mat-form-field class="example-form-field" appearance="outline">
+                            <mat-label>UserName</mat-label>
+                            <input matInput type="text" [(ngModel)]="model.user.userName" disabled >
+                            <!-- <button *ngIf="model.user.userName" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="model.user.userName=''">
+                                <mat-icon>close</mat-icon>
+                            </button> -->
+                            <mat-hint *ngIf="!model.user.userName">Enter userName.</mat-hint>
+                            <mat-error>UserName is required!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile>
+                        <mat-form-field class="example-form-field" appearance="outline">
+                            <mat-label>Phone</mat-label>
+                            <input matInput type="text" [(ngModel)]="model.user.phoneNumber" disabled >
+                            <!-- <button *ngIf="model.user.phoneNumber" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="model.user.phoneNumber=''">
+                                <mat-icon>close</mat-icon>
+                            </button> -->
+                            <mat-hint *ngIf="!model.user.phoneNumber">Enter phone.</mat-hint>
+                            <mat-error>Phone is required!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile>
+                        <mat-form-field class="example-form-field" appearance="outline">
+                            <mat-label>FirstName</mat-label>
+                            <input matInput type="text" [(ngModel)]="model.user.firstName" >
+                            <button *ngIf="model.user.firstName" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="model.user.firstName=''">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                            <mat-hint *ngIf="!model.user.firstName">Enter firstName.</mat-hint>
+                            <mat-error>FirstName is required!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile>
+                        <mat-form-field class="example-form-field" appearance="outline">
+                            <mat-label>LastName</mat-label>
+                            <input matInput type="text" [(ngModel)]="model.user.lastName" >
+                            <button *ngIf="model.user.lastName" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="model.user.lastName=''">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                            <mat-hint *ngIf="!model.user.lastName">Enter lastName.</mat-hint>
+                            <mat-error>LastName is required!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <label *ngIf="errorMessage"> {{errorMessage}} </label>
+            </mat-card-content>
+            <mat-card-footer>
+                <mat-card-actions class="card-footer">
+                    <div class="example-button-row">
+                        <button mat-raised-button color="primary" (click)="saveProfile()" [disabled]="!isUserChange()">Save Profile</button>
+                     </div>
+                </mat-card-actions>
+            </mat-card-footer>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Pin Code">
+        <mat-card class="example-card">
+            <mat-card-header class="card-header ">
+                <mat-card-subtitle>
+                    Set Pin Code
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="card-content">
+
+                <mat-grid-list cols="1" rowHeight="60px">
+
+                    <mat-grid-tile>
+                        <mat-form-field class="example-form-field" appearance="outline">
+                            <mat-label>Pin Code</mat-label>
+                            <input matInput type="number" [(ngModel)]="model.pinCode.code" required>
+                            <button *ngIf="model.pinCode.code" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="model.pinCode.code=''">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                            <mat-hint *ngIf="!model.pinCode.code">Enter pin code</mat-hint>
+                            <mat-error>Pin code is required!</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+
+                </mat-grid-list>
+                <label *ngIf="errorMessage"> {{errorMessage}} </label>
+            </mat-card-content>
+            <mat-card-footer>
+                <mat-card-actions class="card-footer">
+                    <div class="example-button-row">
+                        <button mat-raised-button color="primary" (click)="savePinCode()" [disabled]="!isPinCodeChange()" >Save Pin</button>
+                     </div>
+                </mat-card-actions>
+            </mat-card-footer>
+        </mat-card>
+    </mat-tab> 
+</mat-tab-group>

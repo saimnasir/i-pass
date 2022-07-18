@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+
+		<PackageReference Include="AutoMapper" Version="11.0.1" />
+		<PackageReference Include="AutoMapper.Collection" Version="8.0.0" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\..\IPass.Shared\IPass.Shared.csproj" />
+    <ProjectReference Include="..\Patika.Application.Contracts\Patika.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Patika.EF.Shared\Patika.EF.Shared.csproj" />
+    <ProjectReference Include="..\Patika.IdentityServer.Shared\Patika.IdentityServer.Shared.csproj" />
+    <ProjectReference Include="..\Patika.Shared\Patika.Shared.csproj" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+</Project>

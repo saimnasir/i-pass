@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ApplicationDomain\**" />
+    <Compile Remove="IdentityDomain\**" />
+    <EmbeddedResource Remove="ApplicationDomain\**" />
+    <EmbeddedResource Remove="IdentityDomain\**" />
+    <None Remove="ApplicationDomain\**" />
+    <None Remove="IdentityDomain\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IPass.Shared\IPass.Shared.csproj" />
+    <ProjectReference Include="..\Patika\Patika.Shared\Patika.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

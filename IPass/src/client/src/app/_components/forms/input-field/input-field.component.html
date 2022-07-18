@@ -1,0 +1,21 @@
+<mat-form-field  [ngClass]="className" [appearance]="appearance">
+    <mat-label>{{ label}}</mat-label>
+    <input matInput 
+        [type]="type" 
+        [(ngModel)]="value" 
+        [required]="required" 
+        [disabled]="readOnly"
+        [pattern]="pattern"
+        [min]="min" 
+        [max]="max" 
+        (keyup)="valueChange.emit(value)" 
+        (change)="valueChange.emit(value)" 
+        [placeholder]="placeholder ? (placeholder) : (label)"  
+        [ngClass]="className"
+    >
+    <button *ngIf="showClearButton && value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+    </button>
+    <mat-hint *ngIf="hint">{{hint}}</mat-hint>
+    <mat-error *ngIf="validationMessage">{{validationMessage}}</mat-error>
+</mat-form-field>

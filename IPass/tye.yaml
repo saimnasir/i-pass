@@ -1,0 +1,22 @@
+name: IPass.App
+services:
+
+# Services
+- name: Public-Gateway
+  project: src/backend/gateway/IPass.PublicGateway/IPass.PublicGateway.csproj
+  bindings:
+  - port: 7001
+    protocol: https
+
+- name: Web-Application
+  project: src/backend/app/IPass.WebApp/IPass.WebApp.csproj
+  bindings:
+  - port: 8001
+    protocol: http  
+
+#Authentication
+- name: Identity-Service
+  project: src/backend/app/Patika.AuthenticationServer/Patika.AuthenticationServer.csproj
+  bindings:
+  - port: 9001
+    protocol: http

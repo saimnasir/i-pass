@@ -1,0 +1,192 @@
+<mat-card class="example-card">
+  <mat-card-header class="card-header ">
+    <mat-card-title>
+      <div *ngIf="isNew">
+        <h2>Create Memory</h2>
+      </div>
+      <div *ngIf="!isNew && !isRead">
+        <h2>Update Memory</h2>
+      </div>
+      <div *ngIf="!isNew && isRead">
+        <h2>Memory Details</h2>
+      </div>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <div *ngIf="!isNew">
+        <div><span>{{title}} </span></div>
+      </div>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="card-content">
+
+    <mat-grid-list cols="2" rowHeight="60px">
+      <mat-grid-tile>
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput type="text" [(ngModel)]="model.title" required [disabled]="isRead">
+          <button *ngIf="model.title && !isRead" matSuffix mat-icon-button aria-label="Clear" (click)="model.title=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-hint *ngIf="!model.title">Başlık giriniz.</mat-hint>
+          <mat-error>Lütfen başlık giriniz</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile>
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Organization</mat-label>
+          <mat-select [(ngModel)]="model.organizationId" required [disabled]="isRead">
+            <mat-option [value]=" ">
+              Select
+            </mat-option>
+            <mat-option *ngFor="let organization of organizations" [value]="organization.id">
+              {{organization.title}}
+            </mat-option>
+          </mat-select>
+          <mat-hint *ngIf="!model.organizationId && !isRead">Organization tipi seçiniz.</mat-hint>
+          <mat-error>Lütfen organization tipi seçiniz.</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Memory Type</mat-label>
+          <mat-select [(ngModel)]="model.memoryTypeId" required [disabled]="isRead">
+            <mat-option [value]=" ">
+              Select
+            </mat-option>
+            <mat-option *ngFor="let memoryType of memoryTypes" [value]="memoryType.id">
+              {{memoryType.title}}
+            </mat-option>
+          </mat-select>
+          <mat-hint *ngIf="!model.memoryTypeId && !isRead">Kayıt tipi seçiniz.</mat-hint>
+          <mat-error>Lütfen kayıt tipi seçiniz.</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Environment Type</mat-label>
+          <mat-select [(ngModel)]="model.environmentTypeId" [disabled]="isRead">
+            <mat-option [value]=" ">
+              Select
+            </mat-option>
+            <mat-option *ngFor="let environmentType of environmentTypes" [value]="environmentType.id">
+              {{environmentType.title}}
+            </mat-option>
+          </mat-select>
+          <button *ngIf="model.environmentTypeId && !isRead" matSuffix mat-icon-button aria-label="Clear"
+            (click)="model.environmentTypeId=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-hint *ngIf="!model.environmentTypeId && !isRead">Bu alan zorunlu değildir.</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>User Name</mat-label>
+          <input matInput type="text" [(ngModel)]="model.userName" [required]="!model.email" [disabled]="isRead">
+          <button *ngIf="model.userName  && !isRead" matSuffix mat-icon-button aria-label="Clear"
+            (click)="model.userName=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-hint *ngIf="!model.userName && !model.email && !isRead">Kullanıcı adı giriniz</mat-hint>
+          <mat-error>Mail girilmediğinde kullanıcı adı zorunludur</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" [(ngModel)]="model.email" [required]="!model.userName" [disabled]="isRead">
+          <button *ngIf="model.email && !isRead" matSuffix mat-icon-button aria-label="Clear" (click)="model.email=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-hint *ngIf="!model.email && !model.userName  && !isRead ">Mail giriniz</mat-hint>
+          <mat-error>Kullanıcı adı girilmediğinde mail zorunludur</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Port</mat-label>
+          <input matInput type="text" [(ngModel)]="model.port" [disabled]="isRead">
+          <button *ngIf="model.port && !isRead" matSuffix mat-icon-button aria-label="Clear" (click)="model.port=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-hint *ngIf="!model.port  && !isRead">Port giriniz.</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Host Or Ip Address</mat-label>
+          <input matInput type="text" [(ngModel)]="model.hostOrIpAddress" [disabled]="isRead">
+          <button *ngIf="model.hostOrIpAddress && !isRead" matSuffix mat-icon-button aria-label="Clear"
+            (click)="model.hostOrIpAddress=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-hint *ngIf="!model.hostOrIpAddress  && !isRead">Host adı veya IP adresi giriniz.</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="text" [(ngModel)]="model.password" required [disabled]="isRead">
+          <button *ngIf="model.password && !isRead" matSuffix mat-icon-button aria-label="Clear"
+            (click)="model.password=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-hint *ngIf="!model.password">Başlık giriniz.</mat-hint>
+          <mat-error>Lütfen başlık giriniz</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Description</mat-label>
+          <input matInput type="text" [(ngModel)]="model.description" [disabled]="isRead">
+          <button *ngIf="model.description && !isRead" matSuffix mat-icon-button aria-label="Clear"
+            (click)="model.description=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-hint *ngIf="!model.description  && !isRead">Açıklama giriniz.</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+
+        <mat-slide-toggle matInput [(ngModel)]="model.active" class="toogle" [disabled]="isRead">Active
+        </mat-slide-toggle>
+        <mat-slide-toggle matInput [(ngModel)]="model.isUserNameSecure" class="toogle" [disabled]="isRead">
+          IsUserNameSecure
+        </mat-slide-toggle>
+        <mat-slide-toggle matInput [(ngModel)]="model.isUEmailSecure" class="toogle" [disabled]="isRead">IsUEmailSecure
+        </mat-slide-toggle>
+
+      </mat-grid-tile>
+      <mat-grid-tile>
+
+        <mat-slide-toggle matInput [(ngModel)]="model.isPortSecure" class="toogle" [disabled]="isRead">IsPortSecure
+        </mat-slide-toggle>
+        <mat-slide-toggle matInput [(ngModel)]="model.isHostOrIpAddressSecure" class="toogle" [disabled]="isRead">
+          isHostOrIpAddressSecure
+        </mat-slide-toggle>
+
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-card-actions class="card-footer">
+      <div class="example-button-row">
+        <button *ngIf="!isRead" mat-raised-button color="primary" (click)="save()">Kaydet</button>
+        <button *ngIf="isRead"  mat-icon-button aria-label="Update memory" [routerLink]="['/memories/edit/'+model.id]" [title]="'Edit'">
+          Edit Mode <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card-footer>
+</mat-card>

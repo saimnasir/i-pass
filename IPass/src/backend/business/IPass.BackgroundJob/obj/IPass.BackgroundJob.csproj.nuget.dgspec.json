@@ -1,0 +1,512 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\IPass.BackgroundJob\\IPass.BackgroundJob.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\IPass.BackgroundJob\\IPass.BackgroundJob.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\IPass.BackgroundJob\\IPass.BackgroundJob.csproj",
+        "projectName": "IPass.BackgroundJob",
+        "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\IPass.BackgroundJob\\IPass.BackgroundJob.csproj",
+        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\IPass.BackgroundJob\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\IPass.Shared\\IPass.Shared.csproj": {
+                "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\IPass.Shared\\IPass.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.29, )"
+            },
+            "Hangfire.Core": {
+              "target": "Package",
+              "version": "[1.7.29, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\IPass.Shared\\IPass.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\IPass.Shared\\IPass.Shared.csproj",
+        "projectName": "IPass.Shared",
+        "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\IPass.Shared\\IPass.Shared.csproj",
+        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\IPass.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.IdentityServer.Shared\\Patika.IdentityServer.Shared.csproj": {
+                "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.IdentityServer.Shared\\Patika.IdentityServer.Shared.csproj"
+              },
+              "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Shared\\Patika.Shared.csproj": {
+                "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Shared\\Patika.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Application.Contracts\\Patika.Application.Contracts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Application.Contracts\\Patika.Application.Contracts.csproj",
+        "projectName": "Patika.Application.Contracts",
+        "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Application.Contracts\\Patika.Application.Contracts.csproj",
+        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Application.Contracts\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.EF.Shared\\Patika.EF.Shared.csproj": {
+                "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.EF.Shared\\Patika.EF.Shared.csproj"
+              },
+              "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Shared\\Patika.Shared.csproj": {
+                "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Shared\\Patika.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "AutoMapper.Collection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.EF.Shared\\Patika.EF.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.EF.Shared\\Patika.EF.Shared.csproj",
+        "projectName": "Patika.EF.Shared",
+        "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.EF.Shared\\Patika.EF.Shared.csproj",
+        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.EF.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Shared\\Patika.Shared.csproj": {
+                "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Shared\\Patika.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.5.61, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.IdentityServer.Shared\\Patika.IdentityServer.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.IdentityServer.Shared\\Patika.IdentityServer.Shared.csproj",
+        "projectName": "Patika.IdentityServer.Shared",
+        "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.IdentityServer.Shared\\Patika.IdentityServer.Shared.csproj",
+        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.IdentityServer.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Application.Contracts\\Patika.Application.Contracts.csproj": {
+                "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Application.Contracts\\Patika.Application.Contracts.csproj"
+              },
+              "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.EF.Shared\\Patika.EF.Shared.csproj": {
+                "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.EF.Shared\\Patika.EF.Shared.csproj"
+              },
+              "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Shared\\Patika.Shared.csproj": {
+                "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Shared\\Patika.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Shared\\Patika.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Shared\\Patika.Shared.csproj",
+        "projectName": "Patika.Shared",
+        "projectPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Shared\\Patika.Shared.csproj",
+        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dell\\source\\saim-repos\\IPass\\src\\backend\\business\\Patika\\Patika.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "AutoMapper.Collection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Azure.Storage.Blobs": {
+              "target": "Package",
+              "version": "[12.12.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "Magick.NET-Q16-AnyCPU": {
+              "target": "Package",
+              "version": "[11.1.2, )"
+            },
+            "Magick.NET.Core": {
+              "target": "Package",
+              "version": "[11.1.2, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.4.3, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            },
+            "ServiceStack.Redis": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.3, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "System.Linq.Dynamic.Core": {
+              "target": "Package",
+              "version": "[1.2.18, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

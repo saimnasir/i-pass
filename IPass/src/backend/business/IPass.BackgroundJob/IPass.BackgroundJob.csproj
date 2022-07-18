@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.29" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.29" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IPass.Shared\IPass.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

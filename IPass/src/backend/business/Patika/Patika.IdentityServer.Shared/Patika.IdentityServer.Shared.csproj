@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Entities\**" />
+    <Compile Remove="Exceptions\**" />
+    <EmbeddedResource Remove="Entities\**" />
+    <EmbeddedResource Remove="Exceptions\**" />
+    <None Remove="Entities\**" />
+    <None Remove="Exceptions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Patika.Application.Contracts\Patika.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Patika.EF.Shared\Patika.EF.Shared.csproj" />
+    <ProjectReference Include="..\Patika.Shared\Patika.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

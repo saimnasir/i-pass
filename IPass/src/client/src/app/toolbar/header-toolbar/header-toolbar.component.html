@@ -1,0 +1,52 @@
+<mat-toolbar class="header-toolbar">
+    <mat-toolbar-row>
+        <button mat-icon-button>
+            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+        </button>
+        <button mat-button [routerLink]="'/'">
+            <h1>IPASS </h1>
+        </button>
+        <span class="menu-spacer"></span>
+        <div>
+            <button *ngIf="accountService.userLoggedIn" mat-button [routerLink]="'/memories'"> Memories </button>
+            <button *ngIf="accountService.userLoggedIn" mat-button [routerLink]="'/organizations'"> Organizations
+            </button>
+            <button *ngIf="accountService.userLoggedIn" mat-button [routerLink]="'/profile'"> Profile </button>
+            <!-- <button mat-button [routerLink]="'/memory-types'"> Memory Types </button>
+            <button mat-button [routerLink]="'/organization-types'"> Organization Types </button>
+        -->
+            <button   mat-button [routerLink]="'/login'"> {{ !accountService.userLoggedIn ? 'Login': 'Logut'}} </button>   
+        </div>
+    </mat-toolbar-row>
+
+    <!-- <mat-toolbar-row>
+        <span style="font-size: 12px;">SimpleCRM helps you easily manage your organizations</span>
+    </mat-toolbar-row> -->
+</mat-toolbar>
+
+<mat-toolbar class="main footer">
+    Powered by Patika Global
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" role="navigation" opened="true" class="side-nav">
+        <mat-nav-list>
+
+            <button *ngIf="accountService.userLoggedIn" mat-list-item [routerLink]="'/memories'"> Memories </button>
+            <button *ngIf="accountService.userLoggedIn" mat-list-item [routerLink]="'/memory-types'">Memory Types
+            </button>
+            <button *ngIf="accountService.userLoggedIn" mat-list-item [routerLink]="'/organizations'"> Organizations
+            </button>
+            <button *ngIf="accountService.userLoggedIn" mat-list-item [routerLink]="'/organization-types'">
+                Organization Types </button>
+            <button *ngIf="accountService.userLoggedIn" mat-list-item [routerLink]="'/environment-types'"> Environment
+                Types </button>
+            <button mat-list-item (click)="sidenav.toggle()">Close</button>
+
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="side-nav-content">
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

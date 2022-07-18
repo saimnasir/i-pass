@@ -1,0 +1,21 @@
+.layout-wrapper {
+
+  .layout-main {
+    .layout-content {
+      padding-top: $topBarHeight;
+    }
+
+    .layout-main-mask {
+      display: none;
+    }
+
+    .layout-subtop {
+      position: fixed;
+      width: 100%;
+      z-index: 2;
+      background-color: $subtopBgColor;
+    }
+  }
+}
+
+

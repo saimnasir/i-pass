@@ -1,0 +1,18 @@
+ 
+    <h1 mat-dialog-title>Enter Pin Code</h1>
+    <div mat-dialog-content>
+        <mat-form-field class="example-form-field" appearance="outline">
+            <mat-label>Pin Code</mat-label>
+            <input matInput type="text" [(ngModel)]="model.code" required cdkFocusInitial>
+            <button *ngIf="model.code   " matSuffix mat-icon-button aria-label="Clear" (click)="model.code=''">
+                <mat-icon>close</mat-icon>
+            </button>
+            <mat-hint *ngIf="!model.code">Pin Kodu giriniz</mat-hint>
+            <mat-error>Lütfen pin kodu giriniz</mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="error"> {{error}} </mat-error>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button mat-raised-button mat-dialog-close>Discard</button>
+        <button mat-button mat-raised-button (click)="save()" (keyup.enter)="save()" color="primary">Send</button>
+    </div> 
