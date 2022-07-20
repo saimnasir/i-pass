@@ -59,6 +59,7 @@ import { AccountService } from '../_service/account.service';
 import { InputFieldComponent } from '../_components/forms/input-field/input-field.component';
 import { FormGroupInputComponent } from '../_components/forms/form-group-input/form-group-input.component';
 import { ExternalComponent } from './external/external.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
  
 
 @NgModule({
@@ -104,7 +105,8 @@ import { ExternalComponent } from './external/external.component';
         
         MatProgressSpinnerModule,
         MatProgressBarModule,
-        MatDialogModule
+        MatDialogModule,
+        FlexLayoutModule
     ],
     providers: [ 
       PinCodeService,

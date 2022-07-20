@@ -1,68 +1,64 @@
-﻿<form [formGroup]="form" (ngSubmit)="register()">
-    <mat-card class="example-card">
+﻿<!-- <div class="container sec" fxLayout="row"  fxLayout.lt-md="column" fxFlexFill> 
+        <div fxFlex.lt-sm="100" fxFlex="35" class="sec1">Card 1</div>
+        <div fxFlex.lt-sm="100" fxFlex="35" class="sec2">Card 2</div>
+        <div fxFlex.lt-sm="100" fxFlex="35" class="sec3">Card 3</div> 
+   
+</div> -->
+<form [formGroup]="form" (ngSubmit)="register()">
+    <mat-card class="card">
         <mat-card-header class="card-header ">
             <mat-card-title>
                 Register
             </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="card-content">
-            <mat-grid-list cols="1" rowHeight="100px">
-              
-                <mat-grid-tile>
-                    <app-form-group-input formControlName="phoneNumber" [style]="'width: 100%;'" 
-                        [class]="'example-form-field'" [label]="'Phone'" [type]="'tel'" [placeholder]="'Enter phone'"
-                        [hint]="'Etc: +905555555555'" [required]="true"
-                        [control]="f['phoneNumber']" 
-                        [validationMessages]="phoneNumberValidationMessages"
-                        [appearance]="'outline'"
-                        >
-                    </app-form-group-input>
-                </mat-grid-tile>
+        <mat-card-content class="card-content container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
 
-                <mat-grid-tile>
-                    <app-form-group-input formControlName="password" [value]="'Sn65*6565'" [style]="'width: 100%;'"
-                        [class]="'example-form-field'" [label]="'Password'" [type]="'password'"
-                        [placeholder]="'Enter password'"
-                        [hint]="'Min 8 length, at least 1 uppercase, at least 1 lower case, at least 1 numeric and at least 1 character'"
-                        [required]="true" 
-                        [control]="f['password']"
-                        [validationMessages]="passwordValidationMessages"
-                        [appearance]="'outline'"
-                        >
-                    </app-form-group-input>
-                </mat-grid-tile>
-
-                <mat-grid-tile>
-                    <app-form-group-input formControlName="confirmPassword" [value]="'Sn65*6565'"
-                        [style]="'width: 100%;'" [class]="'example-form-field'" [label]="'Confirm Password'"
-                        [type]="'password'" [placeholder]="'Re-Enter password'" [hint]="'Must be equal to password'"
-                        [required]="true" 
-                        [control]="f['confirmPassword']"                        
-                        [validationMessages]="confirmPasswordValidationMessages"
-                        [appearance]="'outline'"
-                        >
-                    </app-form-group-input>
-                </mat-grid-tile> 
-            </mat-grid-list>
-
+            <div fxFlex.lt-md="100" fxFlex="35" fxLayoutGap="20px">
+                <app-form-group-input formControlName="phoneNumber" fxFlex="98" [class]="'example-form-field'"
+                    [label]="'Phone'" [type]="'tel'" [placeholder]="'Enter phone'" [hint]="'Example: 5555555555'"
+                    [control]="f['phoneNumber']" [validationMessages]="phoneNumberValidationMessages"
+                    
+                    [successValidation]="'Looks good!'"
+                    >
+                </app-form-group-input>
+            </div>
+            <div fxFlex.lt-xs="100" xFlex.lt-md="100" fxFlex="35" fxLayoutGap="20px">
+                <app-form-group-input formControlName="password" fxFlex="98" [class]="'example-form-field'"
+                    [label]="'Password'" [type]="'password'" [placeholder]="'Enter password'" [control]="f['password']"
+                    [validationMessages]="passwordValidationMessages"  
+                    [successValidation]="'Looks good!'">
+                </app-form-group-input>
+            </div>
+            <div fxFlex.lt-xs="100" xFlex.lt-md="100" fxFlex="35" fxLayoutGap="20px">
+                <app-form-group-input formControlName="confirmPassword" fxFlex="98" [class]="'example-form-field'"
+                    [label]="'Confirm Password'" [type]="'password'" [placeholder]="'Re-Enter password'"
+                    [control]="f['confirmPassword']" [validationMessages]="confirmPasswordValidationMessages"
+                   
+                    [successValidation]="'Looks good!'">
+                </app-form-group-input>
+            </div>
         </mat-card-content>
         <mat-card-footer>
             <mat-card-actions class="card-footer">
-                <div class="example-button-row">
-                    <button mat-stroked-button color="primary" type="submit"  >
-                        <mat-icon>how_to_reg</mat-icon>Register
-                    </button>&nbsp;
+                <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                    <div fxFlex.lt-sm="100" fxFlex="50"  style="margin: 2px;">
+                        <button mat-stroked-button color="primary" type="submit">
+                            <mat-icon>how_to_reg</mat-icon>Register
+                        </button>&nbsp;
 
-                    <button mat-stroked-button color="warn" type="button" 
-                        (click)="form.reset()">
-                        <mat-icon>settings_backup_restore</mat-icon>&nbsp;Reset
-                    </button>
-                    <span> &nbsp;If you already have an
-                        account, you can </span>
-                    <a mat-stroked-button color="primary" routerLink="../login" color="primary">
-                        <mat-icon>login</mat-icon> Login
-                    </a>
+                        <button mat-stroked-button color="warn" type="button" (click)="form.reset()">
+                            <mat-icon>settings_backup_restore</mat-icon>&nbsp;Reset
+                        </button>
+                    </div>
+
+                    <div fxFlex.lt-sm="100" fxFlex="50" style="margin: 2px;">
+                        <span> &nbsp;Already have an account?</span>
+                        <a mat-stroked-button color="primary" routerLink="../login" color="primary">
+                            <mat-icon>login</mat-icon> Login
+                        </a>
+                    </div>
                 </div>
+
 
             </mat-card-actions>
         </mat-card-footer>

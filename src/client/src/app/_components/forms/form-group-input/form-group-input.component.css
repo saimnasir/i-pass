@@ -1,0 +1,31 @@
+.hint {
+    color: cadetblue;
+    font-size: smaller;
+}
+
+.error-message {
+    font-size: smaller;
+}
+
+.form-field-card {
+    margin-bottom: 1rem;
+}
+
+.successValidation {
+    color: green;
+    font-size: smaller;
+}
+
+.form-field-card-content {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.form-field-card-footer {
+    text-align: center;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin: 0;
+
+}

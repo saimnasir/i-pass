@@ -19,20 +19,23 @@ export class FormGroupInputComponent implements ControlValueAccessor {
 
   @Input() value: any;
 
-  @Input() validationMessages: CustomValidation [];
+  @Input() validationMessages: CustomValidation[];
   @Input() label: string;
   @Input() type: string = 'text';
   @Input() placeholder: string;
   @Input() hint: string;
-  @Input() required: boolean = true;
   @Input() readOnly: boolean = false;
-  @Input() appearance: MatFormFieldAppearance = 'outline';
+  @Input() appearance: MatFormFieldAppearance = 'legacy';
   @Input() min: number;
   @Input() max: number;
   @Input() showClearButton: boolean = true;
   @Input() control: AbstractControl;
-  //@Output() valueChange = new EventEmitter<any>();
+  @Input() successValidation: string;
 
+  hide: boolean = this.type != 'password';
+  get isPassword(): boolean {
+    return this.type == 'password';
+  }
   onChange = (value: any) => { };
 
   onTouched = () => { };
@@ -66,12 +69,18 @@ export class FormGroupInputComponent implements ControlValueAccessor {
 
   changeValue(e: any) {
     this.value = e.target.value;
-    this.onChange(this.value);    
+    this.onChange(this.value);
   }
 
   clear() {
     this.value = '';
-    this.onChange(this.value);       
+    this.onChange(this.value);
   }
 
+  visibilityMouseEnter(){
+    this.hide = false;
+  }
+  visibilityMouseLeave(){    
+    this.hide = true;
+  }
 }

@@ -15,7 +15,7 @@
             <!-- <button mat-button [routerLink]="'/memory-types'"> Memory Types </button>
             <button mat-button [routerLink]="'/organization-types'"> Organization Types </button>
         -->
-            <button   mat-button [routerLink]="'/login'"> {{ !accountService.userLoggedIn ? 'Login': 'Logut'}} </button>   
+            <button mat-button [routerLink]="'/login'"> {{ !accountService.userLoggedIn ? 'Login': 'Logut'}} </button>
         </div>
     </mat-toolbar-row>
 
@@ -47,6 +47,8 @@
     <mat-sidenav-content class="side-nav-content">
         <div>
             <router-outlet></router-outlet>
+
+            <media-query-status></media-query-status>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

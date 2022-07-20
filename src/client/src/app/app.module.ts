@@ -32,13 +32,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { AccountModule } from './account/account.module'; 
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor'; 
-  
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MediaQueryStatusComponent } from './_components/media-query-status.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
     HeaderToolbarComponent,
     FooterToolbarComponent,   
+    MediaQueryStatusComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -69,8 +71,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     MatSidenavModule,
     MatMenuModule, 
     MatSelectModule,
-    MatChipsModule,
-    
+    MatChipsModule, 
   ],
   providers: [ 
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
