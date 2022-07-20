@@ -38,7 +38,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
   declarations: [
     AppComponent,    
     HeaderToolbarComponent,
-    FooterToolbarComponent,  
+    FooterToolbarComponent,   
   ],
   imports: [
     BrowserAnimationsModule,

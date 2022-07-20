@@ -101,6 +101,21 @@ export class AccountService extends BaseService<User, string> {
             }));
     }
 
+    loginWithFacebook() {
+        let route = `/api/account/facebook`; 
+        return this.get<LoginResult>(route)
+            .pipe(map(response => {
+                if (response.success) {
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                    this.userSubject.next(response.data);                    
+                    this.userLoggedSubject.next(true);
+                    return response;
+                }
+                return response;
+            }));
+    }
+
     logout() {
         // remove user from local storage and set current user to null
         this.removeToken();

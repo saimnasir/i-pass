@@ -6,68 +6,54 @@
             </mat-card-title>
         </mat-card-header>
         <mat-card-content class="card-content">
-            <mat-grid-list cols="1" rowHeight="60px">
-
+            <mat-grid-list cols="1" rowHeight="100px">
+              
                 <mat-grid-tile>
-                    <mat-form-field class="example-form-field" appearance="outline">
-                        <mat-label>Phone</mat-label>
-                        <input matInput type="tel" formControlName="phoneNumber" name="phoneNumber">
-                        <button *ngIf="form.value.phoneNumber" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="form.controls['phoneNumber'].reset()">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                        <mat-hint *ngIf="!form.value.phoneNumber" align="start">Enter phone.</mat-hint>
-                        <mat-error
-                            *ngIf="!form.controls['phoneNumber'].hasError('required') || !form.controls['phoneNumber'].hasError('tel') "
-                            align="start">Please enter a valid phone number!</mat-error>
-                    </mat-form-field>
-                    <!-- <app-form-group-input>
-                        [style]="'width: 100%;'" [class]="'example-form-field'"
-                        [formControlName]="'phoneNumber'"
-                        [label]="'Phone'"
-                        [(value)]="model.phoneNumber" [type]="'text'" [placeholder]="'Enter phone.'"
-                        [hint]="'Etc: +905555555555'" [required]="true" [validationMessage]="'Phone is required!'"
-                    </app-form-group-input> -->
+                    <app-form-group-input formControlName="phoneNumber" [style]="'width: 100%;'" 
+                        [class]="'example-form-field'" [label]="'Phone'" [type]="'tel'" [placeholder]="'Enter phone'"
+                        [hint]="'Etc: +905555555555'" [required]="true"
+                        [control]="f['phoneNumber']" 
+                        [validationMessages]="phoneNumberValidationMessages"
+                        [appearance]="'outline'"
+                        >
+                    </app-form-group-input>
                 </mat-grid-tile>
 
                 <mat-grid-tile>
-                    <mat-form-field class="example-form-field" appearance="outline">
-                        <mat-label>Password</mat-label>
-                        <input matInput type="text" formControlName="password" name="password">
-                        <button *ngIf="form.value.password" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="form.controls['password'].reset()">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                        <mat-hint *ngIf="!form.value.password">Enter password.</mat-hint>
-                        <mat-error *ngIf="form.controls['password'].errors">Password is required!</mat-error>
-                    </mat-form-field>
+                    <app-form-group-input formControlName="password" [value]="'Sn65*6565'" [style]="'width: 100%;'"
+                        [class]="'example-form-field'" [label]="'Password'" [type]="'password'"
+                        [placeholder]="'Enter password'"
+                        [hint]="'Min 8 length, at least 1 uppercase, at least 1 lower case, at least 1 numeric and at least 1 character'"
+                        [required]="true" 
+                        [control]="f['password']"
+                        [validationMessages]="passwordValidationMessages"
+                        [appearance]="'outline'"
+                        >
+                    </app-form-group-input>
                 </mat-grid-tile>
 
                 <mat-grid-tile>
-                    <mat-form-field class="example-form-field" appearance="outline" >
-                        <mat-label>Confirm Password</mat-label>
-                        <input matInput type="text" formControlName="confirmPassword" name="confirmPassword">
-                        <button *ngIf="form.value.confirmPassword" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="form.controls['confirmPassword'].reset()">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                        <mat-hint *ngIf="!form.value.confirmPassword">Re Enter password.</mat-hint>
-                        <mat-error *ngIf="form.controls['confirmPassword'].errors?.['mustMatch']">Password and confirm
-                            not match!</mat-error>
-                    </mat-form-field>
-                </mat-grid-tile>
-
+                    <app-form-group-input formControlName="confirmPassword" [value]="'Sn65*6565'"
+                        [style]="'width: 100%;'" [class]="'example-form-field'" [label]="'Confirm Password'"
+                        [type]="'password'" [placeholder]="'Re-Enter password'" [hint]="'Must be equal to password'"
+                        [required]="true" 
+                        [control]="f['confirmPassword']"                        
+                        [validationMessages]="confirmPasswordValidationMessages"
+                        [appearance]="'outline'"
+                        >
+                    </app-form-group-input>
+                </mat-grid-tile> 
             </mat-grid-list>
 
         </mat-card-content>
         <mat-card-footer>
             <mat-card-actions class="card-footer">
                 <div class="example-button-row">
-                    <button mat-stroked-button color="primary" type="submit" [disabled]="!form.valid">
+                    <button mat-stroked-button color="primary" type="submit"  >
                         <mat-icon>how_to_reg</mat-icon>Register
                     </button>&nbsp;
 
-                    <button mat-stroked-button color="warn" type="button" [disabled]="!form.dirty"
+                    <button mat-stroked-button color="warn" type="button" 
                         (click)="form.reset()">
                         <mat-icon>settings_backup_restore</mat-icon>&nbsp;Reset
                     </button>
@@ -75,7 +61,7 @@
                         account, you can </span>
                     <a mat-stroked-button color="primary" routerLink="../login" color="primary">
                         <mat-icon>login</mat-icon> Login
-                    </a> 
+                    </a>
                 </div>
 
             </mat-card-actions>

@@ -116,7 +116,7 @@ import { ExternalComponent } from './external/external.component';
         ProfileComponent,
         InputFieldComponent,
         FormGroupInputComponent,
-        ExternalComponent
+        ExternalComponent,
     ]
 })
 export class AccountModule { }

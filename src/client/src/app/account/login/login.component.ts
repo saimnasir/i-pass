@@ -63,22 +63,47 @@ export class LoginComponent implements OnInit {
 
         this.loading = true;
         this.accountService.loginWithGoogle()
-            // .pipe(first())
-            // .subscribe(
-            //     response => {
-            //         if (response?.success) {
-            //             this.router.navigate([this.returnUrl]);
-            //         } else {
-            //             this.errorMessage = response?.message;
-            //         }
-            //     },
-            //     error => {
-            //         this.alertService.error(error);
-            //         this.loading = false;
-            //     })
+            .pipe(first())
+            .subscribe(
+                response => {
+                    if (response?.success) {
+                        this.router.navigate([this.returnUrl]);
+                    } else {
+                        this.errorMessage = response?.message;
+                    }
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                })
                 ;
     }
 
+    
+    loginWithFacebook() {
+        this.errorMessage = undefined;
+
+        this.submitted = true;
+        // reset alerts on submit
+        this.alertService.clear();
+
+        this.loading = true;
+        this.accountService.loginWithFacebook()
+            .pipe(first())
+            .subscribe(
+                response => {
+                    if (response?.success) {
+                        this.router.navigate([this.returnUrl]);
+                    } else {
+                        this.errorMessage = response?.message;
+                    }
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                })
+                ;
+    }
     isFormValid(): boolean {
         if (!this.model.phoneNumber) {
             return false;
