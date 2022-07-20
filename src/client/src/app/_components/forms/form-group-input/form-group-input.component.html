@@ -1,31 +1,4 @@
-<!-- <div class="form-field-container">
-    <mat-form-field [appearance]="appearance">
-        <mat-label>{{label}}</mat-label>
-        <input matInput [value]="value" (change)="changeValue($event)" [type]="hide ? type : 'text'"
-            [disabled]="readOnly" [min]="min" [max]="max" [placeholder]="placeholder ? (placeholder) : (label)">
-
-        <mat-icon *ngIf="value && showClearButton &&  (control.dirty || control.touched)" matSuffix mat-icon-button
-            aria-label="Clear" (click)="clear()">close
-        </mat-icon>
-
-        <mat-icon *ngIf="value && isPassword   && (control.dirty || control.touched)" matSuffix (click)="hide = !hide" (mouseenter)="visibilityMouseEnter()" (mouseleave)="visibilityMouseLeave()">
-            {{hide ? 'visibility_off' : 'visibility'}}
-        </mat-icon>
-    </mat-form-field>
-    <mat-error *ngFor="let validation of validationMessages">
-        <mat-error class="error-message"
-            *ngIf="control.hasError(validation.type) && (control.dirty || control.touched)">
-            {{validation.message}}
-        </mat-error>
-    </mat-error>
-    <mat-hint class="hint" *ngIf="hint && !control.valid && (control.dirty || control.touched)" align="start">{{hint}}
-    </mat-hint>
-    <mat-label class="successValidation"
-        *ngIf="successValidation && control.valid && (control.dirty || control.touched)" align="start">
-        {{successValidation}}</mat-label>
-
-</div> -->
-<mat-card class="form-field-card">
+ <mat-card class="form-field-card">
     <mat-card-content class="form-field-card-content">
         <mat-form-field [appearance]="appearance">
             <mat-label>{{label}}</mat-label>
