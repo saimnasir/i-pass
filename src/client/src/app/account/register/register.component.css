@@ -16,50 +16,8 @@
   padding-bottom: 10px;
   background: beige;
 }
+
 .toogle{  
   margin-right: 40px;
 } 
-
-/* Add application styles & imports to this file! */
-
-.bounds {
-  background-color:gray;
-  height :200px;
-}
-
-.sec1 {
-  background: green;
-  color:cyan;
-  text-transform: uppercase
-}
-
-.sec2 {
-  background: red;
-  color:yellow;
-  
-}
-
-.sec3 {
-  background: yellow;
-  color:red;
-  text-transform: uppercase
-}
-.sec {
-  background: gray;
-  color:red;
-  text-transform: uppercase
-}
-
-/* .sec1, .sec2, .sec3 {
-  padding-top:20px;
-  text-align:center
-} */
-
-.content {
-  min-width: 300px;
-  /*height: 400px;*/
-}
-/* .container .cardWrap div{
-  height: 300px;
-  border:2px solid gray;
-  } */
+ 
