@@ -24,14 +24,20 @@ namespace IPass.PublicGateway
             services.AddOcelot();
             services.AddSwaggerForOcelot(Configuration);
 
+            SetupCORS(services);
+        }
+
+        private static void SetupCORS(IServiceCollection services)
+        {
             services.AddCors(opts =>
             {
-                opts.AddDefaultPolicy(policy =>
+                opts.AddPolicy("corsapp", policy =>
                 {
                     policy.WithOrigins("*")
                     .AllowAnyHeader()
-                    .AllowAnyMethod();
-                    //.AllowCredentials();
+                    .AllowAnyMethod()
+                    //.AllowCredentials()
+                    ;
                 });
             });
         }
@@ -46,7 +52,7 @@ namespace IPass.PublicGateway
 
             app.UseRouting();
 
-            app.UseCors();
+            app.UseCors("corsapp");
 
             app.UseEndpoints(endpoints =>
             {

@@ -38,6 +38,19 @@
       "UpstreamPathTemplate": "/signin-google",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "SwaggerKey": "Auth"
+    },
+    {
+      "DownstreamPathTemplate": "/signin-facebook",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9001
+        }
+      ],
+      "UpstreamPathTemplate": "/signin-facebook",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "SwaggerKey": "Auth"
     }
   ],
   "SwaggerEndPoints": [

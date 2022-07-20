@@ -83,6 +83,21 @@ namespace Patika.AuthenticationServer
             services.AddRazorPages().AddRazorRuntimeCompilation();
 
             AddValidators(services);
+            SetupCORS(services);
+        }
+        private static void SetupCORS(IServiceCollection services)
+        {
+            services.AddCors(opts =>
+            {
+                opts.AddPolicy("corsapp", policy =>
+                {
+                    policy.WithOrigins("*")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    //.AllowCredentials()
+                    ;
+                });
+            });
         }
 
         private void AddConfiguration(IServiceCollection services)
@@ -245,7 +260,7 @@ namespace Patika.AuthenticationServer
 
             //if (Environment.IsEnvironment("AzureStaging"))
             //{
-                app.UseCors();
+                app.UseCors("corsapp");
             //}
 
             app.UseAuthentication();

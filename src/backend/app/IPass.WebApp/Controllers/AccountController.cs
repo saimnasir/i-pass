@@ -143,6 +143,13 @@ namespace IPass.WebApp.Controllers
             return Redirect($"{Configuration.GatewayUrl}/identity/authorize/google-login?callback={Configuration.GatewayUrl}/api/account/ext-callback?allowToCommunicate={allowToCommunicate}");
         }
 
+        [HttpGet("facebook")]
+        [AllowAnonymous]
+        public IActionResult LoginWithFacebookAsync(bool allowToCommunicate)
+        {
+            return Redirect($"{Configuration.GatewayUrl}/identity/authorize/facebook-login?callback={Configuration.GatewayUrl}/api/account/ext-callback?allowToCommunicate={allowToCommunicate}");
+        }
+
         [HttpGet("ext-callback")]
         [AllowAnonymous]
         public async Task<ActionResult<FinalResponseDTO<TokenResultDto>>> ServicemanExternalCallbackAsync(

@@ -66,8 +66,9 @@ namespace IPass.WebApp
                 {
                     policy.WithOrigins("*")
                     .AllowAnyHeader()
-                    .AllowAnyMethod();
-                    //.AllowCredentials();
+                    .AllowAnyMethod()
+                    //.AllowCredentials()
+                    ;
                 });
             });
         }
