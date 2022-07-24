@@ -170,8 +170,8 @@ namespace Patika.AuthenticationServer
 
             auth.AddFacebook(options =>
             {
-                options.ClientId = "6577417852300115";
-                options.AppSecret = "2b365c3ace490f5ff769ee3733040a3a";
+                options.ClientId = "5621050854581272";
+                options.AppSecret = "bfd0a2f9893cc300b9e6ff8b132f5385";
                 options.Scope.Add("public_profile");
                 options.Scope.Add("email");
             });

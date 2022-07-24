@@ -49,10 +49,10 @@ namespace IPass.Application.PasswordDomain
                     throw new Exception($"Pin Code bulunamadı.");
                 }
                 var pinCodeDto = Mapper.Map<PinCodeDto>(pinCode);
-                if (pinCodeDto.Expired)
-                {
-                    throw new Exception($"Pin Code expired.");
-                }
+                //if (pinCodeDto.Expired)
+                //{
+                //    throw new Exception($"Pin Code expired.");
+                //}
                 return new SingleResponse<PinCodeDto>()
                 {
                     Data = pinCodeDto

@@ -138,20 +138,22 @@ namespace IPass.WebApp.Controllers
 
         [HttpGet("google")]
         [AllowAnonymous]
-        public IActionResult LoginWithGoogleAsync(bool allowToCommunicate)
+        public IActionResult LoginWithGoogleAsync(string callback, bool allowToCommunicate = true)
         {
-            return Redirect($"{Configuration.GatewayUrl}/identity/authorize/google-login?callback={Configuration.GatewayUrl}/api/account/ext-callback?allowToCommunicate={allowToCommunicate}");
+            callback = $"{callback}?allowToCommunicate={allowToCommunicate}";
+            return Redirect($"{Configuration.GatewayUrl}/identity/authorize/google-login?callback={callback}");
         }
 
         [HttpGet("facebook")]
         [AllowAnonymous]
-        public IActionResult LoginWithFacebookAsync(bool allowToCommunicate)
+        public IActionResult LoginWithFacebookAsync(string callback, bool allowToCommunicate = true)
         {
-            return Redirect($"{Configuration.GatewayUrl}/identity/authorize/facebook-login?callback={Configuration.GatewayUrl}/api/account/ext-callback?allowToCommunicate={allowToCommunicate}");
+            callback = $"{callback}?allowToCommunicate={allowToCommunicate}";
+            return Redirect($"{Configuration.GatewayUrl}/identity/authorize/facebook-login?callback={callback}");
         }
 
         [HttpGet("ext-callback")]
-        [AllowAnonymous]
+        [Authorize(Roles = $"{Consts.USER_ROLE}")]
         public async Task<ActionResult<FinalResponseDTO<TokenResultDto>>> ServicemanExternalCallbackAsync(
          string t = null,
          bool allowToCommunicate = false,
