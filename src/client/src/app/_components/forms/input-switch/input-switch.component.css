@@ -1,0 +1,28 @@
+ 
+.form-field-card {
+    margin-bottom: 1rem;
+}
+
+.successValidation {
+    color: green;
+    font-size: smaller;
+}
+
+.form-field-card-content {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.form-field-card-footer {
+    text-align: justify; 
+    margin: 0;
+
+}
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #49c5b6;
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #49c5b6;
+}

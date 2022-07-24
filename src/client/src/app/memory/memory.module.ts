@@ -3,8 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';   
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { Routes } from '@angular/router';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'; 
 import {MatCardModule} from '@angular/material/card';
   
 import {AvatarModule} from "primeng/avatar";  
@@ -68,6 +67,8 @@ import { UnlockMemoryDialog } from './memory/unlock-memory-dialog/unlock-memory-
 import { MatDialogModule } from '@angular/material/dialog';
 import { PinCodeService } from '../_service/pin-code.service';
 import { MemoryHistoryListComponent } from './memory/memory-history-list/memory-history-list.component';
+import { IPassCommonModule } from '../ipass-common.module';
+import { MemoryCardComponent } from './memory-card/memory-card.component';
 
 
 @NgModule({
@@ -84,51 +85,12 @@ import { MemoryHistoryListComponent } from './memory/memory-history-list/memory-
     EnvironmentTypeEditorComponent,
     EnvironmentTypeListComponent,
     UnlockMemoryDialog,
-    MemoryHistoryListComponent
+    MemoryHistoryListComponent,
+    MemoryCardComponent
+     
   ],
   imports: [
-    BrowserAnimationsModule, 
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    AvatarModule,
-    CommonModule ,
-    FormsModule, 
-    ReactiveFormsModule,
-     
-    MatMenuModule,
-    MatIconModule,
-    MatBadgeModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatTabsModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatListModule,
-    MatToolbarModule,
-    DrawerRailModule,
-    MatStepperModule,
-    MatInputModule,
-    MatGridListModule,
-    MatExpansionModule,
-    MatSortModule,
-    MatSnackBarModule,
-    MatTooltipModule,
-    MatChipsModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatCheckboxModule,
-    NgxMatDatetimePickerModule,
-    NgxMatTimepickerModule,
-    NgxMatNativeDateModule,
-    MatRadioModule,
-    MatCardModule,
-    MatSlideToggleModule,
-    
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
-    MatDialogModule
+    IPassCommonModule,     
   ],
   providers: [
     MemoryService,

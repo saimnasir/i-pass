@@ -9,17 +9,27 @@ import { SingleResponse } from "../_model/single-response";
 
 export class BaseService<T, I> {
 
-    headers: HttpHeaders = new HttpHeaders({
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Origin': '*',
-        "Authorization": `Bearer ${this.getToken()}` 
-    });
+    headers: HttpHeaders;
 
+    authHeaders: HttpHeaders;
     genericError = "Bir hata oluştu. Tekrarı durumunda yönetime bildiriniz.";
 
-    constructor(protected http: HttpClient) { }
+    constructor(protected http: HttpClient) {
+        this.headers = new HttpHeaders({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Credentials': 'true',
+            'Access-Control-Allow-Origin': '*',
+            "Authorization": `Bearer ${this.getToken()}`
+        });
+        this.authHeaders = new HttpHeaders({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Credentials': 'true',
+            'Access-Control-Allow-Origin': '*',
+            "Authorization": `Bearer `
+        });       
+    }
 
     public combineWithApiUrl(route: string): string {
         if (route.startsWith('/')) {
@@ -87,7 +97,7 @@ export class BaseService<T, I> {
     readWithDecoding(route: string, id: any): Observable<FinalResponse<SingleResponse<T>>> {
         const params = new HttpParams().append("decode", true.toString());
         return this.http.get<FinalResponse<SingleResponse<T>>>(this.combineWithApiUrl(route) + `/${id}`, { headers: this.headers, params: params });
-    }
+    } 
 
     post<T>(route: string, entity: any): Observable<FinalResponse<T>> {
         return this.http.post<FinalResponse<T>>(this.combineWithApiUrl(route), entity, { headers: this.headers });
@@ -97,11 +107,18 @@ export class BaseService<T, I> {
         return this.http.get<FinalResponse<T>>(this.combineWithApiUrl(route), { headers: this.headers });
     }
 
+    getExternalLogin<T>(route: string, token: string): Observable<FinalResponse<T>> {
+        this.authHeaders.delete("Authorization");
+        this.authHeaders.set("Authorization", `Bearer ${token}`);
+       
+        console.log('Authorization getExternalLogin', this.authHeaders.get('Authorization')); 
+        return this.http.get<FinalResponse<T>>(this.combineWithApiUrl(route), { headers: this.authHeaders });
+    }
     put<T>(route: string, entity: any): Observable<FinalResponse<T>> {
         return this.http.put<FinalResponse<T>>(this.combineWithApiUrl(route), entity, { headers: this.headers });
     }
 
-    
+
     public handleException(response: FinalResponse<any>) {
         let message = { severity: 'error', summary: `Hata oluştu`, detail: response.message };
         console.log('hata', message);

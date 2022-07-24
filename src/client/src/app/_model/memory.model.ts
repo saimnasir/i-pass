@@ -9,6 +9,8 @@ export class MemoryModel implements BaseModel <string> {
      updated: Date;
      logId: string;
    
+     title: string; 
+
      organizationId: string;
      organization:OrganizationModel; 
      
@@ -16,10 +18,8 @@ export class MemoryModel implements BaseModel <string> {
      memoryType:MemoryTypeModel;  
      
      environmentTypeId: string;
-     environmentType:MemoryTypeModel;     
+     environmentType:MemoryTypeModel; 
      
-     title: string; 
-
      userName: string; 
      isUserNameSecure: boolean; 
      

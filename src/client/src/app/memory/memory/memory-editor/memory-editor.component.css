@@ -9,17 +9,18 @@
   padding-bottom: 10px;
 }
 
+.card-footer-error {
+  text-align: center;
+  margin: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: red;
+  color: wheat;
+}  
 .card-footer {
   text-align: center;
   margin: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background: radial-gradient(circle, rgba(149, 162, 228, 0.8883928571428571) 0%, rgba(228, 230, 158, 1) 39%, rgba(173, 240, 233, 0.7147233893557423) 100%);
-
-}
-.example-form-field{
-  padding: 20px;
-}
-.toogle{  
-  margin-right: 40px;
-} 
+  background: beige;
+}  

@@ -1,28 +1,29 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { CustomValidation } from 'src/app/_model/validation.model';
 
 @Component({
-  selector: 'app-form-group-input',
-  templateUrl: './form-group-input.component.html',
-  styleUrls: ['./form-group-input.component.css'],
+  selector: 'app-input-switch',
+  templateUrl: './input-switch.component.html',
+  styleUrls: ['./input-switch.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: FormGroupInputComponent
+      useExisting: InputSwitchComponent
     }
   ]
 })
-export class FormGroupInputComponent implements ControlValueAccessor {
+export class InputSwitchComponent implements ControlValueAccessor {
 
-  @Input() value: any;
+  @Input() checked: boolean;
 
   @Input() validationMessages: CustomValidation[];
   @Input() label: string;
   @Input() type: string = 'text';
-  @Input() placeholder: string;
+  @Input() formControlName: string;
   @Input() hint: string;
   @Input() readOnly: boolean = false;
   @Input() appearance: MatFormFieldAppearance = 'legacy';
@@ -42,10 +43,10 @@ export class FormGroupInputComponent implements ControlValueAccessor {
 
   touched = false;
 
-  disabled = false;
-
-  writeValue(value: any) {
-    this.value = value;
+  disabled = false; 
+  
+  writeValue(value: boolean) {
+    this.checked = value;
   }
 
   registerOnChange(onChange: any) {
@@ -67,20 +68,9 @@ export class FormGroupInputComponent implements ControlValueAccessor {
     this.disabled = disabled;
   }
 
-  changeValue(e: any) {
-    this.value = e.target.value;
-    this.onChange(this.value);
+  toogleChange(e: MatSlideToggleChange) {
+    this.checked = e.checked;
+    this.onChange(this.checked);
   }
-
-  clear() {
-    this.value = '';
-    this.onChange(this.value);
-  }
-
-  visibilityMouseEnter(){
-    this.hide = false;
-  }
-  visibilityMouseLeave(){    
-    this.hide = true;
-  }
+  
 }

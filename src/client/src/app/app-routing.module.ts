@@ -49,7 +49,7 @@ const routes: Routes = [
 
 
   { path: 'profile', component: ProfileComponent , canActivate: [AuthGuard] },
-  { path: 'register/external', component: ExternalComponent , canActivate: [AuthGuard] },
+  { path: 'register/external', component: ExternalComponent  },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

@@ -8,6 +8,8 @@
 }
 
 .form-field-card {
+    margin: 0;
+    padding: 0; 
     margin-bottom: 1rem;
 }
 
@@ -26,6 +28,9 @@
     text-align: center;
     padding-left: 4px;
     padding-right: 4px;
-    margin: 0;
+    margin: 0; 
+}
 
+.form-field{
+    padding: 8px;
 }

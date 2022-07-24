@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { Guid } from 'guid-typescript'; 
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CustomValidators } from 'src/app/helpers/custom-validators';
 import { EnvironmentTypeModel } from 'src/app/_model/environment-type.model';
 import { MemoryTypeModel } from 'src/app/_model/memory-type.model';
-import { MemoryModel } from 'src/app/_model/memory.model';
-import { OrganizationModel } from 'src/app/_model/organization.model';
+import { Option } from 'src/app/_model/option.model';
 import { EnvironmentTypeService } from 'src/app/_service/environment-type.service';
 import { MemoryTypeService } from 'src/app/_service/memory-type.service';
 import { OrganizationService } from 'src/app/_service/organization.service';
+import { ConfirmPasswordValidationMessages, EmailValidationsValidationMessages, MemoryOrganizationValidationMessages, MemoryTitleValidationMessages, MemoryTypeValidationMessages, PasswordRegex, PasswordValidationMessages, UsernameValidationsValidationMessages } from 'src/app/_static-data/consts';
 import { MemoryService } from '../../../_service/memory.service';
 
 @Component({
@@ -17,52 +17,141 @@ import { MemoryService } from '../../../_service/memory.service';
   styleUrls: ['./memory-editor.component.css']
 })
 export class MemoryEditorComponent implements OnInit {
+  form: FormGroup;
 
-  model = new MemoryModel();
-  organizations: Array<OrganizationModel>;
-  memoryTypes: Array<MemoryTypeModel>;
-  environmentTypes: Array<EnvironmentTypeModel>;
-  title : string;
+  organizations: Array<Option>;
+  memoryTypes: Array<Option>;
+  environmentTypes: Array<Option>;
+  title: string;
   isNew = false;
   isRead = false;
-  constructor(private memoryService: MemoryService, 
+  errorMessage: string | null ;
+  showError:boolean = false;
+  constructor(private formBuilder: FormBuilder,
+    private memoryService: MemoryService,
     private organizationService: OrganizationService,
     private memoryTypeService: MemoryTypeService,
-    private environmentTypeService: EnvironmentTypeService,   
+    private environmentTypeService: EnvironmentTypeService,
     private route: ActivatedRoute,
     protected router: Router) { }
 
 
   ngOnInit(): void {
- 
+
     this.loadOrganizations();
     this.loadMemoryTypes();
     this.loadEnvironmentTypes();
+    this.initForm();
     this.getModel();
+
+  }
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.form.controls;
+  }
+
+  private initForm() {
+    this.form = this.formBuilder.group({
+      id: new FormControl(null),
+      title: new FormControl(null, [
+        Validators.required,
+        // Validators.minLength(10),
+        // Validators.maxLength(100),
+      ]),
+      email: new FormControl(null, [
+        Validators.required,
+        // Validators.minLength(10),
+        // Validators.maxLength(100),
+      ]),
+      userName: new FormControl(null, [
+        Validators.required,
+        // Validators.minLength(10),
+        // Validators.maxLength(100),
+      ]),
+      organizationId: new FormControl(null, [
+        Validators.required,
+      ]),
+      memoryTypeId: new FormControl(null, [
+        Validators.required,
+      ]),
+      environmentTypeId: new FormControl(null),
+      hostOrIpAddress: new FormControl(null),
+      port: new FormControl(null),
+      password: new FormControl(null, [
+        Validators.required,
+        // Validators.minLength(8),
+        // Validators.pattern(PasswordRegex),
+      ]),
+      confirmPassword: new FormControl(null,
+        [Validators.required]
+      ),
+      description: new FormControl(null,
+      ),
+      forgotQuestion: new FormControl(null),
+      forgotAnswer: new FormControl(null,
+      ),
+      active: new FormControl(true),
+      isUEmailSecure: new FormControl(false),
+      isHostOrIpAddressSecure: new FormControl(false),
+      isPortSecure: new FormControl(false),
+      isUserNameSecure: new FormControl(false),
+      // isUserNameSecure: new FormControl(true, [Validators.requiredTrue]),
+    },
+    );
+    this.form.addValidators(CustomValidators.mustMatch('password', 'confirmPassword'));
+  }
+
+  get memoryTitleValidationMessages() {
+    return MemoryTitleValidationMessages;
+  }
+
+  get memoryOrganizationValidationMessages() {
+    return MemoryOrganizationValidationMessages;
+  }
+
+  get memoryTypeValidationMessages() {
+    return MemoryTypeValidationMessages;
+  }
+
+  get emailValidationsValidationMessages() {
+    return EmailValidationsValidationMessages;
+  }
+
+  get usernameValidationsValidationMessages() {
+    return UsernameValidationsValidationMessages;
+  }
+
+  get passwordValidationMessages() {
+    return PasswordValidationMessages;
+  }
+
+  get confirmPasswordValidationMessages() {
+    return ConfirmPasswordValidationMessages;
   }
 
   loadOrganizations() {
+    this.organizations = [];
     this.organizationService.getAll(this.organizationService.route).subscribe({
       next: (response) => {
         if (response.success) {
-          this.organizations = response.data.data;
-          this.title = this.model.title;
+          this.organizations = response.data.data.map(({ id, title }) => (new Option(id, title)));
         }
       },
       error: (e) => console.error(e),
-      complete: () => console.info('complete')
+      //complete: () => console.info('complete')
     });
   }
 
   loadMemoryTypes() {
+    this.memoryTypes = [];
     this.memoryTypeService.getAll(this.memoryTypeService.route).subscribe({
       next: (response) => {
         if (response.success) {
-          this.memoryTypes = response.data.data;
+          this.memoryTypes = response.data.data.map(({ id, title }) => (new Option(id, title)));
         }
       },
       error: (e) => console.error(e),
-      complete: () => console.info('complete')
+      //complete: () => console.info('complete')
     });
   }
 
@@ -70,56 +159,90 @@ export class MemoryEditorComponent implements OnInit {
     this.environmentTypeService.getAll(this.environmentTypeService.route).subscribe({
       next: (response) => {
         if (response.success) {
-          this.environmentTypes = response.data.data;
+          this.environmentTypes = response.data.data.map(({ id, title }) => (new Option(id, title)));
         }
       },
       error: (e) => console.error(e),
-      complete: () => console.info('complete')
+      //complete: () => console.info('complete')
     });
   }
 
   getModel() {
     let id = this.route.snapshot.paramMap.get('id');
     this.isNew = id == null;
-    this.isRead = this.route.snapshot.url[1].toString() ==="read";
+    this.isRead = this.route.snapshot.url[1].toString() === "read";
     if (id) {
       this.memoryService.readWithDecoding(this.memoryService.route, id).subscribe({
         next: (response) => {
           if (response.success) {
-           this.model = response.data.data;
-           
+            this.form.patchValue(response.data.data);
+            this.form.patchValue({ confirmPassword: this.form.value.password })
+            // this.form.patchValue({ title: null })
+            this.title = this.form.value.title;
           }
         },
         error: (e) => console.error(e),
-        complete: () => console.info('complete')
+        //complete: () => console.info('complete')
       });
     }
   }
 
+  waitForFilterResponse(value: string) {
+    this.getCountryList(value);
+  }
+
+  private getCountryList(params: string): void {
+    // params will be converted in url query params ?name={{value}}
+    this.organizations = this.organizations.filter(s => s.title.includes(params));
+  }
+
+  getFormValidationErrors(): string {
+    let message: string = '';
+    Object.keys(this.form.controls).forEach(key => {
+      const controlErrors: ValidationErrors | null | undefined = this.form.get(key)?.errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+          message= controlErrors[keyError];
+        });
+      }
+    });
+    return message;
+  }
+
   save() {
-    if (this.isNew) {
-      this.memoryService.create(this.memoryService.route, this.model).subscribe({
-        next: (response) => {
-          if (response.success) {
-            console.info('created');
-            this.router.navigate(['memories']);
-          }
-        },
-        error: (e) => console.error(e),
-        complete: () => console.info('complete')
-      });
-    } else {
-      this.memoryService.update(this.memoryService.route, this.model).subscribe({
-        next: (response) => {
-          if (response.success) {
-            console.info('updated');
-            this.router.navigate(['memories']);
-          }
-        },
-        error: (e) => console.error(e),
-        complete: () => console.info('complete')
-      });
+     
+    this.showError = !this.form.valid;
+    console.log('form', this.form.value);
+    
+    this.errorMessage = null;
+    if(!this.form.valid){
+      this.errorMessage = 'Please check invalid fields!'
+      return;
     }
+      if (this.isNew) {
+        this.memoryService.create(this.memoryService.route, this.form.value).subscribe({
+          next: (response) => {
+            if (response.success) {
+              console.info('created');
+              this.router.navigate(['memories']);
+            }
+          },
+          error: (e) => console.error(e),
+          complete: () => console.info('complete')
+        });
+      } else {
+        this.memoryService.update(this.memoryService.route, this.form.value).subscribe({
+          next: (response) => {
+            if (response.success) {
+              console.info('updated');
+              this.router.navigate(['memories']);
+            }
+          },
+          error: (e) => console.error(e),
+          complete: () => console.info('complete')
+        });
+      }
   }
 
 }

@@ -3,7 +3,7 @@ import { BaseService } from './base-service';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginResult, ProfileModel, RegisterModel, User } from '../_model/user.model';
-import { Router } from '@angular/router';
+import { Params, Router } from '@angular/router';
 
 import { map } from 'rxjs/operators';
 
@@ -58,25 +58,30 @@ export class AccountService extends BaseService<User, string> {
         return this.post<LoginResult>(route, model)
             .pipe(map(response => {
                 if (response.success) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('user', JSON.stringify(response.data));
-                    this.userSubject.next(response.data);
-                    this.userLoggedSubject.next(true);
+                    this.addToken(response.data);
                     return response;
                 }
                 return response;
             }));
     }
-    
-    loginExternal() {      
-        let route = `/api/account/external-token`; 
-        return this.get<LoginResult>(route)
+
+    loginExternal(params: Params) {
+        let allowToCommunicate = params['allowToCommunicate'];
+        let t = params['t'];
+        let r = params['r'];
+        let e = params['e'];
+        let acs = params['acs'];
+        let acv = params['acv'];
+        let pc = params['pc'];
+
+        let loginResult = new LoginResult();
+        loginResult.accessToken = t; 
+        this.addToken(loginResult);
+        let route = `/api/account/ext-callback?allowToCommunicate=${allowToCommunicate}&t=${t}&r=${r}&e=${e}&acs=${acs}&acv=${acv}&pc=${pc}`;
+        return this.getExternalLogin<LoginResult>(route, t)
             .pipe(map(response => {
                 if (response.success) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('user', JSON.stringify(response.data));
-                    this.userSubject.next(response.data);                    
-                    this.userLoggedSubject.next(true);
+                    this.addToken(response.data);
                     return response;
                 }
                 return response;
@@ -84,36 +89,13 @@ export class AccountService extends BaseService<User, string> {
     }
 
     loginWithGoogle() {
-        // let provider = 'provider=Google';
-        // let callBack = 'callBack=' + this.document.location.origin + '/register/external';
-        // this.document.location.href = this.combineWithApiUrl(`/api/account/google?${callBack}`);
-        let route = `/api/account/google`; 
-        return this.get<LoginResult>(route)
-            .pipe(map(response => {
-                if (response.success) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('user', JSON.stringify(response.data));
-                    this.userSubject.next(response.data);                    
-                    this.userLoggedSubject.next(true);
-                    return response;
-                }
-                return response;
-            }));
+        let callback = this.document.location.origin + '/register/external'
+        this.document.location.href = this.combineWithApiUrl(`/api/account/google?callback=${callback}`);
     }
 
     loginWithFacebook() {
-        let route = `/api/account/facebook`; 
-        return this.get<LoginResult>(route)
-            .pipe(map(response => {
-                if (response.success) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('user', JSON.stringify(response.data));
-                    this.userSubject.next(response.data);                    
-                    this.userLoggedSubject.next(true);
-                    return response;
-                }
-                return response;
-            }));
+        let callback = this.document.location.origin + '/register/external'
+        this.document.location.href = this.combineWithApiUrl(`/api/account/facebook?callback=${callback}`);
     }
 
     logout() {
@@ -125,6 +107,12 @@ export class AccountService extends BaseService<User, string> {
             });
     }
 
+    addToken(loginResult: LoginResult) {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('user', JSON.stringify(loginResult));
+        this.userSubject.next(loginResult);
+        this.userLoggedSubject.next(true);
+    }
     removeToken() {
         localStorage.removeItem('user');
         this.userSubject.next(new LoginResult());
@@ -133,7 +121,14 @@ export class AccountService extends BaseService<User, string> {
 
     register(user: RegisterModel) {
         let route = `/api/account/register`;
-        return this.post<FinalResponse<SingleResponse<User>>>(route, user);
+        return this.post<LoginResult>(route, user)
+        .pipe(map(response => {
+            if (response.success) {
+                this.addToken(response.data);
+                return response;
+            }
+            return response;
+        }));
     }
 
     getProfile() {

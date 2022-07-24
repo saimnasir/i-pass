@@ -1,20 +1,21 @@
- <mat-card class="form-field-card">
+<mat-card class="form-field-card mat-elevation-z{{elevation}}">
     <mat-card-content class="form-field-card-content">
-        <mat-form-field [appearance]="appearance">
+        <mat-form-field [appearance]="appearance"  class="form-field">
             <mat-label>{{label}}</mat-label>
-            <input matInput [value]="value" (change)="changeValue($event)" [type]="hide ? type : 'text'"
-                [disabled]="readOnly" [min]="min" [max]="max" [placeholder]="placeholder ? (placeholder) : (label)">
-
+            <mat-select [value]="value" [required]="required" (selectionChange)="changeValue($event.value)" [disabled]="readOnly"
+                [placeholder]="placeholder ? (placeholder) : (label)">
+                <mat-option *ngIf="placeholder" [value]=" ">
+                    {{placeholder}}
+                </mat-option>
+                <mat-option *ngFor="let option of options" [value]="option.id">
+                    {{option.title}}
+                </mat-option>
+            </mat-select> 
             <mat-icon *ngIf="value && showClearButton &&  (control.dirty || control.touched)" matSuffix mat-icon-button
                 aria-label="Clear" (click)="clear()">close
-            </mat-icon>
-
-            <mat-icon *ngIf="value && isPassword   && (control.dirty || control.touched)" matSuffix
-                (click)="hide = !hide" (mouseenter)="visibilityMouseEnter()" (mouseleave)="visibilityMouseLeave()">
-                {{hide ? 'visibility_off' : 'visibility'}}
-            </mat-icon>
+            </mat-icon> 
         </mat-form-field>
-       
+
     </mat-card-content>
     <mat-card-footer class="form-field-card-footer">
         <mat-error *ngFor="let validation of validationMessages">

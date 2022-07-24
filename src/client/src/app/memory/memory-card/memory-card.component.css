@@ -1,0 +1,23 @@
+ .memory-card {
+     margin: 10px 10px 10px 0;
+     /* padding-top: 10px;
+     padding-bottom: 10px; */
+     display: flex;
+     flex-direction: column;
+     height: 90%;
+ }
+
+ .memory-card-title {
+     color: brown;
+ }
+
+ .memory-card-content {
+     color: gray;
+ }
+
+ .memory-card-footer { 
+    display: flex;
+    flex-direction: column;
+     text-align: center;
+     vertical-align: bottom;
+ }

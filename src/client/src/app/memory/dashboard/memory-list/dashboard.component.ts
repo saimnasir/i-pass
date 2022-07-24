@@ -25,18 +25,18 @@ export class DashboardListComponent implements OnInit  {
   }
    
   ngOnInit(): void {
-    this.memoryService.getAll(this.memoryService.route).subscribe({
-      next: (response) => {
-        if (response.success) {
-          this.memories = response.data.data;
-          console.log("response.data.data",response.data.data);
-          this.dataSource = new MatTableDataSource<MemoryModel>(response.data.data);          
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        }
-      },
-      error: (e) => console.error(e),
-      complete: () => console.info('complete')
-    });
+    // this.memoryService.getAll(this.memoryService.route).subscribe({
+    //   next: (response) => {
+    //     if (response.success) {
+    //       this.memories = response.data.data;
+    //       console.log("response.data.data",response.data.data);
+    //       this.dataSource = new MatTableDataSource<MemoryModel>(response.data.data);          
+    //       this.dataSource.paginator = this.paginator;
+    //       this.dataSource.sort = this.sort;
+    //     }
+    //   },
+    //   error: (e) => console.error(e),
+    //   complete: () => console.info('complete')
+    // });
   } 
 }

@@ -1,14 +1,16 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MemoryModel } from 'src/app/_model/memory.model';
 import { MemoryService } from 'src/app/_service/memory.service';
-import { merge, of as observableOf } from 'rxjs';
+import { BehaviorSubject, merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UnlockMemoryDialog } from '../unlock-memory-dialog/unlock-memory-dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MediaQueryStatusComponent } from 'src/app/_components/media-query-status.component';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-memory-list',
@@ -18,24 +20,47 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MemoryListComponent implements AfterViewInit {
 
   public data: MemoryModel[] = [];
-
+  public groupDataPerCount: MemoryModel[][] = []
   dataSource!: MatTableDataSource<MemoryModel>;
 
   displayedColumns: string[] = ['title', 'organization', 'memoryType', 'environmentType', 'userName', 'email', 'hostOrIpAddress', 'port', 'password', 'description', 'action'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
+  media$: Observable<MediaChange[]>;
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
   seacrchText: string;
-  constructor(private memoryService: MemoryService,
+  cardCountSubject: BehaviorSubject<number>;
+  constructor(media: MediaObserver,
+    private memoryService: MemoryService,
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog
   ) {
 
+    this.media$ = media.asObservable();
+    this.cardCountSubject = new BehaviorSubject<number>(3);
+  }
+  public innerWidth: any;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.media$.subscribe(changes => {
+      let change = changes.find(c => c.mqAlias.length === 2); 
+      let count = 3;
+      if (change?.mqAlias === 'sm') {
+        count = 2;
+      }
+      if (change?.mqAlias === 'xs') {
+        count = 1;
+      }
+      this.cardCountSubject = new BehaviorSubject<number>(count);
+    })
+  }
+
+  public get cardCount(): number {
+    return this.cardCountSubject.value;
   }
 
   ngAfterViewInit() {
@@ -74,17 +99,28 @@ export class MemoryListComponent implements AfterViewInit {
       )
       .subscribe(data => {
         this.data = data;
-        //this.dataSource = new MatTableDataSource<MemoryModel>(data);
-        // this.dataSource.paginator = this.paginator;
-        // this.dataSource.sort = this.sort;
+        this.setGroupDataPerCount;
       });
   }
 
+  get setGroupDataPerCount() {
+    let index = 0;
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.groupDataPerCount[index] && this.groupDataPerCount[index].length === this.cardCount) {
+        index++;
+      }
+      if (!this.groupDataPerCount[index]) {
+        this.groupDataPerCount[index] = [];
+      }
+      this.groupDataPerCount[index].push(this.data[i]);
+    }
+    return this.groupDataPerCount;
+  }
 
   openDialog(id: string, action: string, enterAnimationDuration: string, exitAnimationDuration: string): void {
-    let config :MatDialogConfig<any> = {
-      width: '400px', 
-      disableClose : true,
+    let config: MatDialogConfig<any> = {
+      width: '400px',
+      disableClose: true,
       hasBackdrop: true,
     };
     const dialogRef = this.dialog.open(UnlockMemoryDialog, config);
@@ -97,5 +133,4 @@ export class MemoryListComponent implements AfterViewInit {
       }
     );
   }
-
 }

@@ -1,6 +1,6 @@
 .drawer {
     position: fixed;
-    height: 100vh;
+    /* height: 100vh; */
     min-width: 15%; 
   }
   .drawer .header {
@@ -24,7 +24,7 @@
   }
   
   .main.contents {
-    min-height: 100vh;
+    /* min-height: 100vh; */
     margin-top: 64px; /* height of header */
     padding: 16px;
   }
@@ -43,7 +43,7 @@
   }
   .side-nav-content{
     /* background-color: #FCF9C6; */
-    min-height: 82vh; 
+    /* min-height: 82vh;  */
   }
   .header-toolbar {
     background-color: #90C8AC;

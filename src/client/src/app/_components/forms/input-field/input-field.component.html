@@ -1,21 +1,39 @@
-<mat-form-field  [ngClass]="className" [appearance]="appearance">
-    <mat-label>{{ label}}</mat-label>
-    <input matInput 
-        [type]="type" 
-        [(ngModel)]="value" 
-        [required]="required" 
-        [disabled]="readOnly"
-        [pattern]="pattern"
-        [min]="min" 
-        [max]="max" 
-        (keyup)="valueChange.emit(value)" 
-        (change)="valueChange.emit(value)" 
-        [placeholder]="placeholder ? (placeholder) : (label)"  
-        [ngClass]="className"
-    >
-    <button *ngIf="showClearButton && value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-        <mat-icon>close</mat-icon>
-    </button>
-    <mat-hint *ngIf="hint">{{hint}}</mat-hint>
-    <mat-error *ngIf="validationMessage">{{validationMessage}}</mat-error> 
-</mat-form-field>
+<mat-card class="form-field-card mat-elevation-z{{elevation}}" >
+    <mat-card-content class="form-field-card-content">
+        <mat-form-field [appearance]="appearance" class="form-field" >
+            <mat-label>{{label}}</mat-label>
+            <input *ngIf="!isTextArea" matInput [value]="value" (change)="changeValue($event)"
+                [type]="hide ? type : 'text'" [disabled]="readOnly" [min]="min" [max]="max"
+                [placeholder]="placeholder ? (placeholder) : (label)" [required]="required" 
+                >
+
+            <textarea *ngIf="isTextArea" matInput [value]="value" [required]="required" (change)="changeValue($event)" [disabled]="readOnly"
+                [placeholder]="placeholder ? (placeholder) : (label)">{{value}}
+            </textarea>
+
+            <mat-icon *ngIf="value && showClearButton &&  (control.dirty || control.touched)" matSuffix mat-icon-button
+                aria-label="Clear" (click)="clear()">close
+            </mat-icon>
+
+            <mat-icon *ngIf="value && isPassword" matSuffix
+                (click)="hide = !hide" (mouseenter)="visibilityMouseEnter()" (mouseleave)="visibilityMouseLeave()">
+                {{hide ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+        </mat-form-field>
+
+    </mat-card-content>
+    <mat-card-footer class="form-field-card-footer">
+        <mat-error *ngFor="let validation of validationMessages">
+            <mat-error class="error-message"
+                *ngIf="control.hasError(validation.type) && (control.dirty || control.touched || showError)">
+                {{validation.message}}
+            </mat-error>
+        </mat-error>
+        <mat-hint class="hint" *ngIf="hint && !control.valid && (control.dirty || control.touched)" align="start">
+            {{hint}}
+        </mat-hint>
+        <mat-label class="successValidation"
+            *ngIf="successValidation && control.valid && (control.dirty || control.touched)" align="start">
+            {{successValidation}}</mat-label>
+    </mat-card-footer>
+</mat-card>
