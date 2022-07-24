@@ -23,20 +23,13 @@ export class ExternalComponent implements OnInit {
   ngOnInit() {
     // get return url from route parameters or default to '/'
     this.accountService.removeToken();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-  }
-
-  loginExternal() {
-    this.errorMessage = undefined;
-
-    this.alertService.clear();
-
-    this.accountService.loginExternal()
+    
+    this.accountService.loginExternal(this.route.snapshot.queryParams)
       .pipe(first())
       .subscribe(
         response => {
           if (response?.success) {
-            this.router.navigate([this.returnUrl]);
+            this.router.navigate(['/']);
           } else {
             this.errorMessage = response?.message;
           }
@@ -45,5 +38,5 @@ export class ExternalComponent implements OnInit {
           this.alertService.error(error);
         })
       ;
-  }
+  } 
 }

@@ -96,13 +96,13 @@ export class RegisterComponent implements OnInit {
     }
 
     register() {
-        let invalid = this.findFirstInvalidControls();
-        console.log('invalid controls[0]', invalid);
-        console.log('this.form.value', this.form.value);
-        console.log('validation', this.form.valid);
-        console.log('form', this.form);
-        console.log('phoneNumber errors', this.form.controls['phoneNumber'].errors);
-        return;
+        // let invalid = this.findFirstInvalidControls();
+        // console.log('invalid controls[0]', invalid);
+        // console.log('this.form.value', this.form.value);
+        // console.log('validation', this.form.valid);
+        // console.log('form', this.form);
+        // console.log('phoneNumber errors', this.form.controls['phoneNumber'].errors);
+        // return;
         this.submitted = true;
 
         // reset alerts on submit
@@ -115,7 +115,7 @@ export class RegisterComponent implements OnInit {
             .subscribe(
                 data => {
                     this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-                    this.router.navigate(['../login'], { relativeTo: this.route });
+                    this.router.navigate(['/profile']);
                 },
                 error => {
                     this.alertService.error(error);

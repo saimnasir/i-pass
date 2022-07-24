@@ -9,36 +9,44 @@
         <mat-grid-list cols="1" rowHeight="60px">
 
             <mat-grid-tile>
-                <app-input-field [style]="'width: 100%;'" [className]="'example-form-field'" [label]="'Phone'"
+                <app-input-field-ex [style]="'width: 100%;'" [className]="'example-form-field'" [label]="'Phone'"
                     [(value)]="model.phoneNumber" [type]="'tel'" [placeholder]="'Enter phone.'" [pattern]="phonePattern"
                     [hint]="'Etc: 5555555555'" [required]="true"
-                    [validationMessage]="'Please enter a valid phone number'" 
-
-                    >
-                </app-input-field>
+                    [validationMessage]="'Please enter a valid phone number'">
+                </app-input-field-ex>
 
             </mat-grid-tile>
 
             <mat-grid-tile>
-                <app-input-field [style]="'width: 100%;'" [className]="'example-form-field'" [label]="'Password'"
+                <app-input-field-ex [style]="'width: 100%;'" [className]="'example-form-field'" [label]="'Password'"
                     [(value)]="model.password" [type]="'password'" [placeholder]="'Enter password.'"
                     [hint]="'Min 8 length, at least 1 uppercase, at least 1 lower case, at least 1 numeric and at least 1 character'"
                     [required]="true" [validationMessage]="'Please enter your password!'" [showClearButton]="false">
-                </app-input-field>
+                </app-input-field-ex>
             </mat-grid-tile>
 
         </mat-grid-list>
         <label *ngIf="errorMessage"> {{errorMessage}} </label>
     </mat-card-content>
     <mat-card-footer>
-        <mat-card-actions class="card-footer"> 
+        <mat-card-actions class="card-footer">
             <div class="example-button-row">
-                <button (click)="login()" mat-stroked-button color="primary" [disabled]="!isFormValid()"><mat-icon>login</mat-icon> Login</button>
-                <button (click)="loginWithGoogle()" mat-stroked-button color="primary" ><img style="height: 16px;" src="../../../assets/google-logo.svg.png"/> Login With Google</button>
-                <button mat-stroked-button color="warn" type="button" (click)="reset()"><mat-icon>settings_backup_restore</mat-icon>&nbsp;Reset</button>
+                <button (click)="login()" mat-stroked-button color="primary" [disabled]="!isFormValid()">
+                    <mat-icon>login</mat-icon> Login
+                </button>
+                <button (click)="loginWithGoogle()" mat-stroked-button color="primary"><img style="height: 16px;"
+                        src="../../../assets/google-logo.svg.png" /> Login With Google</button>
+                <button (click)="loginWithFacebook()" mat-stroked-button color="primary">
+                    <mat-icon>facebook</mat-icon>Login with Faacebook
+                </button>
+                <button mat-stroked-button color="warn" type="button" (click)="reset()">
+                    <mat-icon>settings_backup_restore</mat-icon>&nbsp;Reset
+                </button>
                 <span> &nbsp;If you don't have an
                     account, you can</span>
-                <a  mat-stroked-button color="link"  routerLink="../register"  ><mat-icon>how_to_reg</mat-icon> Register</a> 
+                <a mat-stroked-button color="link" routerLink="../register">
+                    <mat-icon>how_to_reg</mat-icon> Register
+                </a>
 
             </div>
         </mat-card-actions>

@@ -7,29 +7,29 @@
         </mat-card-header>
         <mat-card-content class="card-content container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
 
-            <div fxFlex.lt-md="100" fxFlex="35" fxLayoutGap="20px">
-                <app-form-group-input formControlName="phoneNumber" fxFlex="98" [class]="'example-form-field'"
+            <div fxFlex.lt-md="100" fxFlex="35" fxLayoutGap="20px" fxHide.lt-sm>
+                <app-input-field formControlName="phoneNumber" fxFlex="98" [class]="'example-form-field'"
                     [label]="'Phone'" [type]="'tel'" [placeholder]="'Enter phone'" [hint]="'Example: 5555555555'"
                     [control]="f['phoneNumber']" [validationMessages]="phoneNumberValidationMessages"
                     
                     [successValidation]="'Looks good!'"
                     >
-                </app-form-group-input>
+                </app-input-field>
             </div>
             <div fxFlex.lt-xs="100" xFlex.lt-md="100" fxFlex="35" fxLayoutGap="20px">
-                <app-form-group-input formControlName="password" fxFlex="98" [class]="'example-form-field'"
+                <app-input-field formControlName="password" fxFlex="98" [class]="'example-form-field'"
                     [label]="'Password'" [type]="'password'" [placeholder]="'Enter password'" [control]="f['password']"
                     [validationMessages]="passwordValidationMessages"  
                     [successValidation]="'Looks good!'">
-                </app-form-group-input>
+                </app-input-field>
             </div>
             <div fxFlex.lt-xs="100" xFlex.lt-md="100" fxFlex="35" fxLayoutGap="20px">
-                <app-form-group-input formControlName="confirmPassword" fxFlex="98" [class]="'example-form-field'"
+                <app-input-field formControlName="confirmPassword" fxFlex="98" [class]="'example-form-field'"
                     [label]="'Confirm Password'" [type]="'password'" [placeholder]="'Re-Enter password'"
                     [control]="f['confirmPassword']" [validationMessages]="confirmPasswordValidationMessages"
                    
                     [successValidation]="'Looks good!'">
-                </app-form-group-input>
+                </app-input-field>
             </div>
         </mat-card-content>
         <mat-card-footer>

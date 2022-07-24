@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core'; 
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';  
   
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -56,57 +55,14 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { ProfileComponent } from './profile/profile.component';
 import { PinCodeService } from '../_service/pin-code.service';
 import { AccountService } from '../_service/account.service';
-import { InputFieldComponent } from '../_components/forms/input-field/input-field.component';
-import { FormGroupInputComponent } from '../_components/forms/form-group-input/form-group-input.component';
 import { ExternalComponent } from './external/external.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { IPassCommonModule } from '../ipass-common.module';
  
 
 @NgModule({
     imports: [
-        BrowserAnimationsModule, 
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        AvatarModule,
-        CommonModule ,
-        FormsModule, 
-        ReactiveFormsModule,
-         
-        MatMenuModule,
-        MatIconModule,
-        MatBadgeModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatTabsModule,
-        MatSidenavModule,
-        MatButtonModule,
-        MatListModule,
-        MatToolbarModule,
-        DrawerRailModule,
-        MatStepperModule,
-        MatInputModule,
-        MatGridListModule,
-        MatExpansionModule,
-        MatSortModule,
-        MatSnackBarModule,
-        MatTooltipModule,
-        MatChipsModule,
-        MatSelectModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatCheckboxModule,
-        NgxMatDatetimePickerModule,
-        NgxMatTimepickerModule,
-        NgxMatNativeDateModule,
-        MatRadioModule,
-        MatCardModule,
-        MatSlideToggleModule,
-        
-        MatProgressSpinnerModule,
-        MatProgressBarModule,
-        MatDialogModule,
-        FlexLayoutModule
+        IPassCommonModule,
     ],
     providers: [ 
       PinCodeService,
@@ -116,8 +72,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         LoginComponent,
         RegisterComponent,
         ProfileComponent,
-        InputFieldComponent,
-        FormGroupInputComponent,
+        //InputFieldComponent, 
         ExternalComponent,
     ]
 })
