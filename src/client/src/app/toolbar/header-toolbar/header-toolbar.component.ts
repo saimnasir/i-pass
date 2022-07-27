@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/_service/account.service';
 
 @Component({
-  selector: 'app-header-toolbar',
+  selector: 'app-nav-bar',
   templateUrl: './header-toolbar.component.html',
   styleUrls: ['./header-toolbar.component.css']
 })

@@ -155,7 +155,7 @@ namespace IPass.Application.PasswordDomain
 
                 var pagination = new Pagination
                 {
-                    Page = input.Page < 1 ? 1 : input.Page,
+                    Page = input.Page < 1 ? 1 : input.Page +1,
                     Count = input.PageSize < 0 ? 20 : input.PageSize
                 };
                 var query = await MemoryRepository.WhereAsync(conditions, includeAll: true);

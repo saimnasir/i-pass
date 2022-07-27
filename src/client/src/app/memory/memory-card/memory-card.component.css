@@ -1,23 +1,32 @@
  .memory-card {
-     margin: 10px 10px 10px 0;
-     /* padding-top: 10px;
-     padding-bottom: 10px; */
-     display: flex;
-     flex-direction: column;
-     height: 90%;
+     margin: 0 5px 0 0px; 
  }
 
  .memory-card-title {
-     color: brown;
+     font-size: larger;
  }
 
  .memory-card-content {
-     color: gray;
+    margin-top: 10px;
  }
 
  .memory-card-footer { 
-    display: flex;
-    flex-direction: column;
-     text-align: center;
-     vertical-align: bottom;
+    
+     text-align: center; 
  }
+ .mat-expansion-panel-header.mat-expanded {
+    height: 40px;
+}
+.icon{
+    color: brown;
+}
+.mat-card-panel-header{
+    background: aliceblue;
+    font-size: larger;
+}
+.actions {
+    background: powderblue;
+}
+ /* .mat-card-panel-header:hover {
+    background: lavender !important;
+}  */

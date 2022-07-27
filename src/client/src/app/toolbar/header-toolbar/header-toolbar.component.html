@@ -9,8 +9,8 @@
         <span class="menu-spacer"></span>
         <div>
             <button *ngIf="accountService.userLoggedIn" mat-button [routerLink]="'/memories'"> Memories </button>
-            <button *ngIf="accountService.userLoggedIn" mat-button [routerLink]="'/organizations'"> Organizations
-            </button>
+            <!-- <button *ngIf="accountService.userLoggedIn" mat-button [routerLink]="'/organizations'"> Organizations
+            </button> -->
             <button *ngIf="accountService.userLoggedIn" mat-button [routerLink]="'/profile'"> Profile </button>
             <!-- <button mat-button [routerLink]="'/memory-types'"> Memory Types </button>
             <button mat-button [routerLink]="'/organization-types'"> Organization Types </button>
@@ -19,9 +19,9 @@
         </div>
     </mat-toolbar-row>
 
-    <!-- <mat-toolbar-row>
+  <!-- <mat-toolbar-row>
         <span style="font-size: 12px;">SimpleCRM helps you easily manage your organizations</span>
-    </mat-toolbar-row> -->
+    </mat-toolbar-row>  -->
 </mat-toolbar>
 
 <mat-toolbar class="main footer">
@@ -30,7 +30,6 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" role="navigation" opened="true" class="side-nav">
         <mat-nav-list>
-
             <button *ngIf="accountService.userLoggedIn" mat-list-item [routerLink]="'/memories'"> Memories </button>
             <button *ngIf="accountService.userLoggedIn" mat-list-item [routerLink]="'/memory-types'">Memory Types
             </button>
@@ -41,13 +40,11 @@
             <button *ngIf="accountService.userLoggedIn" mat-list-item [routerLink]="'/environment-types'"> Environment
                 Types </button>
             <button mat-list-item (click)="sidenav.toggle()">Close</button>
-
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="side-nav-content">
         <div>
-            <router-outlet></router-outlet>
-
+            <router-outlet class="outlet"></router-outlet>
             <media-query-status></media-query-status>
         </div>
     </mat-sidenav-content>

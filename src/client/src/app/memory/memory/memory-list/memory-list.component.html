@@ -1,21 +1,27 @@
-<mat-card class="mat-elevation-z8 ">
+<mat-card class="mat-elevation-z0 ">
     <mat-card-header class="card-header ">
         <mat-card-title>Memories</mat-card-title>
         <mat-card-subtitle>Don't keep in mind!</mat-card-subtitle>
         <section fxHide.gt-md align="end">
-
             <button align="end" mat-icon-button mat-raised-button color="primary" aria-label="Add memory"
                 [routerLink]="['/memories/add']" [title]="'Add'">
                 <mat-icon>add </mat-icon>
             </button>
-
+            <button *ngIf="!openAllPanels" align="end" mat-icon-button mat-raised-button style="margin-left: 4px;"
+                (click)="openAllPanels = true">
+                <mat-icon>expand_more </mat-icon>
+            </button>
+            <button *ngIf="openAllPanels" align="end" mat-icon-button mat-raised-button style="margin-left: 4px;"
+                (click)="openAllPanels = false">
+                <mat-icon>expand_less </mat-icon>
+            </button>
         </section>
     </mat-card-header>
-    <mat-card-content class="card-content example-container ">
+    <mat-card-content class="card-content ">
 
-        <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+        <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
             <mat-spinner *ngIf="isLoadingResults">Loading..</mat-spinner>
-            <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+            <div class="rate-limit-reached" *ngIf="isRateLimitReached">
                 No Records found
             </div>
         </div>
@@ -23,183 +29,196 @@
         <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
 
             <div fxFlex.lt-md="100" fxFlex="100" fxHide.lt-lg>
-                <div class=" mat-elevation-z1 example-table-container">
-                    <table mat-table [dataSource]="data" matSort matSortActive="created" matSortDisableClear
-                        matSortDirection="desc">
+                <div class=" mat-elevation-z1 ">
+                    <div class=" table-container">
+                        <table mat-table [dataSource]="data" matSort matSortActive="created" matSortDisableClear
+                            matSortDirection="desc">
+                            <!-- title -->
+                            <ng-container matColumnDef="title">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by title">
+                                    {{'title'}}</th>
+                                <td mat-cell *matCellDef="let memory">
+                                    <span>{{memory.title}}</span>
+                                </td>
+                            </ng-container>
 
-                        <!-- title -->
-                        <ng-container matColumnDef="title">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by title">
-                                {{'title'}}</th>
-                            <td mat-cell *matCellDef="let memory">
-                                <span>{{memory.title}}</span>
-                            </td>
-                        </ng-container>
+                            <!-- organization -->
+                            <ng-container matColumnDef="organization">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by organization">
+                                    {{'organization'}}</th>
+                                <td mat-cell *matCellDef="let memory">
+                                    <span>{{memory.organization.title}}</span>
+                                </td>
+                            </ng-container>
+                            <!-- memoryType -->
+                            <ng-container matColumnDef="memoryType">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by memoryType">
+                                    {{'memory type'}}</th>
+                                <td mat-cell *matCellDef="let memory">
+                                    <span>{{memory.memoryType.title}}</span>
+                                </td>
+                            </ng-container>
 
-                        <!-- organization -->
-                        <ng-container matColumnDef="organization">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                sortActionDescription="Sort by organization">
-                                {{'organization'}}</th>
-                            <td mat-cell *matCellDef="let memory">
-                                <span>{{memory.organization.title}}</span>
-                            </td>
-                        </ng-container>
-                        <!-- memoryType -->
-                        <ng-container matColumnDef="memoryType">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                sortActionDescription="Sort by memoryType">
-                                {{'memory type'}}</th>
-                            <td mat-cell *matCellDef="let memory">
-                                <span>{{memory.memoryType.title}}</span>
-                            </td>
-                        </ng-container>
+                            <!-- memoryType -->
+                            <ng-container matColumnDef="environmentType">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by environmentType"> {{'environment type'}}</th>
+                                <td mat-cell *matCellDef="let memory">
+                                    <span>{{memory.environmentType?.title}}</span>
+                                </td>
+                            </ng-container>
 
-                        <!-- memoryType -->
-                        <ng-container matColumnDef="environmentType">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                sortActionDescription="Sort by environmentType"> {{'environment type'}}</th>
-                            <td mat-cell *matCellDef="let memory">
-                                <span>{{memory.environmentType?.title}}</span>
-                            </td>
-                        </ng-container>
+                            <!-- userName -->
+                            <ng-container matColumnDef="userName">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by userName">
+                                    {{'user name'}}</th>
+                                <td mat-cell *matCellDef="let memory">
+                                    <span *ngIf="!memory.isUserNameSecure">{{memory.userName}}</span>
+                                    <button *ngIf="memory.isUserNameSecure" mat-icon-button color="primary"
+                                        aria-label="View memory"
+                                        (click)="openDialog(memory.id, 'read', '3000ms', '1500ms')" [title]="'See'">
+                                        <mat-icon>lock_open</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <!-- email -->
+                            <ng-container matColumnDef="email">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by email">
+                                    {{'email'}}</th>
+                                <td mat-cell *matCellDef="let memory">
+                                    <span *ngIf="!memory.isUEmailSecure">{{memory.email}}</span>
+                                    <button *ngIf="memory.isUEmailSecure" mat-icon-button color="primary"
+                                        aria-label="View memory"
+                                        (click)="openDialog(memory.id,  'read','3000ms', '1500ms')" [title]="'See'">
+                                        <mat-icon>lock_open</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <!-- hostOrIpAddress -->
+                            <ng-container matColumnDef="hostOrIpAddress">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by hostOrIpAddress"> {{'host name/ip address'}}</th>
+                                <td mat-cell *matCellDef="let memory">
+                                    <span *ngIf="!memory.isHostOrIpAddressSecure">{{memory.hostOrIpAddress}}</span>
+                                    <button *ngIf="memory.isHostOrIpAddressSecure" mat-icon-button color="primary"
+                                        aria-label="View memory"
+                                        (click)="openDialog(memory.id,  'read','3000ms', '1500ms')" [title]="'See'">
+                                        <mat-icon>lock_open</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <!-- port -->
+                            <ng-container matColumnDef="port">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by port">
+                                    {{'port'}}</th>
+                                <td mat-cell *matCellDef="let memory">
+                                    <span *ngIf="!memory.isPortSecure">{{memory.port}}</span>
+                                    <button *ngIf="memory.isPortSecure" mat-icon-button color="primary"
+                                        aria-label="View memory"
+                                        (click)="openDialog(memory.id,  'read','3000ms', '1500ms')" [title]="'See'">
+                                        <mat-icon>lock_open</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <!-- password -->
+                            <ng-container matColumnDef="password">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by password">
+                                    {{'password'}}</th>
+                                <td mat-cell *matCellDef="let memory">
+                                    <button mat-icon-button color="primary" aria-label="View memory"
+                                        (click)="openDialog(memory.id,  'read','3000ms', '1500ms')" [title]="'See'">
+                                        <mat-icon>lock_open</mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
 
-                        <!-- userName -->
-                        <ng-container matColumnDef="userName">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                sortActionDescription="Sort by userName">
-                                {{'user name'}}</th>
-                            <td mat-cell *matCellDef="let memory">
-                                <span *ngIf="!memory.isUserNameSecure">{{memory.userName}}</span>
-                                <button *ngIf="memory.isUserNameSecure" mat-icon-button mat-raised-button
-                                    color="primary" aria-label="View memory"
-                                    (click)="openDialog(memory.id, 'read', '3000ms', '1500ms')" [title]="'See'">
-                                    <mat-icon>lock_open</mat-icon>
-                                </button>
-                            </td>
-                        </ng-container>
-                        <!-- email -->
-                        <ng-container matColumnDef="email">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by email">
-                                {{'email'}}</th>
-                            <td mat-cell *matCellDef="let memory">
-                                <span *ngIf="!memory.isUEmailSecure">{{memory.email}}</span>
-                                <button *ngIf="memory.isUEmailSecure" mat-icon-button mat-raised-button color="primary"
-                                    aria-label="View memory" (click)="openDialog(memory.id,  'read','3000ms', '1500ms')"
-                                    [title]="'See'">
-                                    <mat-icon>lock_open</mat-icon>
-                                </button>
-                            </td>
-                        </ng-container>
-                        <!-- hostOrIpAddress -->
-                        <ng-container matColumnDef="hostOrIpAddress">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                sortActionDescription="Sort by hostOrIpAddress"> {{'host name/ip address'}}</th>
-                            <td mat-cell *matCellDef="let memory">
-                                <span *ngIf="!memory.isHostOrIpAddressSecure">{{memory.hostOrIpAddress}}</span>
-                                <button *ngIf="memory.isHostOrIpAddressSecure" mat-icon-button mat-raised-button
-                                    color="primary" aria-label="View memory"
-                                    (click)="openDialog(memory.id,  'read','3000ms', '1500ms')" [title]="'See'">
-                                    <mat-icon>lock_open</mat-icon>
-                                </button>
-                            </td>
-                        </ng-container>
-                        <!-- port -->
-                        <ng-container matColumnDef="port">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by port">
-                                {{'port'}}</th>
-                            <td mat-cell *matCellDef="let memory">
-                                <span *ngIf="!memory.isPortSecure">{{memory.port}}</span>
-                                <button *ngIf="memory.isPortSecure" mat-icon-button mat-raised-button color="primary"
-                                    aria-label="View memory" (click)="openDialog(memory.id,  'read','3000ms', '1500ms')"
-                                    [title]="'See'">
-                                    <mat-icon>lock_open</mat-icon>
-                                </button>
-                            </td>
-                        </ng-container>
-                        <!-- password -->
-                        <ng-container matColumnDef="password">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                sortActionDescription="Sort by password">
-                                {{'password'}}</th>
-                            <td mat-cell *matCellDef="let memory">
-                                <button mat-icon-button mat-raised-button color="primary" aria-label="View memory"
-                                    (click)="openDialog(memory.id,  'read','3000ms', '1500ms')" [title]="'See'">
-                                    <mat-icon>lock_open</mat-icon>
-                                </button>
-                            </td>
-                        </ng-container>
+                            <!-- description -->
+                            <ng-container matColumnDef="description">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header
+                                    sortActionDescription="Sort by description">
+                                    {{'description'}}</th>
+                                <td mat-cell *matCellDef="let memory">
+                                    <span>{{memory.description}}</span>
+                                </td>
+                            </ng-container>
 
-                        <!-- description -->
-                        <ng-container matColumnDef="description">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                sortActionDescription="Sort by description">
-                                {{'description'}}</th>
-                            <td mat-cell *matCellDef="let memory">
-                                <span>{{memory.description}}</span>
-                            </td>
-                        </ng-container>
-
-                        <!-- Action -->
-                        <ng-container matColumnDef="action">
-                            <th mat-header-cell *matHeaderCellDef [style.width]="'170px'">
-                                <button mat-icon-button mat-raised-button color="primary" aria-label="Add memory"
-                                    [routerLink]="['/memories/add']" [title]="'Add'">
-                                    <mat-icon>add </mat-icon>
-                                </button>
-                            </th>
-                            <td mat-cell *matCellDef="let memory">
-                                <section>
-                                    <div class="example-button-row">
-                                        <button mat-icon-button mat-raised-button color="primary"
-                                            aria-label="View memory"
-                                            (click)="openDialog(memory.id,  'edit','3000ms', '1500ms')"
-                                            [title]="'Edit'">
-                                            <mat-icon>edit</mat-icon>
+                            <!-- Action -->
+                            <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div align="end">
+                                        <button mat-raised-button aria-label="Add memory"
+                                            [routerLink]="['/memories/add']" class="add-button" [title]="'Add'">
+                                            <mat-icon>add </mat-icon>Add
                                         </button>
-                                        <button mat-icon-button mat-raised-button color="primary"
-                                            aria-label="View memory"
-                                            (click)="openDialog(memory.id, 'read', '3000ms', '1500ms')"
-                                            [title]="'Read'">
-                                            <mat-icon>remove_red_eye</mat-icon>
-                                        </button>
-                                        <button mat-icon-button mat-raised-button color="primary"
-                                            aria-label="View history"
-                                            (click)="openDialog(memory.id, 'history', '3000ms', '1500ms')"
-                                            [title]="'History'">
-                                            <mat-icon>history</mat-icon>
-                                        </button>
-
-
                                     </div>
-                                </section>
 
-                            </td>
-                        </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-                    <mat-paginator [length]="resultsLength" [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons
-                        aria-label="Select page"></mat-paginator>
+                                </th>
+                                <td mat-cell *matCellDef="let memory">
+                                    <section>
+                                        <div class="button-row" align="end">
+                                            <button mat-button mat-raised-button [matMenuTriggerFor]="beforeMenu"
+                                                class="actions">
+                                                <mat-icon>more_horiz</mat-icon>
+                                            </button>
+                                            <mat-menu #beforeMenu="matMenu" xPosition="before" style="padding: 10px;">
+                                                <button mat-menu-item>
+                                                    <button mat-raised-button aria-label="View memory"
+                                                        (click)="openDialog(memory.id,  'edit','3000ms', '1500ms')"
+                                                        [title]="'Edit'">
+                                                        <mat-icon color="primary">edit</mat-icon>Edit
+                                                    </button>
+                                                </button>
+                                                <button mat-menu-item>
+                                                    <button mat-raised-button aria-label="View memory" fxFlex="100"
+                                                        (click)="openDialog(memory.id, 'read', '3000ms', '1500ms')"
+                                                        [title]="'Read'">
+                                                        <mat-icon color="primary">remove_red_eye</mat-icon>Read
+                                                    </button>
+                                                </button>
+                                                <button mat-menu-item>
+                                                    <button mat-raised-button aria-label="View history" fxFlex="100"
+                                                        (click)="openDialog(memory.id, 'history', '3000ms', '1500ms')"
+                                                        [title]="'History'">
+                                                        <mat-icon color="primary">history</mat-icon>History
+                                                    </button>
+                                                </button>
+                                            </mat-menu>
 
-                    <!-- <mat-paginator [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons
-                aria-label="Select page of periodic elements">
-            </mat-paginator> -->
+                                        </div>
+                                    </section>
+
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        
+                <mat-paginator class="mat-paginator-sticky" [length]="resultsLength" [pageSizeOptions]="[  10, 20, 100]" showFirstLastButtons
+                aria-label="Select page"></mat-paginator> 
+                    </div> 
                 </div>
             </div>
-            <div fxFlex.lt-md="100" fxFlex="100" fxHide.gt-md>
-                <div class="container" > 
-                <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill *ngFor="let groupData of groupDataPerCount ">
-                    <div *ngFor="let memory of groupData " fxFlex.lt-sm="100" fxFlex.lt-md="50" fxFlex="35">
-                        <app-memory-card [memory]="memory"  fxFlex="100">
-                        </app-memory-card>
+            <div fxFlex.lt-md="100" fxFlex="100" fxHide.gt-md> 
+                <div class="container"> 
+                    <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill *ngFor="let groupData of groupDataPerCount ">
+                        <div *ngFor="let memory of groupData " fxFlex.lt-sm="100" fxFlex.lt-md="100" fxFlex="100">
+                            <app-memory-card [memory]="memory" fxFlex="100" [panelOpenState]="openAllPanels">
+                            </app-memory-card>
+                        </div>
+
                     </div>
-                    
+                    <mat-paginator [length]="resultsLength" [pageSizeOptions]="[  10, 20, 100]" showFirstLastButtons
+                    aria-label="Select page"></mat-paginator> 
                 </div>
             </div>
-            </div>
-
-        </div>
+        </div> 
     </mat-card-content>
     <!-- <mat-card-footer class="card-footer">
 

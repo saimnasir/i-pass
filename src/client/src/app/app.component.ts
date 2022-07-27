@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core'; 
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-ipass',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

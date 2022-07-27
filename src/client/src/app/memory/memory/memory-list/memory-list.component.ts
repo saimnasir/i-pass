@@ -25,6 +25,7 @@ export class MemoryListComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['title', 'organization', 'memoryType', 'environmentType', 'userName', 'email', 'hostOrIpAddress', 'port', 'password', 'description', 'action'];
 
+  openAllPanels = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   media$: Observable<MediaChange[]>;
@@ -41,14 +42,14 @@ export class MemoryListComponent implements AfterViewInit {
   ) {
 
     this.media$ = media.asObservable();
-    this.cardCountSubject = new BehaviorSubject<number>(3);
+    this.cardCountSubject = new BehaviorSubject<number>(1);
   }
   public innerWidth: any;
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.media$.subscribe(changes => {
-      let change = changes.find(c => c.mqAlias.length === 2); 
-      let count = 3;
+      let change = changes.find(c => c.mqAlias.length === 2);
+      let count = 2;
       if (change?.mqAlias === 'sm') {
         count = 2;
       }
@@ -89,7 +90,7 @@ export class MemoryListComponent implements AfterViewInit {
 
           if (response === null) {
             return [];
-          }
+          } 
           // Only refresh the result length if there is new data. In case of rate
           // limit errors, we do not want to reset the paginator to zero, as that
           // would prevent users from re-triggering requests.
