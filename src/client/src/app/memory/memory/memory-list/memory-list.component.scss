@@ -45,17 +45,18 @@ th {
 }
 
 .mat-elevation-z1 {
-  background: #EAF6F6;
+  // background: #EAF6F6;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-  position: relative;
+  position: relative; 
 }
 
 .table-container {
-  position: relative;
-  min-height: 200px;
-  max-height: 1000px;
+  position: relative; 
+  max-height: 600px;
   overflow: auto;
 } 
 

@@ -33,7 +33,7 @@ export class MemoryListComponent implements AfterViewInit {
   isLoadingResults = true;
   isRateLimitReached = false;
   seacrchText: string;
-  cardCountSubject: BehaviorSubject<number>;
+
   constructor(media: MediaObserver,
     private memoryService: MemoryService,
     private router: Router,
@@ -42,27 +42,8 @@ export class MemoryListComponent implements AfterViewInit {
   ) {
 
     this.media$ = media.asObservable();
-    this.cardCountSubject = new BehaviorSubject<number>(1);
   }
   public innerWidth: any;
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.media$.subscribe(changes => {
-      let change = changes.find(c => c.mqAlias.length === 2);
-      let count = 2;
-      if (change?.mqAlias === 'sm') {
-        count = 2;
-      }
-      if (change?.mqAlias === 'xs') {
-        count = 1;
-      }
-      this.cardCountSubject = new BehaviorSubject<number>(count);
-    })
-  }
-
-  public get cardCount(): number {
-    return this.cardCountSubject.value;
-  }
 
   ngAfterViewInit() {
 
@@ -90,7 +71,7 @@ export class MemoryListComponent implements AfterViewInit {
 
           if (response === null) {
             return [];
-          } 
+          }
           // Only refresh the result length if there is new data. In case of rate
           // limit errors, we do not want to reset the paginator to zero, as that
           // would prevent users from re-triggering requests.
@@ -100,22 +81,7 @@ export class MemoryListComponent implements AfterViewInit {
       )
       .subscribe(data => {
         this.data = data;
-        this.setGroupDataPerCount;
       });
-  }
-
-  get setGroupDataPerCount() {
-    let index = 0;
-    for (let i = 0; i < this.data.length; i++) {
-      if (this.groupDataPerCount[index] && this.groupDataPerCount[index].length === this.cardCount) {
-        index++;
-      }
-      if (!this.groupDataPerCount[index]) {
-        this.groupDataPerCount[index] = [];
-      }
-      this.groupDataPerCount[index].push(this.data[i]);
-    }
-    return this.groupDataPerCount;
   }
 
   openDialog(id: string, action: string, enterAnimationDuration: string, exitAnimationDuration: string): void {

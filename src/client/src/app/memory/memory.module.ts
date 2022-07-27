@@ -69,6 +69,7 @@ import { PinCodeService } from '../_service/pin-code.service';
 import { MemoryHistoryListComponent } from './memory/memory-history-list/memory-history-list.component';
 import { IPassCommonModule } from '../ipass-common.module';
 import { MemoryCardComponent } from './memory-card/memory-card.component';
+import { MemoryCardListComponent } from './memory/memory-card-list/memory-card-list.component';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { MemoryCardComponent } from './memory-card/memory-card.component';
     EnvironmentTypeListComponent,
     UnlockMemoryDialog,
     MemoryHistoryListComponent,
-    MemoryCardComponent
+    MemoryCardComponent,
+    MemoryCardListComponent
      
   ],
   imports: [
@@ -106,7 +108,8 @@ import { MemoryCardComponent } from './memory-card/memory-card.component';
     OrganizationEditorComponent,
     OrganizationListComponent,
     OrganizationTypeEditorComponent,
-    OrganizationTypeListComponent
+    OrganizationTypeListComponent,
+    MemoryCardListComponent
   ]
 })
 export class MemoryModule { }

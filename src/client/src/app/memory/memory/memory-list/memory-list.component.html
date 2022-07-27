@@ -2,20 +2,6 @@
     <mat-card-header class="card-header ">
         <mat-card-title>Memories</mat-card-title>
         <mat-card-subtitle>Don't keep in mind!</mat-card-subtitle>
-        <section fxHide.gt-md align="end">
-            <button align="end" mat-icon-button mat-raised-button color="primary" aria-label="Add memory"
-                [routerLink]="['/memories/add']" [title]="'Add'">
-                <mat-icon>add </mat-icon>
-            </button>
-            <button *ngIf="!openAllPanels" align="end" mat-icon-button mat-raised-button style="margin-left: 4px;"
-                (click)="openAllPanels = true">
-                <mat-icon>expand_more </mat-icon>
-            </button>
-            <button *ngIf="openAllPanels" align="end" mat-icon-button mat-raised-button style="margin-left: 4px;"
-                (click)="openAllPanels = false">
-                <mat-icon>expand_less </mat-icon>
-            </button>
-        </section>
     </mat-card-header>
     <mat-card-content class="card-content ">
 
@@ -25,14 +11,18 @@
                 No Records found
             </div>
         </div>
+       
+        <div class=" " fxLayout="row" fxFlexFill>
 
-        <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
-
-            <div fxFlex.lt-md="100" fxFlex="100" fxHide.lt-lg>
-                <div class=" mat-elevation-z1 ">
-                    <div class=" table-container">
-                        <table mat-table [dataSource]="data" matSort matSortActive="created" matSortDisableClear
-                            matSortDirection="desc">
+            <div fxFlex.lt-md="100" fxFlex="100">
+                <div class="  " fxLayout="column" fxLayout.gt-md="row">
+                    <div fxFlex.lt-md="100" fxFlex="100" fxHide.gt-md>
+                        <app-memory-card-list [memories]="data">
+                        </app-memory-card-list>
+                    </div>
+                    <div class="table-container" fxFlex="100">
+                        <table fxHide.lt-lg mat-table [dataSource]="data" matSort matSortActive="created"
+                            matSortDisableClear matSortDirection="desc">
                             <!-- title -->
                             <ng-container matColumnDef="title">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header
@@ -199,26 +189,14 @@
                             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                         </table>
-                        
-                <mat-paginator class="mat-paginator-sticky" [length]="resultsLength" [pageSizeOptions]="[  10, 20, 100]" showFirstLastButtons
-                aria-label="Select page"></mat-paginator> 
-                    </div> 
-                </div>
-            </div>
-            <div fxFlex.lt-md="100" fxFlex="100" fxHide.gt-md> 
-                <div class="container"> 
-                    <div fxLayout="row" fxLayout.lt-md="column" fxFlexFill *ngFor="let groupData of groupDataPerCount ">
-                        <div *ngFor="let memory of groupData " fxFlex.lt-sm="100" fxFlex.lt-md="100" fxFlex="100">
-                            <app-memory-card [memory]="memory" fxFlex="100" [panelOpenState]="openAllPanels">
-                            </app-memory-card>
-                        </div>
-
                     </div>
-                    <mat-paginator [length]="resultsLength" [pageSizeOptions]="[  10, 20, 100]" showFirstLastButtons
-                    aria-label="Select page"></mat-paginator> 
                 </div>
             </div>
-        </div> 
+
+        </div>
+        <mat-paginator class="mat-paginator-sticky" [length]="resultsLength" [pageSizeOptions]="[   10, 20, 100]"
+            showFirstLastButtons aria-label="Select page">
+        </mat-paginator>
     </mat-card-content>
     <!-- <mat-card-footer class="card-footer">
 

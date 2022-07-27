@@ -41,11 +41,13 @@
     background-color: #C2DED1;  background: radial-gradient(circle, rgba(149,162,228,0.8883928571428571) 0%, rgba(228,230,158,1) 39%, rgba(173,240,233,0.7147233893557423) 100%);
     position: fixed; 
     top: 64px; /* Sets the sticky toolbar to be on top */
+    width: 180px;
     /* height: 802px; */
     /* z-index: 1000; */
      /* Ensure that your app's content doesn't overlap the toolbar */
   }
   .side-nav-content{
+    width: calc(100% - 180px)
     /* background-color: #FCF9C6; */
     /* min-height: 82vh;  */
     

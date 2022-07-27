@@ -12,6 +12,7 @@ import { UnlockMemoryDialog } from '../memory/unlock-memory-dialog/unlock-memory
 export class MemoryCardComponent implements OnInit {
   @Input() panelOpenState = false;
   @Input() memory: MemoryModel;
+  @Input() decode = false;
   constructor(public dialog: MatDialog,    
     private router: Router,
     private route: ActivatedRoute,) { }

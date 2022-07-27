@@ -5,10 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MemoryModel } from 'src/app/_model/memory.model';
 import { MemoryService } from 'src/app/_service/memory.service';
 import { merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { UnlockMemoryDialog } from '../unlock-memory-dialog/unlock-memory-dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators'; 
+import { ActivatedRoute, Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-memory-history-list',
@@ -18,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MemoryHistoryListComponent implements OnInit,  AfterViewInit {
 
   public data: MemoryModel[] = [];
-
+  decode = true;
   model = new MemoryModel();
   dataSource!: MatTableDataSource<MemoryModel>;
 
@@ -34,8 +32,7 @@ export class MemoryHistoryListComponent implements OnInit,  AfterViewInit {
   id: string | null;
   constructor(private memoryService: MemoryService,
     private router: Router,
-    private route: ActivatedRoute,
-    public dialog: MatDialog
+    private route: ActivatedRoute
   ) {
 
   }
@@ -56,14 +53,15 @@ export class MemoryHistoryListComponent implements OnInit,  AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          let historyRoute = `/api/memories/history/${id}`;
+          let historyRoute = `/api/memories/history/${id}`; 
           return this.memoryService.getHistoryPaginated(
             historyRoute,
             this.sort.active,
             this.sort.direction,
             this.paginator.pageIndex,
             this.paginator.pageSize,
-            this.seacrchText
+            this.seacrchText,
+            this.decode
           ).pipe(catchError(() => observableOf(null)));
         }),
         map(response => {

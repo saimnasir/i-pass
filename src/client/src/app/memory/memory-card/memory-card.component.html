@@ -20,52 +20,50 @@
             <div fxHide.gt-sm>
                 <mat-icon [class]="'icon'" [inline]="true">radio_button_checked</mat-icon>
                 {{memory.memoryType.title}}
-            </div>
+            </div> 
             <div class="container" fxLayout="row" fxLayout.lt-sm="column" fxFlexFill>
-                <div *ngIf="!memory.isUserNameSecure && memory.userName" fxFlex.lt-xs="100" fxFlex.gt-xs="50" >
+                <div *ngIf="(decode || !memory.isUserNameSecure) && memory.userName" fxFlex.lt-xs="100" fxFlex.gt-xs="50" >
                     <mat-icon [class]="'icon'" [inline]="true">person</mat-icon>{{memory.userName}}
                 </div>
-                <div *ngIf="!memory.isUEmailSecure && memory.email" fxFlex.lt-xs="100" fxFlex.gt-xs="50">
+                <div *ngIf="(decode ||!memory.isUEmailSecure) && memory.email" fxFlex.lt-xs="100" fxFlex.gt-xs="50">
                     <mat-icon [class]="'icon'" [inline]="true">mail</mat-icon><a style="color: black;"
                         href="mailto:{{memory.email}}" target="_blank">{{memory.email}}</a>
                 </div>
             </div>
             <div class="container" fxLayout="row" fxLayout.lt-sm="column" fxFlexFill>
-                <div *ngIf="!memory.isHostOrIpAddressSecure && memory.hostOrIpAddress" fxFlex.lt-xs="100"
+                <div *ngIf="(decode ||!memory.isHostOrIpAddressSecure) && memory.hostOrIpAddress" fxFlex.lt-xs="100"
                     fxFlex.gt-xs="50">
                     <mat-icon [class]="'icon'" [inline]="true">cloud</mat-icon>{{memory.hostOrIpAddress}}
                 </div>
-                <div *ngIf="!memory.isPortSecure && memory.port" fxFlex.lt-xs="100" fxFlex.gt-xs="50">
+                <div *ngIf="(decode ||!memory.isPortSecure) && memory.port" fxFlex.lt-xs="100" fxFlex.gt-xs="50">
                     <mat-icon [class]="'icon'" [inline]="true">directions</mat-icon>{{memory.port}}
                 </div>
 
             </div>
-            <div class="container" fxLayout="row" fxLayout.lt-sm="column" fxFlexFill>
+            <div  *ngIf="decode" class="container" fxLayout="row" fxLayout.lt-sm="column" fxFlexFill>
 
-                <div *ngIf="memory.environmentType" fxFlex.lt-xs="100" fxFlex.gt-xs="50">
-                    <mat-icon [class]="'icon'" [inline]="true">category</mat-icon>{{memory.environmentType.title}}
+                <div *ngIf="memory.password" fxFlex.lt-xs="100" fxFlex.gt-xs="100">
+                    <mat-icon [class]="'icon'" [inline]="true">key</mat-icon>{{memory.password}}
                 </div>
-                <div *ngIf="memory.description" fxFlex.lt-xs="100" fxFlex.gt-xs="50">
-                    <mat-icon [class]="'icon'" [inline]="true">description</mat-icon>{{memory.description}}
-                </div>
+                
             </div>
         </mat-card-content>
         <mat-divider></mat-divider>
         <mat-card-footer class="memory-card-footer">
             <mat-card-actions>
-                <button mat-icon-button mat-raised-button color="primary" aria-label="View memory" [title]="'Read'"
+                <button mat-icon-button  color="primary" aria-label="View memory" [title]="'Read'"
                     (click)="openDialog(memory.id, 'read', '3000ms', '1500ms')">
                     <mat-icon>lock_open</mat-icon>
                 </button>
-                <button mat-icon-button mat-raised-button color="primary" aria-label="View memory" [title]="'Edit'"
+                <button mat-icon-button   color="primary" aria-label="View memory" [title]="'Edit'"
                     (click)="openDialog(memory.id,  'edit','3000ms', '1500ms')">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button mat-raised-button color="primary" aria-label="View memory" [title]="'Read'"
+                <button mat-icon-button  color="primary" aria-label="View memory" [title]="'Read'"
                     (click)="openDialog(memory.id, 'read', '3000ms', '1500ms')">
                     <mat-icon>remove_red_eye</mat-icon>
                 </button>
-                <button mat-icon-button mat-raised-button color="primary" aria-label="View history" [title]="'History'"
+                <button mat-icon-button   color="primary" aria-label="View history" [title]="'History'"
                     (click)="openDialog(memory.id, 'history', '3000ms', '1500ms')">
                     <mat-icon>history</mat-icon>
                 </button>
