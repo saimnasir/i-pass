@@ -21,6 +21,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatButtonModule } from "@angular/material/button";
 import { MatListModule } from "@angular/material/list";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import {MatTreeModule} from '@angular/material/tree';
 
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatInputModule } from "@angular/material/input";
@@ -61,6 +62,7 @@ import { OrganizationService } from "./_service/organization.service";
 import { PinCodeService } from "./_service/pin-code.service";
 import { InputSelectComponent } from './_components/forms/input-select/input-select.component';
 import { InputSwitchComponent } from './_components/forms/input-switch/input-switch.component';
+import { TableSearchDialog } from './common/table-search/table-search-dialog';
 
 
 @NgModule({
@@ -76,7 +78,7 @@ import { InputSwitchComponent } from './_components/forms/input-switch/input-swi
         ReactiveFormsModule,
         FlexLayoutModule,
 
-        
+        MatTreeModule,
         MatMenuModule,
         MatIconModule,
         MatBadgeModule,
@@ -116,7 +118,9 @@ import { InputSwitchComponent } from './_components/forms/input-switch/input-swi
         InputFieldExComponent,
         MediaQueryStatusComponent,
         InputSelectComponent,
-        InputSwitchComponent
+        InputSwitchComponent,
+        
+        TableSearchDialog,
         
     ],
     exports: [
@@ -135,7 +139,8 @@ import { InputSwitchComponent } from './_components/forms/input-switch/input-swi
         FormsModule,
         ReactiveFormsModule,
         FlexLayoutModule,
-
+        
+        MatTreeModule,
         MatMenuModule,
         MatIconModule,
         MatBadgeModule,

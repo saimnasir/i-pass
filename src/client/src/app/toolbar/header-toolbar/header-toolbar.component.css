@@ -1,71 +1,75 @@
+.nav {
+  position: fixed;
+  padding: 8px;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  height: 60px;
+  background-color: #cbf2df;
+}
+
 .drawer {
-    position: fixed;
-    height: 100vh;
-    min-width: 15%; 
-  }
-  .drawer .header {
-    position: absolute;
-    right: 0;
-    justify-content: space-between;
-  }
-  .drawer .contents {
-    padding: 16px;
-  }
-  
-  .main {
-    background-color: #F5F0BB;
-  }
-  
-  .main.header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 2; 
-  }
-  
-  .main.contents {
-    /* min-height: 100vh; */
-    margin-top: 64px; /* height of header */
-    padding: 16px;
-  }
-  
-  .main.footer {
-    position: fixed; 
-    background-color: #73A9AD;  background: radial-gradient(circle, rgba(149,162,228,0.8883928571428571) 0%, rgba(228,230,158,1) 39%, rgba(173,240,233,0.7147233893557423) 100%);
-
-    bottom: 0;
-    width: 100%;   
-    align-content: center;
-  }
-  .side-nav{    
-    background-color: #C2DED1;  background: radial-gradient(circle, rgba(149,162,228,0.8883928571428571) 0%, rgba(228,230,158,1) 39%, rgba(173,240,233,0.7147233893557423) 100%);
-    position: fixed; 
-    top: 64px; /* Sets the sticky toolbar to be on top */
-    width: 180px;
-    /* height: 802px; */
-    /* z-index: 1000; */
-     /* Ensure that your app's content doesn't overlap the toolbar */
-  }
-  .side-nav-content{
-    width: calc(100% - 180px)
-    /* background-color: #FCF9C6; */
-    /* min-height: 82vh;  */
-    
-  }
-
-  .header-toolbar {
-    background-color: #90C8AC;
-    
-    background: radial-gradient(circle, rgba(149,162,228,0.8883928571428571) 0%, rgba(228,230,158,1) 39%, rgba(173,240,233,0.7147233893557423) 100%);
-    position: sticky;
-    position: -webkit-sticky; /* For macOS/iOS Safari */
-    top: 0; /* Sets the sticky toolbar to be on top */
-    z-index: 1000;
-     /* Ensure that your app's content doesn't overlap the toolbar */
-
-  }
-  .footer{
-    
-    z-index: 1000;
-  } 
+  position: fixed;
+  height: 100%-120px;
+  min-width: 100px;
+  border-right: 1px solid #ccc;
+  top: 120px; 
+  background-color: #cbf2df;
+  z-index: 1 !important;
+}
  
+.drawer .header {
+  position: relative;
+  right: 0;
+  justify-content: space-between;
+}
+
+.drawer .contents {
+  padding: 3px 0 3px 0;  
+  background-color:  #cbf2df; 
+}
+
+.main {
+  background-color: #fff;
+}
+
+.main.header {
+  position: fixed;
+  top: 60px;
+  width: 100%;
+  z-index: 2000;
+  border-bottom: 1px solid #ccc;
+ 
+  background-color: #cbf2df;
+  left: 0px;
+}
+
+.main.contents {
+  min-height: 80vh;
+  margin-top: 120px; 
+  padding: 4px;
+}
+
+.main.footer { 
+  bottom: 0;
+  width: 100%;
+ 
+  background-color: #cbf2df;
+ 
+}
+
+.selected, .selected:hover, .selected:not(:hover) {
+  color: brown;
+  background: #EAF6F6 ;
+} 
+
+.toggle-drawer {
+
+  background-color: #90e6e6;
+  margin: 4px;
+}
+
+.actions {
+  background-color: #90e6e6;
+}

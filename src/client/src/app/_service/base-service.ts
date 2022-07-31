@@ -9,6 +9,7 @@ import { SingleResponse } from "../_model/single-response";
 
 export class BaseService<T, I> {
 
+
     headers: HttpHeaders;
 
     authHeaders: HttpHeaders;
@@ -28,7 +29,7 @@ export class BaseService<T, I> {
             'Access-Control-Allow-Credentials': 'true',
             'Access-Control-Allow-Origin': '*',
             "Authorization": `Bearer `
-        });       
+        });
     }
 
     public combineWithApiUrl(route: string): string {
@@ -48,30 +49,31 @@ export class BaseService<T, I> {
         }
         return null;
     }
-    getAllPaginated(route: string, sortBy: string, sortType: SortDirection, page: number, pageSize: number, searchText: string, decode: boolean = false): Observable<FinalResponse<ListResponse<T>>> {
-
+    getAllPaginated(route: string, sortBy: string, sortType: SortDirection, page: number, pageSize: number, searchText: string = '', decode: boolean = false): Observable<FinalResponse<ListResponse<T>>> {
+      
+        let sortDirection :string = sortType.toString();
+        if(sortDirection == ''){
+            sortDirection = 'none';
+        }
         const params = new HttpParams()
             .append("page", page.toString())
             .append("pageSize", pageSize.toString())
             .append("sortBy", sortBy.toString())
-            .append("sortType", sortType.toString())
-            .append("decode", decode.toString());
-        if (searchText) {
-            params.append("searchText", searchText.toString())
-        }
+            .append("sortType", sortDirection.toString())
+            .append("decode", decode.toString())
+            .append("searchText", searchText.toString());
         return this.http.get<FinalResponse<ListResponse<T>>>(this.combineWithApiUrl(route), { headers: this.headers, params: params });
     }
 
-    getHistoryPaginated(route: string, sortBy: string, sortType: SortDirection, page: number, pageSize: number, searchText: string, decode: boolean = false): Observable<FinalResponse<ListResponse<T>>> {
+    getHistoryPaginated(route: string, sortBy: string, sortType: SortDirection, page: number, pageSize: number, searchText: string = '', decode: boolean = false): Observable<FinalResponse<ListResponse<T>>> {
         const params = new HttpParams()
             .append("page", page.toString())
             .append("pageSize", pageSize.toString())
             .append("sortBy", sortBy.toString())
             .append("sortType", sortType.toString())
-            .append("decode", decode.toString());
-        if (searchText) {
-            params.append("searchText", searchText.toString())
-        }
+            .append("decode", decode.toString())
+            .append("searchText", searchText.toString());
+
         return this.http.get<FinalResponse<ListResponse<T>>>(this.combineWithApiUrl(route), { headers: this.headers, params: params });
     }
 
@@ -97,7 +99,7 @@ export class BaseService<T, I> {
     readWithDecoding(route: string, id: any): Observable<FinalResponse<SingleResponse<T>>> {
         const params = new HttpParams().append("decode", true.toString());
         return this.http.get<FinalResponse<SingleResponse<T>>>(this.combineWithApiUrl(route) + `/${id}`, { headers: this.headers, params: params });
-    } 
+    }
 
     post<T>(route: string, entity: any): Observable<FinalResponse<T>> {
         return this.http.post<FinalResponse<T>>(this.combineWithApiUrl(route), entity, { headers: this.headers });
@@ -110,8 +112,8 @@ export class BaseService<T, I> {
     getExternalLogin<T>(route: string, token: string): Observable<FinalResponse<T>> {
         this.authHeaders.delete("Authorization");
         this.authHeaders.set("Authorization", `Bearer ${token}`);
-       
-        console.log('Authorization getExternalLogin', this.authHeaders.get('Authorization')); 
+
+        console.log('Authorization getExternalLogin', this.authHeaders.get('Authorization'));
         return this.http.get<FinalResponse<T>>(this.combineWithApiUrl(route), { headers: this.authHeaders });
     }
     put<T>(route: string, entity: any): Observable<FinalResponse<T>> {

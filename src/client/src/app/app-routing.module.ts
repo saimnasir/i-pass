@@ -20,7 +20,7 @@ import { OrganizationEditorComponent } from './memory/organization/organization-
 import { OrganizationListComponent } from './memory/organization/organization-list/organization-list.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardListComponent , canActivate: [AuthGuard]  }, 
+  { path: 'dashboard', component: DashboardListComponent , canActivate: [AuthGuard]  }, 
   { path: 'login', component: LoginComponent , canActivate: [AuthGuard] }, 
   { path: 'register', component: RegisterComponent , canActivate: [AuthGuard] }, 
 
@@ -46,7 +46,6 @@ const routes: Routes = [
   { path: 'environment-types', component: EnvironmentTypeListComponent , canActivate: [AuthGuard] },
   { path: 'environment-types/add', component: EnvironmentTypeEditorComponent , canActivate: [AuthGuard] },
   { path: 'environment-types/edit/:id', component: EnvironmentTypeEditorComponent , canActivate: [AuthGuard] },
-
 
   { path: 'profile', component: ProfileComponent , canActivate: [AuthGuard] },
   { path: 'register/external', component: ExternalComponent  },
