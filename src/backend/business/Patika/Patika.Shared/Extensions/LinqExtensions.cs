@@ -122,7 +122,7 @@ namespace Patika.Shared.Extensions
 
         public static IQueryable<T> Sort<T>(this IQueryable<T> query, IEnumerable<Sort> sorts)
         {
-            if (sorts == null)
+            if (sorts == null || !sorts.Any())
                 return query;
 
             var sortStr = "";

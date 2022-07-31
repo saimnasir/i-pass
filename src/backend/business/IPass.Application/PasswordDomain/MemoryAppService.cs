@@ -142,7 +142,11 @@ namespace IPass.Application.PasswordDomain
             return await WithLogging(input, GetType(), async () =>
             {
                 var conditions = new List<Condition>();
-
+                var sorts = new List<Sort>();
+                if (!string.IsNullOrEmpty(input.SortBy) && input.SortType != SortType.None)
+                {
+                    sorts.Add(new Sort { Column = input.SortBy, SortType = input.SortType });
+                }
                 //if (!string.IsNullOrEmpty(input.SearchText))
                 //{
                 //    conditions.Add(new Condition
@@ -153,13 +157,21 @@ namespace IPass.Application.PasswordDomain
                 //    });
                 //}
 
-                var pagination = new Pagination
+                var pagination = new Pagination(input.Page, input.PageSize);
+                var query = await MemoryRepository.WhereAsync(conditions, sorts: sorts, includeAll: true);
+
+                if (!string.IsNullOrEmpty(input.SearchText))
                 {
-                    Page = input.Page < 1 ? 1 : input.Page +1,
-                    Count = input.PageSize < 0 ? 20 : input.PageSize
-                };
-                var query = await MemoryRepository.WhereAsync(conditions, includeAll: true);
-                var pagedResult = query.AsQueryable().Paginate(pagination);
+                    query = query.Where(m =>
+                    m.Title.Contains(input.SearchText, StringComparison.CurrentCultureIgnoreCase)
+                    || m.Organization.Title.Contains(input.SearchText, StringComparison.CurrentCultureIgnoreCase)
+                    || m.Organization.OrganizationType.Title.Contains(input.SearchText, StringComparison.CurrentCultureIgnoreCase)
+                    || m.MemoryType.Title.Contains(input.SearchText, StringComparison.CurrentCultureIgnoreCase)
+                    //|| (m.EnvironmentType != null && m.EnvironmentType.Title.Contains(input.SearchText, StringComparison.CurrentCultureIgnoreCase))
+                    );
+                }
+
+                var pagedResult = query.AsQueryable().Sort(sorts).Paginate(pagination);
 
                 var memories = pagedResult.Queryable.ToList();
 
@@ -237,7 +249,7 @@ namespace IPass.Application.PasswordDomain
                 };
 
             });
-        } 
-       
+        }
+
     }
 }
