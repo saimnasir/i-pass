@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Filter - Sort</h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="outline" style="margin-bottom: 10px;">
+        <mat-label>Search</mat-label>
+        <input matInput [(ngModel)]="searchText" placeholder="Search text.." #input>
+        <mat-icon mat-icon-button matPrefix>search</mat-icon>
+        <mat-icon *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="searchText = '';">close
+        </mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="margin-bottom: 10px;">
+        <mat-label>Sort by</mat-label>
+        <mat-select [(ngModel)]="sortActive"> 
+            <mat-option *ngFor="let option of columns" value="{{option}}">
+                {{option  | uppercase}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" >
+        <mat-label>Sort Direction</mat-label>
+
+        <mat-select  [(ngModel)]="sortDirection">
+            <mat-select-trigger>
+                <mat-icon>{{getSortDirectionIcon(sortDirection)}} </mat-icon>{{ getSortDirectionName(sortDirection)  | uppercase}}
+            </mat-select-trigger>
+            <mat-option *ngFor="let option of sortDirections" value="{{option}}">
+                <mat-icon>{{getSortDirectionIcon(option)}} </mat-icon> {{ getSortDirectionName(option)  | uppercase}}
+            </mat-option>
+
+        </mat-select>
+    </mat-form-field>
+    <mat-error *ngIf="error"> {{error}} </mat-error>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-raised-button mat-dialog-close>Discard</button>
+    <button mat-button mat-raised-button (click)="save()" (keyup.enter)="save()" color="primary">Apply</button>
+</div>
