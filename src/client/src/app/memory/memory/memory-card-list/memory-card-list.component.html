@@ -1,6 +1,7 @@
 <div class="container">
     <div fxFlexFill align="end">
         <div class="actions" align="end">
+
             <button  *ngIf="showAdd" mat-raised-button aria-label="Add memory" [routerLink]="['/memories/add']" class="action-button"
                 [title]="'Add'">
                 <mat-icon>add </mat-icon>Add
@@ -12,6 +13,9 @@
             <button *ngIf="openAllPanels" align="end" mat-icon-button mat-raised-button    class="action-button"
                 (click)="openAllPanels = false">
                 <mat-icon>expand_less </mat-icon>
+            </button>
+            <button mat-icon-button (click)="openSearch( '3000ms', '1500ms')" class="action-button">
+                <mat-icon>sort</mat-icon>
             </button>
         </div>
     </div>

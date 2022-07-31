@@ -30,8 +30,7 @@ export class MemoryTypeListComponent implements OnInit  {
     this.memoryTypeService.getAll(this.memoryTypeService.route).subscribe({
       next: (response) => {
         if (response.success) {
-          this.memoryTypes = response.data.data;
-          console.log("response.data.data",response.data.data);
+          this.memoryTypes = response.data.data; 
           this.dataSource = new MatTableDataSource<MemoryTypeModel>(response.data.data);          
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;

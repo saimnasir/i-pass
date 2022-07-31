@@ -25,23 +25,22 @@ th {
 }
 
 .mat-paginator {
-
   background: #EAF6F6;
 }
 
 
 .card-header {
-  background: radial-gradient(circle, rgba(149, 162, 228, 0.8883928571428571) 0%, rgba(228, 230, 158, 1) 39%, rgba(173, 240, 233, 0.7147233893557423) 100%);
+  background: white;
   
   // top: 40px;
   // position: sticky;
-  z-index: 10;
+  // z-index: 10;
 }
 
 .card-content {
   // background: #EAF6F6;
  // height:80%;
-  padding-top: 10px ;
+  padding-top: 0px ;
 }
 
 .mat-elevation-z1 {
@@ -56,7 +55,7 @@ th {
 
 .table-container {
   position: relative; 
-  max-height: 600px;
+  height: 600px;
   overflow: auto;
 } 
 
@@ -67,7 +66,7 @@ th {
   bottom: 56px;
   right: 0;
   background: rgba(0, 0, 0, 0.15);
-  z-index: 1;
+  z-index: 3000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,11 +118,11 @@ section {
   width: 120px;
 }
 .mat-cell{
-  padding: 6px;
+  padding: 0px 5px 0px 5px;
 }
 
 .mat-header-cell{
-  padding: 6px;
+  padding: 0px 5px 1px 0px;
 } 
 
 .actions{
@@ -137,4 +136,11 @@ section {
   bottom: 0px;
   position: sticky;
   z-index: 10;
+}
+.cardx {
+  padding: 0;
+}
+
+mat-expansion-panel {
+  background-color: white !important;
 }

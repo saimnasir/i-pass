@@ -1,16 +1,16 @@
-import { AfterViewInit, Component, HostListener, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MemoryModel } from 'src/app/_model/memory.model';
 import { MemoryService } from 'src/app/_service/memory.service';
-import { BehaviorSubject, merge, Observable, of as observableOf } from 'rxjs';
+import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UnlockMemoryDialog } from '../unlock-memory-dialog/unlock-memory-dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MediaQueryStatusComponent } from 'src/app/_components/media-query-status.component';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
+import { TableSearchDialog } from 'src/app/common/table-search/table-search-dialog';
 
 @Component({
   selector: 'app-memory-list',
@@ -24,6 +24,7 @@ export class MemoryListComponent implements AfterViewInit {
   dataSource!: MatTableDataSource<MemoryModel>;
 
   displayedColumns: string[] = ['title', 'organization', 'memoryType', 'environmentType', 'userName', 'email', 'hostOrIpAddress', 'port', 'password', 'description', 'action'];
+  sortableColumns: string[] = ['title', 'userName', 'email', 'hostOrIpAddress', 'port', 'created','updated'];
 
   openAllPanels = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,7 +33,7 @@ export class MemoryListComponent implements AfterViewInit {
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
-  seacrchText: string;
+  searchText: string;
 
   constructor(media: MediaObserver,
     private memoryService: MemoryService,
@@ -45,7 +46,18 @@ export class MemoryListComponent implements AfterViewInit {
   }
   public innerWidth: any;
 
+  applyFilter() {
+    this.getData();
+  }
+
   ngAfterViewInit() {
+
+    // this.sort.active = 'title';
+    // this.sort.direction = 'asc';
+    this.getData();
+  }
+
+  getData() {
 
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
@@ -61,7 +73,7 @@ export class MemoryListComponent implements AfterViewInit {
             this.sort.direction,
             this.paginator.pageIndex,
             this.paginator.pageSize,
-            this.seacrchText
+            this.searchText
           ).pipe(catchError(() => observableOf(null)));
         }),
         map(response => {
@@ -76,6 +88,9 @@ export class MemoryListComponent implements AfterViewInit {
           // limit errors, we do not want to reset the paginator to zero, as that
           // would prevent users from re-triggering requests.
           this.resultsLength = response.data.totalCount;
+
+          console.log("response", response);
+          console.log("resultsLength", this.resultsLength);
           return response.data.data;
         }),
       )
@@ -96,6 +111,31 @@ export class MemoryListComponent implements AfterViewInit {
         console.log("Dialog output:", data);
         if (data.active) {
           this.router.navigate([`${action}/${id}`], { relativeTo: this.route });
+        }
+      }
+    );
+  }
+
+
+  openSearch(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    let config: MatDialogConfig<any> = {
+      width: '400px',
+      disableClose: false,
+      hasBackdrop: true,
+    };
+    const dialogRef = this.dialog.open(TableSearchDialog, config);
+    dialogRef.componentInstance.searchText = this.searchText;
+    dialogRef.componentInstance.columns = this.sortableColumns;
+    dialogRef.componentInstance.sortActive = this.sort.active;
+    dialogRef.componentInstance.sortDirection = this.sort.direction;
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data) {
+          console.log("TableSearchDialog output:", data);
+          this.searchText = data.searchText;
+          this.sort.active = data.sortActive;
+          this.sort.direction = data.sortDirection;
+          this.getData();
         }
       }
     );
