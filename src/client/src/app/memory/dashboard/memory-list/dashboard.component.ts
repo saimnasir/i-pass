@@ -19,12 +19,11 @@ export class DashboardListComponent implements OnInit  {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private memoryService: MemoryService 
-  ) {
-
+  constructor(public memoryService: MemoryService 
+  ) { 
   }
    
-  ngOnInit(): void {
+  ngOnInit(): void {  
     // this.memoryService.getAll(this.memoryService.route).subscribe({
     //   next: (response) => {
     //     if (response.success) {

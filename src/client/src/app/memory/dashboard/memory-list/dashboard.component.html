@@ -1,105 +1,11 @@
 <mat-card class="mem-card  mat-elevation-z8 ">
-    <mat-card-header class="card-header"> 
-        <mat-card-title>Memories</mat-card-title>
-        <mat-card-subtitle>Don't keep in your mind!</mat-card-subtitle>
+    <mat-card-header class="card-header" hidden> 
+        <mat-card-title>Dashboard</mat-card-title>
+        <mat-card-subtitle>Your dashboard summarize you!</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="card-content">
         <div class="mat-elevation-z1">
-            <table mat-table [dataSource]="dataSource" matSort  >
-
-                <!-- title -->
-                <ng-container matColumnDef="title">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by title">
-                        {{'title'}}</th>
-                    <td mat-cell *matCellDef="let memory">
-                        <span>{{memory.title}}</span>
-                    </td>
-                </ng-container>
-
-                <!-- organization -->
-                <ng-container matColumnDef="organization">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by organization">
-                        {{'organization'}}</th>
-                    <td mat-cell *matCellDef="let memory">
-                        <span>{{memory.organization.title}}</span>
-                    </td>
-                </ng-container>
-                <!-- memoryType -->
-                <ng-container matColumnDef="memoryType">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by memoryType">
-                        {{'memory type'}}</th>
-                    <td mat-cell *matCellDef="let memory">
-                        <span>{{memory.memoryType.title}}</span>
-                    </td>
-                </ng-container>
-
-                <!-- memoryType -->
-                <ng-container matColumnDef="environmentType">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header
-                        sortActionDescription="Sort by environmentType"> {{'environment type'}}</th>
-                    <td mat-cell *matCellDef="let memory">
-                        <span>{{memory.environmentType?.title}}</span>
-                    </td>
-                </ng-container>
-
-                <!-- userName -->
-                <ng-container matColumnDef="userName">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by userName">
-                        {{'user name'}}</th>
-                    <td mat-cell *matCellDef="let memory">
-                        <span>{{memory.userName}}</span>
-                    </td>
-                </ng-container>
-                <!-- email -->
-                <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by email">
-                        {{'email'}}</th>
-                    <td mat-cell *matCellDef="let memory">
-                        <span>{{memory.email}}</span>
-                    </td>
-                </ng-container>
-                <!-- hostOrIpAddress -->
-                <ng-container matColumnDef="hostOrIpAddress">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header
-                        sortActionDescription="Sort by hostOrIpAddress"> {{'host name/ip address'}}</th>
-                    <td mat-cell *matCellDef="let memory">
-                        <span>{{memory.hostOrIpAddress}}</span>
-                    </td>
-                </ng-container>
-                <!-- port -->
-                <ng-container matColumnDef="port">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by port">
-                        {{'port'}}</th>
-                    <td mat-cell *matCellDef="let memory">
-                        <span>{{memory.port}}</span>
-                    </td>
-                </ng-container>
-                <!-- password -->
-                <ng-container matColumnDef="password">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by password">
-                        {{'password'}}</th>
-                    <td mat-cell *matCellDef="let memory">
-                        <span>{{memory.password}}</span>
-                    </td>
-                </ng-container>
-
-                <!-- description -->
-                <ng-container matColumnDef="description">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by description">
-                        {{'description'}}</th>
-                    <td mat-cell *matCellDef="let memory">
-                        <span>{{memory.description}}</span>
-                    </td>
-                </ng-container> 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <mat-paginator [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons 
-                aria-label="Select page of periodic elements">
-            </mat-paginator>
-            <div class="mt-1" *ngIf="!memories|| memories.length === 0">
-                <label>No Data</label>
-            </div>
+       ddd
         </div>
     </mat-card-content>
     <!-- <mat-card-footer class="card-footer">
