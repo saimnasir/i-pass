@@ -11,11 +11,15 @@ import { UnlockMemoryDialog } from '../unlock-memory-dialog/unlock-memory-dialog
 import { ActivatedRoute, Router } from '@angular/router';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { TableSearchDialog } from 'src/app/common/table-search/table-search-dialog';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-memory-list',
   templateUrl: './memory-list.component.html',
-  styleUrls: ['./memory-list.component.scss']
+  styleUrls: ['./memory-list.component.scss'],
+  providers: [
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline', floatLabels: 'always'}}
+  ],
 })
 export class MemoryListComponent implements AfterViewInit {
 
@@ -34,7 +38,6 @@ export class MemoryListComponent implements AfterViewInit {
   isLoadingResults = true;
   isRateLimitReached = false;
   searchText: string;
-
   constructor(media: MediaObserver,
     private memoryService: MemoryService,
     private router: Router,
