@@ -32,8 +32,8 @@ export class HeaderToolbarComponent implements OnInit {
 
   navigations: Navigation[] = [
     new Navigation('/', 'home', 'home', false, false),
-    new Navigation('/memories', 'Memories', 'Do not keep in your mind!', true, true),
     new Navigation('/dashboard', 'Dashboard', 'Your mind dashboard..', true, false),
+    new Navigation('/memories', 'Memories', 'Do not keep in your mind!', true, true),
     new Navigation('/memory-types', 'Memory Types', 'Mail, Rdp, Microsoft Teams etc.', true, false),
     new Navigation('/organizations', 'Organizations', 'Microsoft, Patika, Google etc.', true, false),
     new Navigation('/organization-types', 'Organization Types', 'Work, Online Sale, Banks etc.', true, false),
@@ -44,6 +44,7 @@ export class HeaderToolbarComponent implements OnInit {
   seletedNav: Navigation | undefined;
   xlocation: Location;
   media$: Observable<MediaChange[]>;
+  mediaChange: MediaChange[];
   constructor(location: Location,
     public accountService: AccountService,
     public router: Router,
@@ -60,8 +61,10 @@ export class HeaderToolbarComponent implements OnInit {
     this.drawerMode = 'push';
     this.media$
       .subscribe((change) => {
-        this.drawerMode = change.find(s => s.mqAlias === 'xs') ? 'over' : 'side';
-        change.forEach((item) => {
+        this.mediaChange = change;
+        this.drawerMode = this. mediaChange.find(s => s.mqAlias === 'lt-md') ? 'over' : 'side';
+        console.log('change',this. mediaChange);
+        this. mediaChange.forEach((item) => {
           this.activeMediaQuery = item
             ? `'${item.mqAlias}' = (${item.mediaQuery})`
             : '';

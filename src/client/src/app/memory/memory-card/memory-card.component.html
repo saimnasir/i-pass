@@ -1,8 +1,8 @@
-<mat-accordion class="memory-card mat-elevation-z2">
+<mat-accordion class="memory-card  mat-elevation-z4  ">
     <mat-expansion-panel class="memory-card-panel" [expanded]="panelOpenState">
         <mat-expansion-panel-header class="mat-card-panel-header">
             <mat-panel-title class="memory-card-title" fxFlex.lt-md="100" fxFlex.lt-lg="50" fxFlex="35">
-                <mat-icon [class]="'icon'" [inline]="true">subtitles</mat-icon>{{memory.title}}
+                <small style="margin-right: 10px; color:brown">{{index}}</small><mat-icon [class]="'icon'" [inline]="true">subtitles</mat-icon>{{memory.title}}
             </mat-panel-title>
             <mat-panel-title fxFlex.lt-lg="25" fxFlex.lt-md="50" fxFlex="35" fxHide.lt-sm>
                 <mat-icon [class]="'icon'" [inline]="true">account_tree </mat-icon> {{memory.organization.title}}

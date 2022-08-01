@@ -6,8 +6,9 @@
 }
 .table-container {
   position: relative; 
-  max-height: 600px;
+  height: calc(100vh - 320px);
   overflow: auto;
+  padding: 2px;
 } 
 .action-button{
   background-color: #90e6e6 ;

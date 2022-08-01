@@ -29,35 +29,10 @@ th {
 }
 
 
-.card-header {
-  background: white;
-  
-  // top: 40px;
-  // position: sticky;
-  // z-index: 10;
-}
-
-.card-content {
-  // background: #EAF6F6;
- // height:80%;
-  padding-top: 0px ;
-}
-
-.mat-elevation-z1 {
-  // background: #EAF6F6;
-  margin: 0;
-  padding: 0;
-}
-
 .container {
-  position: relative; 
+  position: relative;
 }
-
-.table-container {
-  position: relative; 
-  height: 600px;
-  overflow: auto;
-} 
+ 
 
 .loading-shade {
   position: absolute;
@@ -117,30 +92,80 @@ section {
   justify-content: center;
   width: 120px;
 }
-.mat-cell{
-  padding: 0px 5px 0px 5px;
-}
 
-.mat-header-cell{
+.mat-cell {
+  padding: 0px 5px 0px 5px;
+} 
+
+.mat-header-cell {
   padding: 0px 5px 1px 0px;
 } 
 
-.actions{
-  background-color: #90e6e6 ;
+td.mat-cell{
+  /* row border */
+  border-left: 1px solid whitesmoke;
 }
-.add-button{
-  background-color: #90e6e6 ;
+td{  
+  border-right: 1px solid whitesmoke;
+}
+
+th.mat-cell{
+  /* row border */
+  border-left: 1px solid #e0e0e0;
+}
+th{  
+  border-right: 1px solid #e0e0e0;
+}
+.actions-icon {
+  font-size: xx-large ; color:#09a7a7;
+  margin-top: -10px;
+}
+
+.actions {
+  font-size: larger ; color:black;
+}
+
+
+.add-button {
+  // background-color: #09a7a7;
 }
 
 .mat-paginator-sticky {
-  bottom: 0px;
+  // bottom: 100px;
+  margin-top: 10px;
   position: sticky;
   z-index: 10;
 }
-.cardx {
-  padding: 0;
+
+ 
+.app-card {
+  top: 60px;
+  padding: 0px;
+  margin: 0px;
 }
 
-mat-expansion-panel {
-  background-color: white !important;
+.app-card-header {
+  position: fixed;
+  top: 60px;
+  background-color: #cbf2df;
+  // margin-bottom: 200px;
+  //  margin: 10px;
+  padding: 10px;
+  width: 100%;
+  z-index: 2000;
+}
+
+.app-card-content { 
+  top: 84px;
+  margin: 10px; 
+  position: relative;
+} 
+
+.table-container {  
+  height: calc(100vh - 320px);
+  position: relative; 
+  overflow: auto;
+} 
+.even{
+  background-color: #f3f7f7;
 }

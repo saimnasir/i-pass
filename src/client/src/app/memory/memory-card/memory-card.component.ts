@@ -13,6 +13,7 @@ export class MemoryCardComponent implements OnInit {
   @Input() panelOpenState = false;
   @Input() memory: MemoryModel;
   @Input() decode = false;
+  @Input() index : number;
   constructor(public dialog: MatDialog,    
     private router: Router,
     private route: ActivatedRoute,) { }

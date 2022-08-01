@@ -1,6 +1,12 @@
 <div class="nav mat-elevation-z6">
     <div fxFlex="100" fxLayout="row">
         <div fxFlex="75" fxLayout="row">
+            <button mat-icon-button  *ngIf=" drawer.opened" >
+                <mat-icon style="font-size: xx-large ; color:#09a7a7" class="close" (click)="drawer.close()">keyboard_double_arrow_left</mat-icon>
+            </button>
+            <button mat-icon-button *ngIf="  !drawer.opened" >
+                <mat-icon  style="font-size: xx-large ; color:#09a7a7" (click)="drawer.toggle()">keyboard_double_arrow_right</mat-icon>
+            </button>
             <button mat-button [routerLink]="'/'"  (click)="onMenuChange('/')" aria-label="IPASS"
                 class="mat-focus-indicator  mat-button mat-button-base" aria-disabled="false"><span
                     class="mat-button-wrapper">
@@ -15,7 +21,7 @@
         </div>
         <div fxFlex="25" fxLayout="column" fx-flex fx-layout-align="end" style="align-items: end;">
             <div fx-layout="row" fx-flex fx-layout-align="end">
-                <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+                <button  mat-icon-button [matMenuTriggerFor]="beforeMenu" >
                     <mat-icon style="font-size: xx-large ; color:#09a7a7">account_circle</mat-icon>
                 </button>
                 <mat-menu #beforeMenu="matMenu" xPosition="before" style="padding: 10px;">
@@ -36,22 +42,15 @@
     </div>
 </div>
 <mat-drawer-container [class.drawer-opened]="drawer.opened" class="mat-elevation-z4">
-    <mat-toolbar class="main header  mat-elevation-z4"> 
-        <mat-toolbar-row> 
-            <button mat-icon-button mat-raised-button *ngIf=" drawer.opened" class="toggle-drawer">
-                <mat-icon class="close" (click)="drawer.close()">keyboard_double_arrow_left</mat-icon>
-            </button>
-            <button mat-icon-button *ngIf="  !drawer.opened" class="toggle-drawer">
-                <mat-icon (click)="drawer.toggle()">keyboard_double_arrow_right</mat-icon>
-            </button>
+    <mat-toolbar class="main header  mat-elevation-z4" hidden> 
+        <mat-toolbar-row>           
             <div>
                 <h1>{{seletedNav?.title}} </h1> 
             </div>
         </mat-toolbar-row>
     </mat-toolbar>
-
     <mat-drawer #drawer class="drawer  mat-elevation-z4" [mode]="drawerMode" [opened]="drawerMode == 'side'">
-        
+
         <div class="contents ">
             <mat-nav-list>
                 <div *ngFor="let nav of drawerNavigations" >
@@ -60,25 +59,24 @@
                         [routerLink]="nav.link" (click)="drawerMode == 'over' && drawer.close();onMenuChange(nav.link)"> {{nav.title}}
                     </button>
                     <mat-divider></mat-divider>
-                </div>
+                </div> 
+                <span></span>
             </mat-nav-list>
         </div>
     </mat-drawer>
-
-   
     <div class="main contents">
-        <!-- <p> {{drawerMode}}</p>
-        <p> {{activeMediaQuery}}</p> -->
+      
         <div>
             <router-outlet class="outlet"></router-outlet>
-            <!-- <media-query-status></media-query-status> -->
         </div>
     </div>
-<mat-toolbar class="   "  style="z-index: 4 !important;">
-    <mat-toolbar class=" main footer mat-elevation-z4"  > 
-        <mat-toolbar-row  > 
-            Powered by Patika Global
-        </mat-toolbar-row>
-    </mat-toolbar>
-</mat-toolbar>
+    <div class="   "  style="z-index: 4 !important;">
+        
+        <media-query-status></media-query-status>
+        <mat-toolbar class=" main footer mat-elevation-z4"  > 
+            <mat-toolbar-row  > 
+                Powered by Patika Global
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </div>
 </mat-drawer-container>
