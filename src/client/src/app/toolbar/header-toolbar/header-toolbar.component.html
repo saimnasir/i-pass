@@ -4,7 +4,7 @@
             <button mat-icon-button  *ngIf=" drawer.opened" >
                 <mat-icon style="font-size: xx-large ; color:#09a7a7" class="close" (click)="drawer.close()">keyboard_double_arrow_left</mat-icon>
             </button>
-            <button mat-icon-button *ngIf="  !drawer.opened" >
+            <button mat-icon-button *ngIf="accountService.userLoggedIn &&   !drawer.opened" >
                 <mat-icon  style="font-size: xx-large ; color:#09a7a7" (click)="drawer.toggle()">keyboard_double_arrow_right</mat-icon>
             </button>
             <button mat-button [routerLink]="'/'"  (click)="onMenuChange('/')" aria-label="IPASS"
@@ -21,7 +21,7 @@
         </div>
         <div fxFlex="25" fxLayout="column" fx-flex fx-layout-align="end" style="align-items: end;">
             <div fx-layout="row" fx-flex fx-layout-align="end">
-                <button  mat-icon-button [matMenuTriggerFor]="beforeMenu" >
+                <button  mat-icon-button [matMenuTriggerFor]="beforeMenu" *ngIf="accountService.userLoggedIn">
                     <mat-icon style="font-size: xx-large ; color:#09a7a7">account_circle</mat-icon>
                 </button>
                 <mat-menu #beforeMenu="matMenu" xPosition="before" style="padding: 10px;">
@@ -49,9 +49,9 @@
             </div>
         </mat-toolbar-row>
     </mat-toolbar>
-    <mat-drawer #drawer class="drawer  mat-elevation-z4" [mode]="drawerMode" [opened]="drawerMode == 'side'">
+    <mat-drawer #drawer class="drawer  mat-elevation-z4" [mode]="drawerMode" [opened]="drawerMode == 'side' && accountService.userLoggedIn">
 
-        <div class="contents ">
+        <div class="contents " >
             <mat-nav-list>
                 <div *ngFor="let nav of drawerNavigations" >
                     <button *ngIf="accountService.userLoggedIn"
