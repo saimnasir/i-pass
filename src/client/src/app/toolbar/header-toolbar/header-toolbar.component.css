@@ -46,7 +46,7 @@
 }
 
 .main.contents {
-  min-height: calc(100vh - 74px);
+  min-height: calc(100vh - 65px);
   margin: 0; 
   padding: 0;
 }
