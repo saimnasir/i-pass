@@ -932,5 +932,8 @@ mwl-gauge > .gauge > .dial {
 .mat-toolbar-row, .mat-toolbar-single-row {
   height: 55px;
 }
+.mat-form-field-label{
+  color: brown !important;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
