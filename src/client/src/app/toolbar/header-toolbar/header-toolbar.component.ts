@@ -37,7 +37,7 @@ export class HeaderToolbarComponent implements OnInit {
     new Navigation('/memory-types', 'Memory Types', 'Mail, Rdp, Microsoft Teams etc.', true, false),
     new Navigation('/organizations', 'Organizations', 'Microsoft, Patika, Google etc.', true, false),
     new Navigation('/organization-types', 'Organization Types', 'Work, Online Sale, Banks etc.', true, false),
-    new Navigation('/environment-types', 'EnvironmentTypes', 'Dev, Test, Prod etc.', true, false),
+    new Navigation('/environment-types', 'Environment Types', 'Dev, Test, Prod etc.', true, false),
     new Navigation('/profile', 'Profile', 'Setting up your profile!', true, false),
   ];
 
