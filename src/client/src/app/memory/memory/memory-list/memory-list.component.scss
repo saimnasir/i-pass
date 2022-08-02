@@ -130,8 +130,7 @@ th{
 }
  
 
-.mat-paginator-sticky {
-  // bottom: 100px;
+.mat-paginator-sticky { 
   margin-top: 10px;
   position: sticky;
   z-index: 10;
@@ -147,12 +146,10 @@ th{
 .app-card-header {
   position: fixed;
   top: 60px;
-  background-color: #cbf2df;
-  // margin-bottom: 200px;
-  //  margin: 10px;
+  background-color: #cbf2df; 
   padding: 10px;
   width: 100%;
-  z-index: 2000;
+  z-index: 3000;
 }
 
 .app-card-content { 
@@ -162,7 +159,7 @@ th{
 } 
 
 .table-container {  
-  height: calc(100vh - 320px);
+  height: calc(100vh - 310px);
   position: relative; 
   overflow: auto;
 } 

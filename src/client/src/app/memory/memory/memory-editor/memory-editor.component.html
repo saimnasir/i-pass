@@ -1,191 +1,231 @@
-<form [formGroup]="form" (ngSubmit)="save()">
-  <mat-card class="example-card">
-    <mat-card-header class="card-header ">
-      <mat-card-title>
-        <div *ngIf="isNew">
-          <h2>Create Memory</h2>
-        </div>
-        <div *ngIf="!isNew && !isRead">
-          <h2>Update Memory</h2>
-        </div>
-        <div *ngIf="!isNew && isRead">
-          <h2>Memory Details</h2>
-        </div>
-      </mat-card-title>
-      <mat-card-subtitle>
-        <div *ngIf="!isNew">
-          <div><span>{{title}} </span></div>
-        </div>
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content class="card-content">
+<mat-card class="app-card mat-elevation-z0">
 
-      <!-- row 1 -->
-      <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+  <mat-card-header class="app-card-header mat-elevation-z8">
+    <mat-card-title>
+      <div *ngIf="isNew">
+        <h2>Create Memory</h2>
+      </div>
+      <div *ngIf="!isNew && !isRead">
+        <h2>Update Memory</h2>
+      </div>
+      <div *ngIf="!isNew && isRead">
+        <h2>Memory Details</h2>
+      </div>
+    </mat-card-title>
+    <mat-card-subtitle style="margin-bottom: 8px;">
+      <div *ngIf="!isNew">
+        <div><span>{{title}} </span></div>
+      </div>
+    </mat-card-subtitle>
+  </mat-card-header>
 
-        <div fxFlex.lt-md="100" fxFlex="50">
-          <app-input-field formControlName="title" fxFlex="98" [class]="'example-form-field'" [label]="'Title'"
-            [type]="'text'" [placeholder]="'Enter title'" [control]="f['title']" [disabled]="isRead"
-            [showClearButton]="!isRead" [validationMessages]="memoryTitleValidationMessages" [showError]="showError">
-          </app-input-field>
-        </div>
-        <div fxFlex.lt-md="100" fxFlex="50">
-          <app-input-select formControlName="organizationId" fxFlex="98" [class]="'example-form-field'"
-            [label]="'Organization'" [placeholder]="'Select Organization'" [control]="f['organizationId']"
-            [disabled]="isRead" [showClearButton]="true" [options]="organizations"
-            [validationMessages]="memoryOrganizationValidationMessages">
-          </app-input-select>
+
+  <mat-card-content class="app-card-content mat-elevation-z8">
+
+    <div class="" fxLayout="row" fxFlexFill>
+
+      <div fxFlex="100">
+        <div class="  " fxLayout="column">
+
+          <div class="container-list" fxFlex="100">
+
+            <form [formGroup]="form" (ngSubmit)="save()">
+              <mat-card class="example-card mat-elevation-z0">
+                <mat-card-content class="card-content">
+
+                  <!-- row 1 -->
+                  <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+
+                    <div fxFlex.lt-md="100" fxFlex="50">
+                      <app-input-field formControlName="title" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Title'" [type]="'text'" [placeholder]="'Enter title'" [control]="f['title']"
+                        [disabled]="isRead" [showClearButton]="!isRead"
+                        [validationMessages]="memoryTitleValidationMessages" [showError]="showError">
+                      </app-input-field>
+                    </div>
+                    <div fxFlex.lt-md="100" fxFlex="50">
+                      <app-input-select formControlName="organizationId" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Organization'" [placeholder]="'Select Organization'" [control]="f['organizationId']"
+                        [disabled]="isRead" [showClearButton]="true" [options]="organizations"
+                        [validationMessages]="memoryOrganizationValidationMessages">
+                      </app-input-select>
+                    </div>
+                  </div>
+
+                  <!-- row 2 -->
+                  <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+
+                    <div fxFlex.lt-md="100" fxFlex="50">
+                      <app-input-select formControlName="memoryTypeId" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Memory Type'" [placeholder]="'Select Memory Type'" [control]="f['memoryTypeId']"
+                        [disabled]="isRead" [showClearButton]="true" [options]="memoryTypes"
+                        [validationMessages]="memoryTypeValidationMessages">
+                      </app-input-select>
+                    </div>
+
+                    <div fxFlex.lt-md="100" fxFlex="50">
+                      <app-input-select formControlName="environmentTypeId" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Environment Type'" [placeholder]="'Select Environment Type'"
+                        [control]="f['environmentTypeId']" [disabled]="isRead" [showClearButton]="true"
+                        [options]="environmentTypes">
+                      </app-input-select>
+                    </div>
+
+                  </div>
+
+                  <!-- row 3 -->
+                  <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                    <div fxFlex.lt-md="100" fxFlex="50">
+                      <app-input-field formControlName="userName" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'User Name'" [type]="'text'" [placeholder]="'Enter User Name'"
+                        [control]="f['userName']" [disabled]="isRead" [showClearButton]="!isRead"
+                        [validationMessages]="usernameValidationsValidationMessages">
+                      </app-input-field>
+                    </div>
+                    <div fxFlex.lt-md="100" fxFlex="50">
+                      <app-input-field formControlName="email" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Email'" [type]="'text'" [placeholder]="'Enter Email'" [control]="f['email']"
+                        [disabled]="isRead" [showClearButton]="!isRead"
+                        [validationMessages]="emailValidationsValidationMessages">
+                      </app-input-field>
+                    </div>
+                  </div>
+
+                  <!-- row 4 -->
+                  <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                    <div fxFlex.lt-md="100" fxFlex="50">
+                      <app-input-field formControlName="hostOrIpAddress" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Host or IP Adress'" [type]="'text'" [placeholder]="'Enter Host or IP Adress'"
+                        [control]="f['hostOrIpAddress']" [disabled]="isRead" [showClearButton]="!isRead">
+                      </app-input-field>
+                    </div>
+                    <div fxFlex.lt-md="100" fxFlex="50">
+                      <app-input-field formControlName="port" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Port'" [type]="'number'" [placeholder]="'Enter Port'" [control]="f['port']"
+                        [disabled]="isRead" [showClearButton]="!isRead">
+                      </app-input-field>
+                    </div>
+                  </div>
+
+                  <!-- row 5 -->
+                  <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                    <div fxFlex.lt-md="100" fxFlex="50">
+                      <app-input-field formControlName="password" fxLayoutGap="10px" fxFlex="98"
+                        [class]="'example-form-field'" [label]="'Password'" [type]="'password'"
+                        [placeholder]="'Enter password'" [control]="f['password']"
+                        [validationMessages]="passwordValidationMessages" [successValidation]="'Looks good!'">
+                      </app-input-field>
+                    </div>
+                    <div fxFlex.lt-md="100" fxFlex="50">
+                      <app-input-field formControlName="confirmPassword" fxLayoutGap="10px" fxFlex="98"
+                        [class]="'example-form-field'" [label]="'Confirm Password'" [type]="'password'"
+                        [placeholder]="'Re-Enter password'" [control]="f['confirmPassword']"
+                        [validationMessages]="confirmPasswordValidationMessages" [successValidation]="'Looks good!'">
+                      </app-input-field>
+                    </div>
+
+                  </div>
+
+                  <!-- row 5 -->
+                  <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                    <div fxFlex="35">
+                      <app-input-field formControlName="forgotQuestion" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Forgot Password Question'" [placeholder]="'Forgot Password Question'"
+                        [control]="f['forgotQuestion']" [isTextArea]="true" [appearance]="'fill'">
+                      </app-input-field>
+                    </div>
+                    <div fxFlex="35">
+                      <app-input-field formControlName="forgotAnswer" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Forgot Password Answer'" [placeholder]="'Forgot Password Answer'"
+                        [control]="f['forgotAnswer']" [isTextArea]="true" [appearance]="'fill'">
+                      </app-input-field>
+                    </div>
+                    <div fxFlex="35">
+                      <app-input-field formControlName="description" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Description'" [placeholder]="'Enter Description'" [control]="f['description']"
+                        [isTextArea]="true" [appearance]="'fill'">
+                      </app-input-field>
+                    </div>
+                  </div>
+
+                  <!-- row 7 -->
+                  <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                    <div fxFlex.lt-md="100" fxFlex="35">
+                      <app-input-switch formControlName="active" [checked]="f['active'].value" fxFlex="98"
+                        [class]="'example-form-field'" [label]="'Is Active'" [control]="f['active']"
+                        [disabled]="isRead">
+                      </app-input-switch>
+                    </div>
+                    <div fxFlex.lt-md="100" fxFlex="35">
+                      <app-input-switch formControlName="isUserNameSecure" [checked]="f['isUserNameSecure'].value"
+                        fxFlex="98" [class]="'example-form-field'" [label]="'Save User Name Secured'"
+                        [control]="f['isUserNameSecure']" [disabled]="isRead">
+                      </app-input-switch>
+                    </div>
+                    <div fxFlex.lt-md="100" fxFlex="35">
+                      <app-input-switch formControlName="isUEmailSecure" [checked]="f['isUEmailSecure'].value"
+                        fxFlex="98" [class]="'example-form-field'" [label]="'Save Email Secured'"
+                        [control]="f['isUEmailSecure']" [disabled]="isRead">
+                      </app-input-switch>
+                    </div>
+
+                  </div>
+
+                  <!-- row 8 -->
+                  <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                    <div fxFlex.lt-md="100" fxFlex="50">
+                      <app-input-switch formControlName="isHostOrIpAddressSecure"
+                        [checked]="f['isHostOrIpAddressSecure'].value" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Save Host Or Ip Address Secured'" [control]="f['isHostOrIpAddressSecure']"
+                        [disabled]="isRead">
+                      </app-input-switch>
+                    </div>
+                    <div fxFlex.lt-md="100" fxFlex="50">
+                      <app-input-switch formControlName="isPortSecure" [checked]="f['isPortSecure'].value" fxFlex="98"
+                        [class]="'example-form-field'" [label]="'Save Port Secured'" [control]="f['isPortSecure']"
+                        [disabled]="isRead">
+                      </app-input-switch>
+                    </div>
+                  </div>
+
+                </mat-card-content>
+              </mat-card>
+            </form>
+          </div>
         </div>
       </div>
+    </div>
+  </mat-card-content>
 
-      <!-- row 2 -->
-      <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
 
-        <div fxFlex.lt-md="100" fxFlex="50">
-          <app-input-select formControlName="memoryTypeId" fxFlex="98" [class]="'example-form-field'"
-            [label]="'Memory Type'" [placeholder]="'Select Memory Type'" [control]="f['memoryTypeId']"
-            [disabled]="isRead" [showClearButton]="true" [options]="memoryTypes"
-            [validationMessages]="memoryTypeValidationMessages">
-          </app-input-select>
-        </div>
+  <mat-card-footer class="app-card-footer  mat-elevation-z8">
+    <mat-card-actions *ngIf="errorMessage" class="card-footer-error">
+      <mat-card-title>{{errorMessage}}</mat-card-title>
+    </mat-card-actions>
+    <mat-card-actions  fxFlexAlign="center"  >
+      <button mat-raised-button  aria-label="Update memory" class="actions" style="margin-right: 40px;"  
+        [routerLink]="['/memories/']" [title]="'Return'">
+         <mat-icon class="actions-icon" style="margin-right: 10px;">arrow_back</mat-icon>Return
+      </button>
+      <button type="submit" *ngIf="!isRead " mat-raised-button  class="actions">
+        <mat-icon  class="actions-icon" style="margin-right: 10px;">add</mat-icon>Create
+      </button>
+      <button *ngIf="isRead" mat-raised-button aria-label="Update memory" class="actions" 
+        [routerLink]="['/memories/edit/'+this.form.value.id]" [title]="'Edit'">
+         <mat-icon  class="actions-icon" style="margin-right: 10px;">edit</mat-icon>Edit
+      </button>
+    </mat-card-actions>
+  </mat-card-footer>
 
-        <div fxFlex.lt-md="100" fxFlex="50">
-          <app-input-select formControlName="environmentTypeId" fxFlex="98" [class]="'example-form-field'"
-            [label]="'Environment Type'" [placeholder]="'Select Environment Type'" [control]="f['environmentTypeId']"
-            [disabled]="isRead" [showClearButton]="true" [options]="environmentTypes">
-          </app-input-select>
-        </div>
+</mat-card>
+<div style="
+z-index: 5000;
+position: fixed;
+display: flex;
+align-self: flex-end;
+top: 80px;
+right: 20px;">
+  <mat-icon mat-icon-button class="actions-icon">question_mark</mat-icon>
 
-      </div>
 
-      <!-- row 3 -->
-      <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
-        <div fxFlex.lt-md="100" fxFlex="50">
-          <app-input-field formControlName="userName" fxFlex="98" [class]="'example-form-field'" [label]="'User Name'"
-            [type]="'text'" [placeholder]="'Enter User Name'" [control]="f['userName']" [disabled]="isRead"
-            [showClearButton]="!isRead" [validationMessages]="usernameValidationsValidationMessages">
-          </app-input-field>
-        </div>
-        <div fxFlex.lt-md="100" fxFlex="50">
-          <app-input-field formControlName="email" fxFlex="98" [class]="'example-form-field'" [label]="'Email'"
-            [type]="'text'" [placeholder]="'Enter Email'" [control]="f['email']" [disabled]="isRead"
-            [showClearButton]="!isRead" [validationMessages]="emailValidationsValidationMessages">
-          </app-input-field>
-        </div>
-      </div>
-
-      <!-- row 4 -->
-      <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
-        <div fxFlex.lt-md="100" fxFlex="50">
-          <app-input-field formControlName="hostOrIpAddress" fxFlex="98" [class]="'example-form-field'"
-            [label]="'Host or IP Adress'" [type]="'text'" [placeholder]="'Enter Host or IP Adress'"
-            [control]="f['hostOrIpAddress']" [disabled]="isRead" [showClearButton]="!isRead">
-          </app-input-field>
-        </div>
-        <div fxFlex.lt-md="100" fxFlex="50">
-          <app-input-field formControlName="port" fxFlex="98" [class]="'example-form-field'" [label]="'Port'"
-            [type]="'number'" [placeholder]="'Enter Port'" [control]="f['port']" [disabled]="isRead"
-            [showClearButton]="!isRead">
-          </app-input-field>
-        </div>
-      </div>
-
-      <!-- row 5 -->
-      <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
-        <div fxFlex.lt-md="100" fxFlex="50">
-          <app-input-field formControlName="password" fxLayoutGap="10px" fxFlex="98" [class]="'example-form-field'"
-            [label]="'Password'" [type]="'password'" [placeholder]="'Enter password'" [control]="f['password']"
-            [validationMessages]="passwordValidationMessages" [successValidation]="'Looks good!'">
-          </app-input-field>
-        </div>
-        <div fxFlex.lt-md="100" fxFlex="50">
-          <app-input-field formControlName="confirmPassword" fxLayoutGap="10px" fxFlex="98"
-            [class]="'example-form-field'" [label]="'Confirm Password'" [type]="'password'"
-            [placeholder]="'Re-Enter password'" [control]="f['confirmPassword']"
-            [validationMessages]="confirmPasswordValidationMessages" [successValidation]="'Looks good!'">
-          </app-input-field>
-        </div>
-
-      </div>
-
-      <!-- row 5 -->
-      <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
-        <div fxFlex="35">
-          <app-input-field formControlName="forgotQuestion" fxFlex="98" [class]="'example-form-field'"
-            [label]="'Forgot Password Question'" [placeholder]="'Forgot Password Question'"
-            [control]="f['forgotQuestion']" [isTextArea]="true" [appearance]="'fill'">
-          </app-input-field>
-        </div>
-        <div fxFlex="35">
-          <app-input-field formControlName="forgotAnswer" fxFlex="98" [class]="'example-form-field'"
-            [label]="'Forgot Password Answer'" [placeholder]="'Forgot Password Answer'" [control]="f['forgotAnswer']"
-            [isTextArea]="true" [appearance]="'fill'">
-          </app-input-field>
-        </div>
-        <div fxFlex="35">
-          <app-input-field formControlName="description" fxFlex="98" [class]="'example-form-field'"
-            [label]="'Description'" [placeholder]="'Enter Description'" [control]="f['description']" [isTextArea]="true"
-            [appearance]="'fill'">
-          </app-input-field>
-        </div>
-      </div>
-
-      <!-- row 7 -->
-      <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
-        <div fxFlex.lt-md="100" fxFlex="35">
-          <app-input-switch formControlName="active" [checked]="f['active'].value" fxFlex="98"
-            [class]="'example-form-field'" [label]="'Is Active'" [control]="f['active']" [disabled]="isRead">
-          </app-input-switch>
-        </div>
-        <div fxFlex.lt-md="100" fxFlex="35">
-          <app-input-switch formControlName="isUserNameSecure" [checked]="f['isUserNameSecure'].value" fxFlex="98"
-            [class]="'example-form-field'" [label]="'Save User Name Secured'" [control]="f['isUserNameSecure']"
-            [disabled]="isRead">
-          </app-input-switch>
-        </div>
-        <div fxFlex.lt-md="100" fxFlex="35">
-          <app-input-switch formControlName="isUEmailSecure" [checked]="f['isUEmailSecure'].value" fxFlex="98"
-            [class]="'example-form-field'" [label]="'Save Email Secured'" [control]="f['isUEmailSecure']"
-            [disabled]="isRead">
-          </app-input-switch>
-        </div>
-
-      </div>
-
-      <!-- row 8 -->
-      <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
-        <div fxFlex.lt-md="100" fxFlex="50">
-          <app-input-switch formControlName="isHostOrIpAddressSecure" [checked]="f['isHostOrIpAddressSecure'].value"
-            fxFlex="98" [class]="'example-form-field'" [label]="'Save Host Or Ip Address Secured'"
-            [control]="f['isHostOrIpAddressSecure']" [disabled]="isRead">
-          </app-input-switch>
-        </div>
-        <div fxFlex.lt-md="100" fxFlex="50">
-          <app-input-switch formControlName="isPortSecure" [checked]="f['isPortSecure'].value" fxFlex="98"
-            [class]="'example-form-field'" [label]="'Save Port Secured'" [control]="f['isPortSecure']"
-            [disabled]="isRead">
-          </app-input-switch>
-        </div>
-      </div>
-
-    </mat-card-content>
-    <mat-card-footer>
-
-      <mat-card-actions *ngIf="errorMessage" class="card-footer-error">
-        <mat-card-title  >{{errorMessage}}</mat-card-title>
-      </mat-card-actions>
-      <mat-card-actions class="card-footer">
-
-        <div class="example-button-row">
-          <!-- [disabled]="!form.valid" -->
-          <button type="submit" *ngIf="!isRead " mat-raised-button color="primary">Kaydet</button>
-          <button *ngIf="isRead" mat-icon-button aria-label="Update memory"
-            [routerLink]="['/memories/edit/'+this.form.value.id]" [title]="'Edit'">
-            Edit Mode <mat-icon>edit</mat-icon>
-          </button>
-        </div>
-      </mat-card-actions>
-    </mat-card-footer>
-
-    <!-- <p>form : {{form.value | json}}</p> -->
-  </mat-card>
+</div>

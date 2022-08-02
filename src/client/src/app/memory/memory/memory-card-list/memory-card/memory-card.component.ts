@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MemoryModel } from 'src/app/_model/memory.model';
-import { UnlockMemoryDialog } from '../memory/unlock-memory-dialog/unlock-memory-dialog';
+import { UnlockMemoryDialog } from '../../unlock-memory-dialog/unlock-memory-dialog';
 
 @Component({
   selector: 'app-memory-card',
