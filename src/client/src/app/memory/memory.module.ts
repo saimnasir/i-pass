@@ -68,7 +68,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PinCodeService } from '../_service/pin-code.service';
 import { MemoryHistoryListComponent } from './memory/memory-history-list/memory-history-list.component';
 import { IPassCommonModule } from '../ipass-common.module';
-import { MemoryCardComponent } from './memory/memory-card-list/memory-card/memory-card.component';
+import { MemoryCardComponent } from './memory/memory-card/memory-card.component';
 import { MemoryCardListComponent } from './memory/memory-card-list/memory-card-list.component';
 
 
