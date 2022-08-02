@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomValidators } from 'src/app/helpers/custom-validators';
-import { EnvironmentTypeModel } from 'src/app/_model/environment-type.model';
-import { MemoryTypeModel } from 'src/app/_model/memory-type.model';
 import { Option } from 'src/app/_model/option.model';
 import { EnvironmentTypeService } from 'src/app/_service/environment-type.service';
 import { MemoryTypeService } from 'src/app/_service/memory-type.service';
 import { OrganizationService } from 'src/app/_service/organization.service';
-import { ConfirmPasswordValidationMessages, EmailValidationsValidationMessages, MemoryOrganizationValidationMessages, MemoryTitleValidationMessages, MemoryTypeValidationMessages, PasswordRegex, PasswordValidationMessages, UsernameValidationsValidationMessages } from 'src/app/_static-data/consts';
+import { ConfirmPasswordValidationMessages, EmailValidationsValidationMessages, MemoryOrganizationValidationMessages, MemoryTitleValidationMessages, MemoryTypeValidationMessages, PasswordValidationMessages, UsernameValidationsValidationMessages } from 'src/app/_static-data/consts';
 import { MemoryService } from '../../../_service/memory.service';
 
 @Component({
@@ -23,10 +21,12 @@ export class MemoryEditorComponent implements OnInit {
   memoryTypes: Array<Option>;
   environmentTypes: Array<Option>;
   title: string;
-  isNew = false;
-  isRead = false;
-  errorMessage: string | null ;
-  showError:boolean = false;
+  action: string = 'add';
+  get isRead() {
+    return this.action === 'read'
+  }
+  errorMessage: string | null;
+  showError: boolean = false;
   constructor(private formBuilder: FormBuilder,
     private memoryService: MemoryService,
     private organizationService: OrganizationService,
@@ -169,9 +169,8 @@ export class MemoryEditorComponent implements OnInit {
 
   getModel() {
     let id = this.route.snapshot.paramMap.get('id');
-    this.isNew = id == null;
-    this.isRead = this.route.snapshot.url[1].toString() === "read";
-    if (id) {
+    this.action = this.route.snapshot.url[1].toString();
+    if (this.action !== 'add') {
       this.memoryService.readWithDecoding(this.memoryService.route, id).subscribe({
         next: (response) => {
           if (response.success) {
@@ -203,7 +202,7 @@ export class MemoryEditorComponent implements OnInit {
       if (controlErrors != null) {
         Object.keys(controlErrors).forEach(keyError => {
           console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-          message= controlErrors[keyError];
+          message = controlErrors[keyError];
         });
       }
     });
@@ -211,38 +210,38 @@ export class MemoryEditorComponent implements OnInit {
   }
 
   save() {
-     
+
     this.showError = !this.form.valid;
     console.log('form', this.form.value);
-    
+
     this.errorMessage = null;
-    if(!this.form.valid){
+    if (!this.form.valid) {
       this.errorMessage = 'Please check invalid fields!'
       return;
     }
-      if (this.isNew) {
-        this.memoryService.create(this.memoryService.route, this.form.value).subscribe({
-          next: (response) => {
-            if (response.success) {
-              console.info('created');
-              this.router.navigate(['memories']);
-            }
-          },
-          error: (e) => console.error(e),
-          complete: () => console.info('complete')
-        });
-      } else {
-        this.memoryService.update(this.memoryService.route, this.form.value).subscribe({
-          next: (response) => {
-            if (response.success) {
-              console.info('updated');
-              this.router.navigate(['memories']);
-            }
-          },
-          error: (e) => console.error(e),
-          complete: () => console.info('complete')
-        });
-      }
+    if (this.action === 'add') {
+      this.memoryService.create(this.memoryService.route, this.form.value).subscribe({
+        next: (response) => {
+          if (response.success) {
+            console.info('created');
+            this.router.navigate(['memories']);
+          }
+        },
+        error: (e) => console.error(e),
+        complete: () => console.info('complete')
+      });
+    } else {
+      this.memoryService.update(this.memoryService.route, this.form.value).subscribe({
+        next: (response) => {
+          if (response.success) {
+            console.info('updated');
+            this.router.navigate(['memories']);
+          }
+        },
+        error: (e) => console.error(e),
+        complete: () => console.info('complete')
+      });
+    }
   }
 
 }
