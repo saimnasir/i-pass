@@ -1,15 +1,11 @@
  .memory-card {
-     margin: 6px;
+     margin: 1px;
  }
 
  .memory-card-title {
      font-size: larger;
  }
-
- .memory-card-content {
-     margin-top: 10px;
- }
-
+ 
  .memory-card-footer {
 
      text-align: center;
@@ -32,10 +28,21 @@
      background: powderblue;
  }
 
- /* .mat-card-panel-header:hover {
-    background: lavender !important;
-}  */
+ .mat-card-panel-header:hover {
+    background: whitesmoke !important;
+} 
 
  mat-expansion-panel {
-     background-color: #b4ffdb2b  !important;
+     /* background-color: #b4ffdb2b  !important; */
+     background-color: white  !important;
  }
+ 
+.actions-icon {
+    color:#09a7a7; 
+    font-size: x-large ;
+  }
+  
+  .actions {  
+    background-color: transparent;
+  }
+   

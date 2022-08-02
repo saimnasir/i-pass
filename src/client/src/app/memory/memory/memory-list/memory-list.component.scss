@@ -20,6 +20,10 @@ th {
   font-weight: 900;
 }
 
+.even{
+  background-color: whitesmoke;
+}
+
 .mat-header-row {
   background: #EAF6F6;
 }
@@ -124,11 +128,7 @@ th{
 .actions {
   font-size: larger ; color:black;
 }
-
-
-.add-button {
-  // background-color: #09a7a7;
-}
+ 
 
 .mat-paginator-sticky {
   // bottom: 100px;
@@ -166,6 +166,3 @@ th{
   position: relative; 
   overflow: auto;
 } 
-.even{
-  background-color: #f3f7f7;
-}

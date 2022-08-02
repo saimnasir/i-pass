@@ -1,8 +1,8 @@
-<mat-accordion class="memory-card  mat-elevation-z4  ">
+<mat-accordion class="memory-card  mat-elevation-z4">
     <mat-expansion-panel class="memory-card-panel" [expanded]="panelOpenState">
         <mat-expansion-panel-header class="mat-card-panel-header">
             <mat-panel-title class="memory-card-title" fxFlex.lt-md="100" fxFlex.lt-lg="50" fxFlex="35">
-                <small style="margin-right: 10px; color:brown">{{index}}</small><mat-icon [class]="'icon'" [inline]="true">subtitles</mat-icon>{{memory.title}}
+                <small style="margin-right: 20px; color:grey">{{index}}</small><mat-icon [class]="'icon'" [inline]="true">subtitles</mat-icon>{{memory.title}}
             </mat-panel-title>
             <mat-panel-title fxFlex.lt-lg="25" fxFlex.lt-md="50" fxFlex="35" fxHide.lt-sm>
                 <mat-icon [class]="'icon'" [inline]="true">account_tree </mat-icon> {{memory.organization.title}}
@@ -51,21 +51,21 @@
         <mat-divider></mat-divider>
         <mat-card-footer class="memory-card-footer">
             <mat-card-actions>
-                <button mat-icon-button  color="primary" aria-label="View memory" [title]="'Read'"
+                <button mat-icon-button  class="actions"  aria-label="View memory" [title]="'Read'"
                     (click)="openDialog(memory.id, 'read', '3000ms', '1500ms')">
-                    <mat-icon>lock_open</mat-icon>
+                    <mat-icon class="actions-icon">lock_open</mat-icon>
                 </button>
-                <button mat-icon-button   color="primary" aria-label="View memory" [title]="'Edit'"
+                <button mat-icon-button  class="actions"  aria-label="View memory" [title]="'Edit'"
                     (click)="openDialog(memory.id,  'edit','3000ms', '1500ms')">
-                    <mat-icon>edit</mat-icon>
+                    <mat-icon class="actions-icon" >edit</mat-icon>
                 </button>
-                <button mat-icon-button  color="primary" aria-label="View memory" [title]="'Read'"
+                <button mat-icon-button  class="actions"  aria-label="View memory" [title]="'Read'"
                     (click)="openDialog(memory.id, 'read', '3000ms', '1500ms')">
-                    <mat-icon>remove_red_eye</mat-icon>
+                    <mat-icon class="actions-icon" >remove_red_eye</mat-icon>
                 </button>
-                <button mat-icon-button   color="primary" aria-label="View history" [title]="'History'"
+                <button mat-icon-button  class="actions"  aria-label="View history" [title]="'History'"
                     (click)="openDialog(memory.id, 'history', '3000ms', '1500ms')">
-                    <mat-icon>history</mat-icon>
+                    <mat-icon class="actions-icon" >history</mat-icon>
                 </button>
             </mat-card-actions>
         </mat-card-footer>
