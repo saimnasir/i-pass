@@ -1,32 +1,28 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AccountService } from '../../_service/account.service';
 import { AlertService } from '../../_service/alert.service';
 import { CustomValidators } from 'src/app/helpers/custom-validators';
 import { PhoneNumberValidationMessages, PasswordValidationMessages, ConfirmPasswordValidationMessages, PasswordRegex, PhoneNumberRegex } from 'src/app/_static-data/consts';
 
- 
+
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-    form = new FormGroup(
-        {
-            phoneNumber: new FormControl(),
-            password: new FormControl(),
-            confirmPassword: new FormControl()
-        },
-    );
+    form: FormGroup;
 
     // model = new RegisterModel();
     loading = false;
     submitted = false;
 
-    constructor(
+    errorMessage: string | null;
+    showError: boolean = false;
+    constructor(private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
         private accountService: AccountService,
@@ -44,25 +40,23 @@ export class RegisterComponent implements OnInit {
     }
 
     private initForm() {
-        this.form = new FormGroup(
-            {
-                'phoneNumber': new FormControl(null, [
+        this.form = this.formBuilder.group
+            ({
+                phoneNumber: new FormControl(null, [
                     Validators.required,
-                    Validators.pattern(PhoneNumberRegex),
                     Validators.minLength(10),
-                    Validators.maxLength(10)
+                    Validators.maxLength(10),
                 ]),
-                'password': new FormControl(null, [
+                password: new FormControl(null, [
                     Validators.required,
                     Validators.minLength(8),
                     Validators.pattern(PasswordRegex),
-                ]),
-                'confirmPassword': new FormControl(null,
-                    [Validators.required]
-                ),
-            },
-            CustomValidators.mustMatch('password', 'confirmPassword') // insert here);
-        );
+                ]), 
+                confirmPassword: new FormControl(null, [
+                    Validators.required,
+                ])
+            });
+        this.form.addValidators(CustomValidators.mustMatch('password', 'confirmPassword'));
     }
 
     get phoneNumberValidationMessages() {
@@ -121,5 +115,17 @@ export class RegisterComponent implements OnInit {
                     this.alertService.error(error);
                     this.loading = false;
                 });
+    }
+
+    loginWithGoogle() {
+        this.accountService.loginWithGoogle();
+    }
+
+    loginWithFacebook() {
+        this.accountService.loginWithFacebook();
+    }
+
+    reset() {
+        this.initForm();
     }
 }
