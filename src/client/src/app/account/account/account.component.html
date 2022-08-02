@@ -1,0 +1,46 @@
+﻿<mat-card class="app-card mat-elevation-z0">
+
+    <mat-card-header class="app-card-header mat-elevation-z8">
+        <mat-card-title> Login - Register </mat-card-title>
+        <mat-card-subtitle style="margin-bottom: 8px;">Login, Register, Continue with social accounts
+        </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="app-card-content ">
+
+        <mat-card class="example-card mat-elevation-z8 container">
+            <mat-card-content class="card-content ">
+
+                <div fxLayout="column" fxFlexFill>
+                    <mat-tab-group [color]="'primary'">
+                        <mat-tab label="Login">
+                            <div class="mat-elevation-z4 social-account">
+                                <app-login></app-login>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Register">
+                            <div class="mat-elevation-z4 social-account">
+                                <app-register></app-register>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+                <div fxLayout="column" fxFlexFill>
+                    <div fxLayout="column"  class="mat-elevation-z4 social-account">
+                        <div class="social-account-title" fxFlex="100"> Continue With</div>
+                        <div fxLayout="row" fxFlexFill fxFlexAlign="center" class=" " fxFlex="100">
+                            <button fxFlex="50" class="action-button" (click)="loginWithGoogle()" mat-raised-button><img
+                                    style="height: 16px;" src="../../../assets/google-logo.svg.png" /> Google</button>
+                            <button fxFlex="50" class="action-button" (click)="loginWithFacebook()" mat-raised-button
+                                color="primary">
+                                <mat-icon>facebook</mat-icon>Facebook
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+
+        </mat-card>
+    </mat-card-content>
+
+</mat-card>

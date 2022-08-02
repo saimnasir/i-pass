@@ -1,27 +1,29 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AccountService } from '../../_service/account.service';
 import { AlertService } from '../../_service/alert.service';
+import { User } from '../../_model/user.model';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ConfirmPasswordValidationMessages, PasswordRegex, PasswordValidationMessages, PhoneNumberValidationMessages, UsernameValidationsValidationMessages } from 'src/app/_static-data/consts';
 import { CustomValidators } from 'src/app/helpers/custom-validators';
-import { PhoneNumberValidationMessages, PasswordValidationMessages, ConfirmPasswordValidationMessages, PasswordRegex, PhoneNumberRegex } from 'src/app/_static-data/consts';
 
 
 @Component({
-    selector: 'app-register',
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.css']
+    selector: 'app-account',
+    templateUrl: './account.component.html',
+    styleUrls: ['./account.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class AccountComponent implements OnInit {
     form: FormGroup;
-
-    // model = new RegisterModel();
+    registerForm: FormGroup;
     loading = false;
     submitted = false;
+    returnUrl: string;
 
     errorMessage: string | null;
     showError: boolean = false;
+    phonePattern: string | RegExp = new RegExp('^[0-9]{10}$');
     constructor(private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
@@ -30,8 +32,10 @@ export class RegisterComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        // get return url from route parameters or default to '/'
+        this.accountService.removeToken();
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
         this.initForm();
-        // this.form.addValidators( CustomValidators.mustMatch('password', 'confirmPassword'));
     }
 
     // convenience getter for easy access to form fields
@@ -51,26 +55,20 @@ export class RegisterComponent implements OnInit {
                     Validators.required,
                     Validators.minLength(8),
                     Validators.pattern(PasswordRegex),
-                ]), 
-                confirmPassword: new FormControl(null, [
-                    Validators.required,
-                ])
+                ]),
             });
-        this.form.addValidators(CustomValidators.mustMatch('password', 'confirmPassword'));
     }
 
     get phoneNumberValidationMessages() {
         return PhoneNumberValidationMessages;
     }
+
     get passwordValidationMessages() {
         return PasswordValidationMessages;
     }
-    get confirmPasswordValidationMessages() {
-        return ConfirmPasswordValidationMessages;
-    }
- 
 
-    register() { 
+    login() {
+
         this.showError = !this.form.valid;
         console.log('form', this.form.value);
 
@@ -81,19 +79,21 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
-        this.accountService.register(this.form.value)
+        this.accountService.login(this.form.value.phoneNumber, this.form.value.password)
             .pipe(first())
             .subscribe(
-                data => {
-                    this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-                    this.router.navigate(['/profile']);
+                response => {
+                    if (response?.success) {
+                        this.router.navigate([this.returnUrl]);
+                    } else {
+                        this.errorMessage = response?.message;
+                    }
                 },
                 error => {
                     this.alertService.error(error);
                     this.loading = false;
                 });
     }
-
     loginWithGoogle() {
         this.accountService.loginWithGoogle();
     }

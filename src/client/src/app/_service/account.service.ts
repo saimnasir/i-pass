@@ -101,7 +101,7 @@ export class AccountService extends BaseService<User, string> {
     logout() {
         // remove user from local storage and set current user to null
         this.removeToken();
-        this.router.navigate(['/login'])
+        this.router.navigate(['/account'])
             .then(() => {
                 window.location.reload();
             });

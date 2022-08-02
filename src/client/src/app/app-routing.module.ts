@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'; 
+import { AccountComponent } from './account/account/account.component';
 import { ExternalComponent } from './account/external/external.component';
-import { LoginComponent } from './account/login/login.component';
 import { ProfileComponent } from './account/profile/profile.component';
-import { RegisterComponent } from './account/register/register.component';
-import { AppComponent } from './app.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { DashboardListComponent } from './memory/dashboard/memory-list/dashboard.component';
 import { EnvironmentTypeEditorComponent } from './memory/environment-type/environment-type-editor/environment-type-editor.component';
@@ -21,8 +19,7 @@ import { OrganizationListComponent } from './memory/organization/organization-li
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardListComponent , canActivate: [AuthGuard]  }, 
-  { path: 'login', component: LoginComponent , canActivate: [AuthGuard] }, 
-  { path: 'register', component: RegisterComponent , canActivate: [AuthGuard] }, 
+  { path: 'account', component: AccountComponent , canActivate: [AuthGuard] }, 
 
   { path: 'memories', component: MemoryListComponent, canActivate: [AuthGuard]  },
   { path: 'memories/add', component: MemoryEditorComponent, canActivate: [AuthGuard]  },

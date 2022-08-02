@@ -56,8 +56,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { PinCodeService } from '../_service/pin-code.service';
 import { AccountService } from '../_service/account.service';
 import { ExternalComponent } from './external/external.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { IPassCommonModule } from '../ipass-common.module';
+import { AccountComponent } from './account/account.component';
  
 
 @NgModule({
@@ -72,8 +72,8 @@ import { IPassCommonModule } from '../ipass-common.module';
         LoginComponent,
         RegisterComponent,
         ProfileComponent,
-        //InputFieldComponent, 
         ExternalComponent,
+        AccountComponent
     ]
 })
 export class AccountModule { }

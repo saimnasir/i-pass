@@ -15,8 +15,7 @@ import { CustomValidators } from 'src/app/helpers/custom-validators';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    form: FormGroup;
-    registerForm: FormGroup;
+    form: FormGroup; 
     loading = false;
     submitted = false;
     returnUrl: string;
@@ -93,13 +92,6 @@ export class LoginComponent implements OnInit {
                     this.alertService.error(error);
                     this.loading = false;
                 });
-    }
-    loginWithGoogle() {
-        this.accountService.loginWithGoogle();
-    }
-
-    loginWithFacebook() {
-        this.accountService.loginWithFacebook();
     }
 
     reset() {
