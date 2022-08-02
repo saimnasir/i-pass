@@ -3,7 +3,7 @@
 
     </mat-card-content>
     <mat-card-footer class="form-field-card-footer">
-        <mat-slide-toggle matInput [checked]="checked" (change)="toogleChange($event)" color="primary">
+        <mat-slide-toggle matInput [checked]="checked" (change)="toogleChange($event)" color="primary" [disabled]="readOnly">
             <mat-label>{{label}}</mat-label>
         </mat-slide-toggle>
 
