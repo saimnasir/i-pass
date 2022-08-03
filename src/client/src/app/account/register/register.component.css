@@ -99,10 +99,11 @@
   margin: 10px;
 } 
 .mat-card-actions{
-  /* border-top: 1px solid #afdfc8;
-  border-bottom: 1px solid #afdfc8; */
+  border-top: 1px solid #afdfc8;
+  border-bottom: 1px solid #afdfc8;
   border-radius: 16px; 
   margin: 10px;
+  padding: 10px;
 }
 /*  
 .app-card-footer {

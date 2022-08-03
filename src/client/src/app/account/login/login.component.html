@@ -26,13 +26,18 @@
                 <mat-card-title>{{errorMessage}}</mat-card-title>
             </mat-card-actions>
             <mat-card-actions fxFlexAlign="center" class=" ">
-
-                <button class="action-button" (click)="login()" mat-raised-button color="primary">
-                    <mat-icon>login</mat-icon> Login
-                </button>
-                <button class="action-button" mat-raised-button color="warn" type="button" (click)="reset()">
-                    <mat-icon>settings_backup_restore</mat-icon>&nbsp;Reset
-                </button>
+                <div fxLayout="column" fxFlexFill>
+                    <div fxLayout="column"  class=" "> 
+                        <div fxLayout="row" fxFlexFill fxFlexAlign="center" class=" " fxFlex="100">
+                            <button fxFlex="50" class="action-button" (click)="login()" mat-raised-button color="primary">
+                                <mat-icon>login</mat-icon> Login
+                            </button>
+                            <button  fxFlex="50" class="action-button" mat-raised-button color="warn" type="button" (click)="reset()">
+                                <mat-icon>settings_backup_restore</mat-icon>&nbsp;Reset
+                            </button>
+                        </div>
+                    </div>
+                </div> 
             </mat-card-actions> 
         </mat-card-footer>
     </mat-card>
