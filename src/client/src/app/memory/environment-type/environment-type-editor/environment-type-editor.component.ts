@@ -12,29 +12,54 @@ import { EnvironmentTypeService } from 'src/app/_service/environment-type.servic
 })
 export class EnvironmentTypeEditorComponent implements OnInit {
 
-  
-  model = new EnvironmentTypeModel ();
-  title :string;
-  isNew = false;
-  constructor(private environmentTypeService: EnvironmentTypeService, 
+  form: FormGroup;
+
+  title: string;
+  action: string = 'add';
+  id: string | null;
+  get isRead() {
+    return this.action === 'read'
+  }
+  errorMessage: string | null;
+  showError: boolean = false;
+
+  constructor(private environmentTypeService: EnvironmentTypeService,
+    private formBuilder: FormBuilder, 
     private route: ActivatedRoute,
     protected router: Router) { }
 
 
   ngOnInit(): void {
- 
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.action = this.route.snapshot.url[1].toString();
     this.getModel();
+    this.initForm();
   }
 
-  getModel() {
-    let id = this.route.snapshot.paramMap.get('id');
-    this.isNew = id == null;
-    if (!this.isNew) {
-      this.environmentTypeService.readWithDecoding(this.environmentTypeService.route, id).subscribe({
+  private initForm() {
+    this.form = this.formBuilder.group({
+      id: new FormControl(null),
+      title: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(100),
+      ]),
+    },
+    );
+  }
+
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.form.controls;
+  }
+  getModel() {  
+    if (this.id) {
+      this.environmentTypeService.read(this.environmentTypeService.route, this.id).subscribe({
         next: (response) => {
           if (response.success) {
-            this.model = response.data.data; 
-            this.title = this.model.title;
+            this.form.patchValue(response.data.data);
+            this.title = this.form.value.title;
+        
           }
         },
         error: (e) => console.error(e),
@@ -44,8 +69,16 @@ export class EnvironmentTypeEditorComponent implements OnInit {
   }
 
   save() {
-    if (this.isNew) {
-      this.environmentTypeService.create(this.environmentTypeService.route, this.model).subscribe({
+    this.showError = !this.form.valid;
+    console.log('form', this.form.value);
+
+    this.errorMessage = null;
+    if (!this.form.valid) {
+      this.errorMessage = 'Please check invalid fields!'
+      return;
+    }
+    if (this.action === 'add') {
+      this.environmentTypeService.create(this.environmentTypeService.route, this.form.value).subscribe({
         next: (response) => {
           if (response.success) {
             console.info('created');
@@ -56,7 +89,7 @@ export class EnvironmentTypeEditorComponent implements OnInit {
         complete: () => console.info('complete')
       });
     } else {
-      this.environmentTypeService.update(this.environmentTypeService.route, this.model).subscribe({
+      this.environmentTypeService.update(this.environmentTypeService.route, this.form.value).subscribe({
         next: (response) => {
           if (response.success) {
             console.info('updated');
