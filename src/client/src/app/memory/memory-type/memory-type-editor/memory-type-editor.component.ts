@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { Guid } from 'guid-typescript';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MemoryTypeModel } from 'src/app/_model/memory-type.model';
 import { MemoryTypeService } from 'src/app/_service/memory-type.service';
 
@@ -12,10 +11,17 @@ import { MemoryTypeService } from 'src/app/_service/memory-type.service';
 })
 export class MemoryTypeEditorComponent implements OnInit {
 
+  form: FormGroup;
 
-  model = new MemoryTypeModel();
   title: string;
-  isNew = false;
+  action: string = 'add';
+  id: string | null;
+  get isRead() {
+    return this.action === 'read'
+  }
+  errorMessage: string | null;
+  showError: boolean = false;
+
   constructor(private memoryTypeService: MemoryTypeService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -23,18 +29,36 @@ export class MemoryTypeEditorComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.action = this.route.snapshot.url[1].toString();
     this.getModel();
+    this.initForm();
   }
 
+  private initForm() {
+    this.form = this.formBuilder.group({
+      id: new FormControl(null),
+      title: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(100),
+      ]),
+    },
+    );
+  }
+
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.form.controls;
+  }
   getModel() {
-    let id = this.route.snapshot.paramMap.get('id');
-    this.isNew = id == null;
-    if (id) {
-      this.memoryTypeService.readWithDecoding(this.memoryTypeService.route, id).subscribe({
+
+    if (this.id) {
+      this.memoryTypeService.readWithDecoding(this.memoryTypeService.route, this.id).subscribe({
         next: (response) => {
           if (response.success) {
-            this.model = response.data.data;
-            this.title = this.model.title;
+            this.form.patchValue(response.data.data);
+            this.title = this.form.value.title;
           }
         },
         error: (e) => console.error(e),
@@ -44,8 +68,16 @@ export class MemoryTypeEditorComponent implements OnInit {
   }
 
   save() {
-    if (this.isNew) {
-      this.memoryTypeService.create(this.memoryTypeService.route, this.model).subscribe({
+    this.showError = !this.form.valid;
+    console.log('form', this.form.value);
+
+    this.errorMessage = null;
+    if (!this.form.valid) {
+      this.errorMessage = 'Please check invalid fields!'
+      return;
+    }
+    if (this.action === 'add') {
+      this.memoryTypeService.create(this.memoryTypeService.route, this.form.value).subscribe({
         next: (response) => {
           if (response.success) {
             console.info('created');
@@ -56,7 +88,7 @@ export class MemoryTypeEditorComponent implements OnInit {
         complete: () => console.info('complete')
       });
     } else {
-      this.memoryTypeService.update(this.memoryTypeService.route, this.model).subscribe({
+      this.memoryTypeService.update(this.memoryTypeService.route, this.form.value).subscribe({
         next: (response) => {
           if (response.success) {
             console.info('updated');
