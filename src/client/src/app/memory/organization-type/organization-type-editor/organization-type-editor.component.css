@@ -1,19 +1,72 @@
-.card-header {
-  background: #C2DED1;
-  background: radial-gradient(circle, rgba(149, 162, 228, 0.8883928571428571) 0%, rgba(230, 169, 158, 1) 39%, rgba(173, 240, 233, 0.7147233893557423) 100%);
+/* .container-list{  
+  height: calc(100vh - 520px);
+  position: relative; 
+  overflow: auto;
+} */
+.app-card {
+  top: 60px;
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  overflow: auto;
+  height: calc(100vh - 120px);
+  background-color: #eefbf5;
 }
 
-.card-content {
-  margin: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.app-card-header {
+  position: fixed;
+  top: 60px;
+  height: 74px;
+  background-color: #cbf2df;   
+  padding: 10px;
+  padding-bottom: 0;
+  width: 100%;
+  z-index: 1000;  
 }
 
-.card-footer {
+.app-card-content { 
+  top: 80px; 
+  position: relative;
+  overflow: auto;
+  margin: 4px; 
+}  
+
+.actions-icon {
+  font-size: xx-large ; color:#09a7a7;
+  margin-top: -10px;
+}
+
+.actions {
+  font-size: larger ; color: #09a7a7;
+}
+
+.example-card{
+  max-height:  calc(100vh - 290px);
+  position: relative;
+  overflow: auto; 
+}
+ 
+
+.app-card-footer {
+  position: fixed;
+  bottom: 60px;
+  background-color: whitesmoke;    
+  width: 100%;
+  z-index: 1000;  
   text-align: center;
+  
+  margin: 0;  
+  margin-bottom: 10px;
+}
+ 
+.card-footer-error { 
   margin: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background: radial-gradient(circle, rgba(149, 162, 228, 0.8883928571428571) 0%, rgba(228, 230, 158, 1) 39%, rgba(173, 240, 233, 0.7147233893557423) 100%);
+  background: red;
+  color: wheat;
+}  
 
+.card-content{
+  padding-bottom: 20px;
 }

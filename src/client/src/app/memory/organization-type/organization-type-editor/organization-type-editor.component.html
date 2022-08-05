@@ -1,40 +1,85 @@
-<mat-card class="example-card">
-  <mat-card-header class="card-header ">
+<mat-card class="app-card mat-elevation-z0">
+
+  <form [formGroup]="form" (ngSubmit)="save()">
+  <mat-card-header class="app-card-header mat-elevation-z8">
     <mat-card-title>
-      <div *ngIf="isNew">
+      <div *ngIf="action === 'add'">
         <h2>Create Organization Type</h2>
       </div>
-      <div *ngIf="!isNew">
+      <div *ngIf="action === 'edit'">
         <h2>Update Organization Type</h2>
       </div>
+      <div *ngIf="action === 'read'">
+        <h2>Organization Type Details</h2>
+      </div>
     </mat-card-title>
-    <mat-card-subtitle>
-      <div *ngIf="!isNew">
+    <mat-card-subtitle style="margin-bottom: 8px;">
+      <div *ngIf="title">
         <div><span>{{title}} </span></div>
       </div>
     </mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content class="card-content">
 
-    <mat-grid-list cols="1" rowHeight="60px">
-      <mat-grid-tile>
-        <mat-form-field class="example-form-field" appearance="outline">
-          <mat-label>Title</mat-label>
-          <input matInput type="text" [(ngModel)]="model.title" required>
-          <button *ngIf="model.title" matSuffix mat-icon-button aria-label="Clear" (click)="model.title=''">
-            <mat-icon>close</mat-icon>
-          </button>
-          <mat-hint>Başlık giriniz.</mat-hint>
-          <mat-error>Lütfen başlık giriniz</mat-error>
-        </mat-form-field>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-card-content>
-  <mat-card-footer>
-    <mat-card-actions class="card-footer">
-      <div class="example-button-row">
-        <button mat-raised-button color="primary" (click)="save()">Kaydet</button>
+
+
+  <mat-card-content class="app-card-content mat-elevation-z8">
+
+    <div class="" fxLayout="row" fxFlexFill>
+      <div fxFlex="100">
+        <div class="  " fxLayout="column">
+
+          <div class="container-list" fxFlex="100">
+
+              <mat-card class="example-card mat-elevation-z0">
+                <mat-card-content class="card-content">
+
+                  <!-- row 1 -->
+                  <div class="container" fxLayout="column" fxLayout.lt-md="column" fxFlexFill>
+                    <div fxFlex.lt-md="100" fxFlex="100">
+                      <app-input-field formControlName="title" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Title'" [type]="'text'" [placeholder]="'Enter title'" [control]="f['title']"
+                        [readOnly]="isRead" [showClearButton]="!isRead"
+                        [validationMessages]="[]" [showError]="showError">
+                      </app-input-field>
+                    </div>
+                  </div> 
+                </mat-card-content>
+              </mat-card>
+          </div>
+        </div>
       </div>
+    </div>
+  </mat-card-content>
+
+
+  <mat-card-footer class="app-card-footer  mat-elevation-z8">
+    <mat-card-actions *ngIf="errorMessage" class="card-footer-error">
+      <mat-card-title>{{errorMessage}}</mat-card-title>
+    </mat-card-actions>
+    <mat-card-actions fxFlexAlign="center">
+      <button mat-raised-button aria-label="Update Organization Type" class="actions" style="margin-right: 40px;"
+        [routerLink]="['/organization-types/']" [title]="'Return'">
+        <mat-icon class="actions-icon" style="margin-right: 10px;">arrow_back</mat-icon>Back to list
+      </button>
+      <button type="submit" *ngIf="action === 'add' || action === 'edit'" mat-raised-button class="actions">
+        <mat-icon class="actions-icon" style="margin-right: 10px;">save</mat-icon>Save
+      </button>
+
+      <button *ngIf="action === 'read'" mat-raised-button aria-label="Update Organization Type" class="actions"
+        [routerLink]="['/organization-types/edit/'+this.form.value.id]" [title]="'Edit'">
+        <mat-icon class="actions-icon" style="margin-right: 10px;">edit</mat-icon>Edit
+      </button>
     </mat-card-actions>
   </mat-card-footer>
-</mat-card> 
+
+</form>
+</mat-card>
+<div style="
+z-index: 5000;
+position: fixed;
+display: flex;
+align-self: flex-end;
+top: 80px;
+right: 20px;">
+  <mat-icon mat-icon-button class="actions-icon">question_mark</mat-icon>
+</div>

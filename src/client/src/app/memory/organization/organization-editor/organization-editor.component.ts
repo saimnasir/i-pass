@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OrganizationTypeModel } from 'src/app/_model/organization-type.model';
-import { OrganizationModel } from 'src/app/_model/organization.model';
 import { OrganizationTypeService } from 'src/app/_service/organization-type.service';
 import { OrganizationService } from 'src/app/_service/organization.service';
 import { Option } from 'src/app/_model/option.model';
@@ -26,6 +24,7 @@ export class OrganizationEditorComponent implements OnInit {
   }
   errorMessage: string | null;
   showError: boolean = false;
+
   constructor(private formBuilder: FormBuilder,
     private organizationService: OrganizationService,
     private organizationTypeService: OrganizationTypeService,
@@ -100,11 +99,10 @@ export class OrganizationEditorComponent implements OnInit {
     });
   }
 
-  getModel() {
-    let id = this.route.snapshot.paramMap.get('id');
+  getModel() { 
     this.action = this.route.snapshot.url[1].toString();
-    if (id) {
-      this.organizationService.read(this.organizationService.route, id).subscribe({
+    if (this.id) {
+      this.organizationService.read(this.organizationService.route, this.id).subscribe({
         next: (response) => {
           if (response.success) {
             this.form.patchValue(response.data.data);
