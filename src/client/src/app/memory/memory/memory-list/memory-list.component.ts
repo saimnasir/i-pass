@@ -23,8 +23,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 })
 export class MemoryListComponent implements AfterViewInit {
 
-  public data: MemoryModel[] = [];
-  public groupDataPerCount: MemoryModel[][] = []
+  public data: MemoryModel[] = []; 
   dataSource!: MatTableDataSource<MemoryModel>;
 
   displayedColumns: string[] = ['title', 'organization', 'memoryType', 'environmentType', 'userName', 'email', 'hostOrIpAddress', 'port', 'password', 'description', 'action'];

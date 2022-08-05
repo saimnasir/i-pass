@@ -20,45 +20,23 @@ th {
   font-weight: 900;
 }
 
+// .even{
+//   background-color: whitesmoke;
+// }
+
 .mat-header-row {
   background: #EAF6F6;
 }
 
 .mat-paginator {
-
   background: #EAF6F6;
 }
 
 
-.card-header {
-  background: radial-gradient(circle, rgba(149, 162, 228, 0.8883928571428571) 0%, rgba(228, 230, 158, 1) 39%, rgba(173, 240, 233, 0.7147233893557423) 100%);
-  
-  // top: 40px;
-  // position: sticky;
-  z-index: 10;
-}
-
-.card-content {
-  // background: #EAF6F6;
- // height:80%;
-  padding-top: 10px ;
-}
-
-.mat-elevation-z1 {
-  // background: #EAF6F6;
-  margin: 0;
-  padding: 0;
-}
-
 .container {
-  position: relative; 
+  position: relative;
 }
-
-.table-container {
-  position: relative; 
-  max-height: 600px;
-  overflow: auto;
-} 
+ 
 
 .loading-shade {
   position: absolute;
@@ -67,7 +45,7 @@ th {
   bottom: 56px;
   right: 0;
   background: rgba(0, 0, 0, 0.15);
-  z-index: 1;
+  z-index: 3000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,23 +96,70 @@ section {
   justify-content: center;
   width: 120px;
 }
-.mat-cell{
-  padding: 6px;
-}
 
-.mat-header-cell{
-  padding: 6px;
+.mat-cell {
+  padding: 0px 5px 0px 5px;
 } 
 
-.actions{
-  background-color: #90e6e6 ;
+.mat-header-cell {
+  padding: 0px 5px 1px 0px;
+} 
+
+td.mat-cell{
+  /* row border */
+  border-left: 1px solid whitesmoke;
 }
-.add-button{
-  background-color: #90e6e6 ;
+td{  
+  border-right: 1px solid whitesmoke;
 }
 
-.mat-paginator-sticky {
-  bottom: 0px;
+th.mat-cell{
+  /* row border */
+  border-left: 1px solid #e0e0e0;
+}
+th{  
+  border-right: 1px solid #e0e0e0;
+}
+.actions-icon {
+  font-size: xx-large ; color:#09a7a7;
+  margin-top: -10px;
+}
+
+.actions {
+  font-size: larger ; color:black;
+}
+ 
+
+.mat-paginator-sticky { 
+  margin-top: 10px;
   position: sticky;
   z-index: 10;
 }
+
+ 
+.app-card {
+  top: 60px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.app-card-header {
+  position: fixed;
+  top: 60px;
+  background-color: #cbf2df; 
+  padding: 10px;
+  width: 100%;
+  z-index: 3000;
+}
+
+.app-card-content { 
+  top: 80px;
+  margin: 10px; 
+  position: relative;
+} 
+
+.table-container {  
+  height: calc(100vh - 310px);
+  position: relative; 
+  overflow: auto;
+} 

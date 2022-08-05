@@ -1,27 +1,28 @@
-<mat-card class="mat-elevation-z0 ">
-    <mat-card-header class="card-header ">
-        <mat-card-subtitle>History of</mat-card-subtitle>
-        <mat-card-title> {{model.title}} </mat-card-title>
+<mat-card class="app-card mat-elevation-z0">
+    <mat-card-header class="app-card-header mat-elevation-z8">
+        <mat-card-title>{{model.title}}</mat-card-title>
+        <mat-card-subtitle style="margin-bottom: 8px;">History</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content class="card-content  ">
-        <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
-            <mat-spinner *ngIf="isLoadingResults">Loading..</mat-spinner>
-            <div class="rate-limit-reached" *ngIf="isRateLimitReached">
-                No Records found
-            </div>
-        </div>
-        <div class=" " fxLayout="row" fxFlexFill>
+
+    <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+        <mat-spinner *ngIf="isLoadingResults">Loading..</mat-spinner>
+    </div>
+    <mat-card-content class="app-card-content  ">
+
+        <div class=" mat-elevation-z8" fxLayout="row" fxFlexFill>
 
             <div fxFlex.lt-md="100" fxFlex="100">
                 <div class="  " fxLayout="column" fxLayout.gt-md="row">
+
                     <div fxFlex.lt-md="100" fxFlex="100" fxHide.gt-md>
-                        <app-memory-card-list [memories]="data" [decode]="decode" [showAdd]="false" [openAllPanels]="true" >
+                        <app-memory-card-list [memories]="data" [displayedColumns]="displayedColumns" #memoryCards
+                            [searchText]="searchText" [sort]="sort">
                         </app-memory-card-list>
                     </div>
                     <div class="table-container" fxFlex="100">
-                        <table fxHide.lt-lg mat-table [dataSource]="data" matSort matSortActive="created"
-                            matSortDisableClear matSortDirection="desc">
-                            <!-- title -->
+                        <table fxHide.lt-lg mat-table [dataSource]="data" matSort
+                            [matSortActive]="sort? sort.active : 'title'"
+                            [matSortDirection]="sort? sort.direction : 'asc'" matSortDirection="asc">
 
                             <!-- title -->
                             <ng-container matColumnDef="title">
@@ -35,8 +36,7 @@
 
                             <!-- organization -->
                             <ng-container matColumnDef="organization">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by organization">
+                                <th mat-header-cell *matHeaderCellDef>
                                     {{'organization'}}</th>
                                 <td mat-cell *matCellDef="let memory">
                                     <span>{{memory.organization.title}}</span>
@@ -44,8 +44,7 @@
                             </ng-container>
                             <!-- memoryType -->
                             <ng-container matColumnDef="memoryType">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by memoryType">
+                                <th mat-header-cell *matHeaderCellDef>
                                     {{'memory type'}}</th>
                                 <td mat-cell *matCellDef="let memory">
                                     <span>{{memory.memoryType.title}}</span>
@@ -54,8 +53,7 @@
 
                             <!-- memoryType -->
                             <ng-container matColumnDef="environmentType">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by environmentType"> {{'environment type'}}</th>
+                                <th mat-header-cell *matHeaderCellDef> {{'environment type'}}</th>
                                 <td mat-cell *matCellDef="let memory">
                                     <span>{{memory.environmentType?.title}}</span>
                                 </td>
@@ -108,28 +106,71 @@
 
                             <!-- description -->
                             <ng-container matColumnDef="description">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header
-                                    sortActionDescription="Sort by description">
+                                <th mat-header-cell *matHeaderCellDef>
                                     {{'description'}}</th>
                                 <td mat-cell *matCellDef="let memory">
                                     <span>{{memory.description}}</span>
                                 </td>
                             </ng-container>
 
-                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                            <tr mat-row *matRowDef="
+                            let row;
+                            let even = even;  columns: displayedColumns;" [ngClass]="{even: even}"></tr>
                         </table>
-                        
+
                     </div>
                 </div>
             </div>
 
         </div>
-        <mat-paginator class="mat-paginator-sticky" [length]="resultsLength" [pageSizeOptions]="[ 5,  10, 20, 100]"
-            showFirstLastButtons aria-label="Select page">
+        <div class="rate-limit-reached" *ngIf="data.length<= 0" fxLayout="row" fxLayout.gt-md="row">
+            No Records found
+        </div>
+        <mat-paginator class="mat-paginator-sticky mat-elevation-z8" [length]="resultsLength"
+            [pageSizeOptions]="[   10, 20, 50, 100, 200, 500, 1000]" showFirstLastButtons aria-label="Select page">
         </mat-paginator>
     </mat-card-content>
     <!-- <mat-card-footer class="card-footer">
 
 </mat-card-footer> -->
 </mat-card>
+
+<div style="
+z-index: 5000;
+position: fixed;
+display: flex;
+align-self: flex-end;
+top: 75px;
+right: 18px;">
+    <button class="mat-elevation-z8" mat-icon-button [matMenuTriggerFor]="menu" xPosition="before"
+        style="background-color: white;">
+        <mat-icon style="font-size: xx-large ; color:#09a7a7">app_registration</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+
+        <button mat-menu-item class="actions" aria-label="Add memory" [routerLink]="['/memories/add']" [title]="'Add'">
+            <mat-icon class="actions-icon">add </mat-icon>Add New
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item class="actions" (click)="openSearch( '3000ms', '1500ms')">
+            <mat-icon class="actions-icon" mat-icon-button>sort</mat-icon>
+            <span>Sort&Filter</span>
+        </button>
+        <mat-divider fxHide.gt-md></mat-divider>
+        <div fxHide.gt-md>
+            <button *ngIf="!memoryCards.openAllPanels" class="actions" align="end" mat-menu-item
+                (click)="memoryCards.openAllPanels = true">
+                <mat-icon class="actions-icon" mat-button>expand_more </mat-icon>
+                <span>Expand All</span>
+            </button>
+            <button *ngIf="memoryCards.openAllPanels" align="end" mat-menu-item
+                (click)="memoryCards.openAllPanels = false">
+                <mat-icon class="actions-con" mat-button>expand_less </mat-icon>
+                <span>Collapse All</span>
+            </button>
+        </div>
+
+    </mat-menu>
+
+</div>
