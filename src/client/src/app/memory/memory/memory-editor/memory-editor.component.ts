@@ -185,30 +185,7 @@ export class MemoryEditorComponent implements OnInit {
       });
     }
   }
-
-  waitForFilterResponse(value: string) {
-    this.getCountryList(value);
-  }
-
-  private getCountryList(params: string): void {
-    // params will be converted in url query params ?name={{value}}
-    this.organizations = this.organizations.filter(s => s.title.includes(params));
-  }
-
-  getFormValidationErrors(): string {
-    let message: string = '';
-    Object.keys(this.form.controls).forEach(key => {
-      const controlErrors: ValidationErrors | null | undefined = this.form.get(key)?.errors;
-      if (controlErrors != null) {
-        Object.keys(controlErrors).forEach(keyError => {
-          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-          message = controlErrors[keyError];
-        });
-      }
-    });
-    return message;
-  }
-
+ 
   save() {
 
     this.showError = !this.form.valid;

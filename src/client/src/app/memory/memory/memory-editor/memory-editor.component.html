@@ -1,37 +1,37 @@
 <mat-card class="app-card mat-elevation-z0">
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <mat-card-header class="app-card-header mat-elevation-z8">
+      <mat-card-title>
+        <div *ngIf="action === 'add'">
+          <h2>Create Memory</h2>
+        </div>
+        <div *ngIf="action === 'edit'">
+          <h2>Update Memory</h2>
+        </div>
+        <div *ngIf="action === 'read'">
+          <h2>Memory Details</h2>
+        </div>
+      </mat-card-title>
+      <mat-card-subtitle style="margin-bottom: 8px;">
+        <div *ngIf="title">
+          <div><span>{{title}} </span></div>
+        </div>
+      </mat-card-subtitle>
+    </mat-card-header>
 
-  <mat-card-header class="app-card-header mat-elevation-z8">
-    <mat-card-title>
-      <div *ngIf="action === 'create'">
-        <h2>Create Memory</h2>
-      </div>
-      <div *ngIf="action === 'edit'">
-        <h2>Update Memory</h2>
-      </div>
-      <div *ngIf="action === 'read'">
-        <h2>Memory Details</h2>
-      </div>
-    </mat-card-title>
-    <mat-card-subtitle style="margin-bottom: 8px;">
-      <div *ngIf="title">
-        <div><span>{{title}} </span></div>
-      </div>
-    </mat-card-subtitle>
-  </mat-card-header>
+
+    <mat-card-content class="app-card-content mat-elevation-z8">
+
+      <div class="" fxLayout="row" fxFlexFill>
+        <div fxFlex="100">
+          <div class="  " fxLayout="column">
+
+            <div class="container-list" fxFlex="100">
 
 
-  <mat-card-content class="app-card-content mat-elevation-z8">
-
-    <div class="" fxLayout="row" fxFlexFill>
-      <div fxFlex="100">
-        <div class="  " fxLayout="column">
-
-          <div class="container-list" fxFlex="100">
-
-            <form [formGroup]="form" (ngSubmit)="save()">
               <mat-card class="example-card mat-elevation-z0">
-                <mat-card-content class="card-content"> 
-                  
+                <mat-card-content class="card-content">
+
                   <!-- row 1 -->
                   <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
 
@@ -132,22 +132,19 @@
                     <div fxFlex="35">
                       <app-input-field formControlName="forgotQuestion" fxFlex="98" [class]="'example-form-field'"
                         [label]="'Forgot Password Question'" [placeholder]="'Forgot Password Question'"
-                        [control]="f['forgotQuestion']" [isTextArea]="true" [appearance]="'fill'"
-                        [readOnly]="isRead">
+                        [control]="f['forgotQuestion']" [isTextArea]="true" [appearance]="'fill'" [readOnly]="isRead">
                       </app-input-field>
                     </div>
                     <div fxFlex="35">
                       <app-input-field formControlName="forgotAnswer" fxFlex="98" [class]="'example-form-field'"
                         [label]="'Forgot Password Answer'" [placeholder]="'Forgot Password Answer'"
-                        [control]="f['forgotAnswer']" [isTextArea]="true" [appearance]="'fill'"
-                        [readOnly]="isRead">
+                        [control]="f['forgotAnswer']" [isTextArea]="true" [appearance]="'fill'" [readOnly]="isRead">
                       </app-input-field>
                     </div>
                     <div fxFlex="35">
                       <app-input-field formControlName="description" fxFlex="98" [class]="'example-form-field'"
                         [label]="'Description'" [placeholder]="'Enter Description'" [control]="f['description']"
-                        [isTextArea]="true" [appearance]="'fill'"
-                        [readOnly]="isRead">
+                        [isTextArea]="true" [appearance]="'fill'" [readOnly]="isRead">
                       </app-input-field>
                     </div>
                   </div>
@@ -194,34 +191,34 @@
 
                 </mat-card-content>
               </mat-card>
-            </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </mat-card-content>
+    </mat-card-content>
 
 
-  <mat-card-footer class="app-card-footer  mat-elevation-z8">
-    <mat-card-actions *ngIf="errorMessage" class="card-footer-error">
-      <mat-card-title>{{errorMessage}}</mat-card-title>
-    </mat-card-actions>
-    <mat-card-actions  fxFlexAlign="center"  >
-      <button mat-raised-button  aria-label="Update memory" class="actions" style="margin-right: 40px;"  
-        [routerLink]="['/memories/']" [title]="'Return'">
-         <mat-icon class="actions-icon" style="margin-right: 10px;">arrow_back</mat-icon>Back to list
-      </button>
-      <button type="submit" *ngIf="action === 'add' || action === 'edit'" mat-raised-button  class="actions">
-        <mat-icon  class="actions-icon" style="margin-right: 10px;">save</mat-icon>Save
-      </button>
-      
-      <button *ngIf="action === 'read'" mat-raised-button aria-label="Update memory" class="actions" 
-        [routerLink]="['/memories/edit/'+this.form.value.id]" [title]="'Edit'">
-         <mat-icon  class="actions-icon" style="margin-right: 10px;">edit</mat-icon>Edit
-      </button>
-    </mat-card-actions>
-  </mat-card-footer>
+    <mat-card-footer class="app-card-footer  mat-elevation-z8">
+      <mat-card-actions *ngIf="errorMessage" class="card-footer-error">
+        <mat-card-title>{{errorMessage}}</mat-card-title>
+      </mat-card-actions>
+      <mat-card-actions fxFlexAlign="center">
+        <button mat-raised-button aria-label="Update memory" class="actions" style="margin-right: 40px;"
+          [routerLink]="['/memories/']" [title]="'Return'">
+          <mat-icon class="actions-icon" style="margin-right: 10px;">arrow_back</mat-icon>Back to list
+        </button>
+        <button type="submit" *ngIf="action === 'add' || action === 'edit'" mat-raised-button class="actions">
+          <mat-icon class="actions-icon" style="margin-right: 10px;">save</mat-icon>Save
+        </button>
 
+        <button *ngIf="action === 'read'" mat-raised-button aria-label="Update memory" class="actions"
+          [routerLink]="['/memories/edit/'+this.form.value.id]" [title]="'Edit'">
+          <mat-icon class="actions-icon" style="margin-right: 10px;">edit</mat-icon>Edit
+        </button>
+      </mat-card-actions>
+    </mat-card-footer>
+
+  </form>
 </mat-card>
 <div style="
 z-index: 5000;
