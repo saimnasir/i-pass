@@ -23,6 +23,7 @@ namespace IPass.EFRepositories.IPassContext.Repositories
             foreach (var memory in res)
             {
                 memory.Organization = await ctx.Organizations.SingleOrDefaultAsync(o => o.Id == memory.OrganizationId);
+                memory.Organization.OrganizationType = await ctx.OrganizationTypes.SingleOrDefaultAsync(o => o.Id == memory.Organization.OrganizationTypeId);
                 memory.MemoryType = await ctx.MemoryTypes.SingleOrDefaultAsync(o => o.Id == memory.MemoryTypeId);
                 memory.EnvironmentType = await ctx.EnvironmentTypes.SingleOrDefaultAsync(o => o.Id == memory.EnvironmentTypeId);
             }

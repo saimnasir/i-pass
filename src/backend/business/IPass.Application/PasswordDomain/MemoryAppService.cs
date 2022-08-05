@@ -146,16 +146,7 @@ namespace IPass.Application.PasswordDomain
                 if (!string.IsNullOrEmpty(input.SortBy) && input.SortType != SortType.None)
                 {
                     sorts.Add(new Sort { Column = input.SortBy, SortType = input.SortType });
-                }
-                //if (!string.IsNullOrEmpty(input.SearchText))
-                //{
-                //    conditions.Add(new Condition
-                //    {
-                //        Operator = ConditionOperator.Contains,
-                //        PropertyName = nameof(Memory.Title),
-                //        Values = new List<string> { input.SearchText.ToString() }
-                //    });
-                //}
+                } 
 
                 var pagination = new Pagination(input.Page, input.PageSize);
                 var query = await MemoryRepository.WhereAsync(conditions, sorts: sorts, includeAll: true);
@@ -177,7 +168,7 @@ namespace IPass.Application.PasswordDomain
 
                 if (input.Decode)
                 {
-                    memories.Select(memory => { DecodeMemory(memory); return memory; }).ToList();
+                    memories = memories.Select(memory => { DecodeMemory(memory); return memory; }).ToList();
                 }
 
                 var passwordDtos = Mapper.Map<List<MemoryDto>>(memories);
@@ -199,20 +190,33 @@ namespace IPass.Application.PasswordDomain
             return await WithLogging(input, GetType(), async () =>
             {
                 var conditions = new List<Condition>();
-
-                var pagination = new Pagination
+                var sorts = new List<Sort>();
+                if (!string.IsNullOrEmpty(input.SortBy) && input.SortType != SortType.None)
                 {
-                    Page = input.Page < 1 ? 1 : input.Page,
-                    Count = input.PageSize < 0 ? 20 : input.PageSize
-                };
-                var query = await MemoryRepository.GetHistoriesAsync(input.Id);
-                var pagedResult = query.AsQueryable().Paginate(pagination);
+                    sorts.Add(new Sort { Column = input.SortBy, SortType = input.SortType });
+                }
+
+                var pagination = new Pagination(input.Page, input.PageSize);
+                var query = await MemoryRepository.GetHistoriesAsync(input.Id); 
+
+                if (!string.IsNullOrEmpty(input.SearchText))
+                {
+                    query = query.Where(m =>
+                    m.Title.Contains(input.SearchText, StringComparison.CurrentCultureIgnoreCase)
+                    || m.Organization.Title.Contains(input.SearchText, StringComparison.CurrentCultureIgnoreCase)
+                    || m.Organization.OrganizationType.Title.Contains(input.SearchText, StringComparison.CurrentCultureIgnoreCase)
+                    || m.MemoryType.Title.Contains(input.SearchText, StringComparison.CurrentCultureIgnoreCase)
+                    //|| (m.EnvironmentType != null && m.EnvironmentType.Title.Contains(input.SearchText, StringComparison.CurrentCultureIgnoreCase))
+                    );
+                }
+
+                var pagedResult = query.AsQueryable().Sort(sorts).Paginate(pagination);
 
                 var memories = pagedResult.Queryable.ToList();
 
                 if (input.Decode)
                 {
-                    memories.Select(memory => { DecodeMemory(memory); return memory; }).ToList();
+                    memories = memories.Select(memory => { DecodeMemory(memory); return memory; }).ToList();
                 }
 
                 var passwordDtos = Mapper.Map<List<MemoryDto>>(memories);
