@@ -53,6 +53,7 @@ namespace IPass.WebApp.Controllers
         }
 
         [HttpPost("otp/forgot-password")]
+        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<object>>> SendValidationCodeAsync(SendActivationCodeInputDto input)
         {
             return await WithLoggingFinalResponse<object>(input, async () =>
@@ -63,6 +64,7 @@ namespace IPass.WebApp.Controllers
         }
 
         [HttpPost("forgot-password")]
+        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<object>>> ChangePasswordAsync(ResetPasswordInputDto input)
         {
             input.LogId = (await LogWriter.CreateLog(Configuration.ApplicationName)).Id.ToString();
@@ -103,6 +105,7 @@ namespace IPass.WebApp.Controllers
 
         [Route("refresh-token")]
         [HttpPost]
+        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<TokenResultDto>>> GetRefreshTokenAsync(RefreshTokenInputDto input)
         {
             return await WithLoggingFinalResponse(input, async () =>
@@ -112,7 +115,7 @@ namespace IPass.WebApp.Controllers
         }
 
         [HttpGet("profile")]
-        [Authorize(Roles = $"{Consts.USER_ROLE}")]
+        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<SingleResponse<ProfileDto>>>> GetProfileAsync()
         {
             var input = new DTO();
@@ -124,7 +127,7 @@ namespace IPass.WebApp.Controllers
         }
 
         [HttpPut("profile")]
-        [Authorize(Roles = $"{Consts.USER_ROLE}")]
+        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<object>>> UpdateProfileAsync(UserDto input)
         {
             return await WithLoggingFinalResponse<object>(input, async () =>
@@ -153,7 +156,7 @@ namespace IPass.WebApp.Controllers
         }
 
         [HttpGet("ext-callback")]
-        [Authorize(Roles = $"{Consts.USER_ROLE}")]
+        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<TokenResultDto>>> ServicemanExternalCallbackAsync(
          string t = null,
          bool allowToCommunicate = false,

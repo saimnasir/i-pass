@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 namespace IPass.WebApp.Controllers
 {
     [Route("api/[controller]/")]
+    [Authorize(Policy = Consts.USER_POLICY)]
     public class OrganizationsController : GenericApiController
     {
         IOrganizationAppService OrganizationAppService { get; }
