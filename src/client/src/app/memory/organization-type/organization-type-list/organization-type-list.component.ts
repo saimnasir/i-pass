@@ -1,8 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';   
-import { OrganizationTypeModel } from 'src/app/_model/organization-type.model'; 
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { OrganizationTypeModel } from 'src/app/_model/organization-type.model';
 import { OrganizationTypeService } from 'src/app/_service/organization-type.service';
 
 @Component({
@@ -10,33 +13,72 @@ import { OrganizationTypeService } from 'src/app/_service/organization-type.serv
   templateUrl: './organization-type-list.component.html',
   styleUrls: ['./organization-type-list.component.scss']
 })
-export class OrganizationTypeListComponent implements OnInit  {
-  public organizationTypes?: Array<OrganizationTypeModel>;
+export class OrganizationTypeListComponent implements AfterViewInit {
+  public data: OrganizationTypeModel[] = [];
 
   dataSource!: MatTableDataSource<OrganizationTypeModel>;
 
-  displayedColumns: string[] = [ 'title', 'action'];
+  displayedColumns: string[] = ['title', 'action'];
+  sortableColumns: string[] = ['title'];
+
+  resultsLength = 0;
+  isLoadingResults = true;
+  isRateLimitReached = false;
+  searchText: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private organizationTypeService: OrganizationTypeService
+  media$: Observable<MediaChange[]>;
+  constructor(media: MediaObserver,
+    private organizationTypeService: OrganizationTypeService
   ) {
-
+    this.media$ = media.asObservable();
   }
-   
-  ngOnInit(): void {
-    this.organizationTypeService.getAll(this.organizationTypeService.route).subscribe({
-      next: (response) => {
-        if (response.success) {
-          this.organizationTypes = response.data.data;
-          console.log("response.data.data",response.data.data);
-          this.dataSource = new MatTableDataSource<OrganizationTypeModel>(response.data.data);          
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        }
-      },
-      error: (e) => console.error(e),
-      complete: () => console.info('complete')
-    });
-  } 
+
+  ngAfterViewInit(): void {    
+    this.getData();    
+  }
+
+  
+  getData() {
+
+    // If the user changes the sort order, reset back to the first page.
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.organizationTypeService.getAllPaginated(
+            this.organizationTypeService.route,
+            this.sort.active,
+            this.sort.direction,
+            this.paginator.pageIndex,
+            this.paginator.pageSize,
+            this.searchText
+          ).pipe(catchError(() => observableOf(null)));
+        }),
+        map(response => {
+          // Flip flag to show that loading has finished.
+          this.isLoadingResults = false;
+          this.isRateLimitReached = response === null;
+
+          if (response === null) {
+            return [];
+          }
+          // Only refresh the result length if there is new data. In case of rate
+          // limit errors, we do not want to reset the paginator to zero, as that
+          // would prevent users from re-triggering requests.
+          this.resultsLength = response.data.totalCount;
+
+          console.log("response", response);
+          console.log("resultsLength", this.resultsLength);
+          return response.data.data;
+        }),
+      )
+      .subscribe(data => {
+        this.data = data;
+      });
+  }
 }

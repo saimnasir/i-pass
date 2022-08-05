@@ -1,47 +1,64 @@
-<mat-card class="mem-card mat-elevation-z8 ">
-    <mat-card-header class="card-header ">
-        <mat-card-title>Environment Types</mat-card-title>
-        <mat-card-subtitle>Dev, Test, Prod etc.</mat-card-subtitle>
+<mat-card class="app-card mat-elevation-z0">
+    <mat-card-header class="app-card-header mat-elevation-z8">
+        <mat-card-title> Environment Types</mat-card-title>
+        <mat-card-subtitle style="margin-bottom: 8px;"> Dev, Test, Prod etc.
+        </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content class="card-content">
-        <div class="mat-elevation-z1"> 
-            <table mat-table [dataSource]="dataSource" matSort >
 
-                <!-- title -->
-                <ng-container matColumnDef="title">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by title">
-                        {{'title'}}</th>
-                    <td mat-cell *matCellDef="let environment">
-                        <span>{{environment.title}}</span>
-                    </td>
-                </ng-container>
+    <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+        <mat-spinner *ngIf="isLoadingResults">Loading..</mat-spinner>
+    </div>
 
-                <!-- Action -->
-                <ng-container matColumnDef="action">
-                    <th mat-header-cell *matHeaderCellDef [style.width]="'50px'">
-                        <button mat-icon-button aria-label="Add environment" [routerLink]="['/environment-types/add']">
-                            <mat-icon aria-hidden="false" aria-label="Example home icon" color="primary">add</mat-icon>
-                        </button>
-                    </th>
-                    <td mat-cell *matCellDef="let environment" >
-                        <button mat-icon-button aria-label="Update environment"
-                            [routerLink]="['/environment-types/edit/'+environment.id]" [title]="'Edit'">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <mat-paginator [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons
-                aria-label="Select page of periodic elements">
-            </mat-paginator>
-            <div class="mt-1" *ngIf="!environmentTypes|| environmentTypes.length === 0">
-                <label>No Data</label>
+    <mat-card-content class="app-card-content ">
+
+        <div class=" mat-elevation-z8" fxLayout="row" fxFlexFill>
+
+            <div fxFlex.lt-md="100" fxFlex="100">
+                <div class="table-container" fxFlex="100">
+                    <table mat-table [dataSource]="data" matSort [matSortActive]="sort? sort.active : 'title'"
+                        [matSortDirection]="sort? sort.direction : 'asc'" matSortDirection="asc">
+                        <!-- title -->
+                        <ng-container matColumnDef="title">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by title">
+                                {{'title'}}</th>
+                            <td mat-cell *matCellDef="let memory">
+                                <span>{{memory.title}}</span>
+                            </td>
+                        </ng-container>
+
+                        <!-- Action -->
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef [style.width]="'50px'">
+                                <button mat-raised-button aria-label="Add memory" [routerLink]="['/environment-types/add']"
+                                    class="actions" [title]="'Add'">
+                                    <mat-icon class="actions-icon" style="margin-right: 5px;">add
+                                    </mat-icon>Add
+                                </button>
+                            </th>
+                            <td mat-cell *matCellDef="let memory">
+                                <button class="actions" mat-icon-button aria-label="Update memory"
+                                    [routerLink]="['/environment-types/edit/'+memory.id]" [title]="'Edit'">
+                                    <mat-icon class="actions-icon">edit</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="
+                            let row;
+                            let even = even;  columns: displayedColumns;" [ngClass]="{even: even}"></tr>
+                    </table>
+                </div>
             </div>
-        </div>
-    </mat-card-content>
-    <!-- <mat-card-footer class="card-footer">
 
-</mat-card-footer> -->
+        </div>
+        <div class="rate-limit-reached" *ngIf="data.length<= 0" fxLayout="row" fxLayout.gt-md="row">
+            No Records found
+        </div>
+        <mat-paginator class="mat-paginator-sticky mat-elevation-z8" [length]="resultsLength"
+            [pageSizeOptions]="[   10, 20, 50, 100, 200, 500, 1000]" showFirstLastButtons aria-label="Select page">
+        </mat-paginator>
+    </mat-card-content>
+
 </mat-card>
+ 

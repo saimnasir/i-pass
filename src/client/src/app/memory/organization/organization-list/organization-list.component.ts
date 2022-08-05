@@ -36,10 +36,7 @@ export class OrganizationListComponent implements AfterViewInit {
     this.media$ = media.asObservable();
   }
 
-  ngAfterViewInit() {
-
-    // this.sort.active = 'title';
-    // this.sort.direction = 'asc';
+  ngAfterViewInit() { 
     this.getData();
   }
 
