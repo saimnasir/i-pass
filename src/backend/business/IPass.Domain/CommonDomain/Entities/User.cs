@@ -14,7 +14,7 @@ namespace IPass.Domain.CommonDomain.Entities
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-		public string PhoneNumber { get; set; }
+		public string UserName { get; set; }
 		public DateTime? BirthDate { get; set; }
         public string PhotoId { get; set; } = string.Empty;
         public virtual ICollection<OTPHistory> OTPHistories { get; set; }

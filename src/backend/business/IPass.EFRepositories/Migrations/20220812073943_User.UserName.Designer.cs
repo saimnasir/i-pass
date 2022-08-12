@@ -4,6 +4,7 @@ using IPass.EFRepositories.IPassContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IPass.EFRepositories.Migrations
 {
     [DbContext(typeof(MyMemoryDbContext))]
-    partial class MyMemoryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220812073943_User.UserName")]
+    partial class UserUserName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

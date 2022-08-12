@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 import { AccountService } from '../../_service/account.service';
 import { AlertService } from '../../_service/alert.service';
 import { CustomValidators } from 'src/app/helpers/custom-validators';
-import { PhoneNumberValidationMessages, PasswordValidationMessages, ConfirmPasswordValidationMessages, PasswordRegex, PhoneNumberRegex } from 'src/app/_static-data/consts';
+import { PasswordValidationMessages, ConfirmPasswordValidationMessages, PasswordRegex,  UsernameValidationsValidationMessages, EmailValidationMessages } from 'src/app/_static-data/consts';
 
 
 @Component({
@@ -42,10 +42,15 @@ export class RegisterComponent implements OnInit {
     private initForm() {
         this.form = this.formBuilder.group
             ({
-                phoneNumber: new FormControl(null, [
+                userName: new FormControl(null, [
                     Validators.required,
                     Validators.minLength(10),
-                    Validators.maxLength(10),
+                    Validators.maxLength(100),
+                ]),
+                email: new FormControl(null, [
+                    Validators.required,
+                    Validators.minLength(10),
+                    Validators.maxLength(100),
                 ]),
                 password: new FormControl(null, [
                     Validators.required,
@@ -54,13 +59,17 @@ export class RegisterComponent implements OnInit {
                 ]), 
                 confirmPassword: new FormControl(null, [
                     Validators.required,
-                ])
+                ]),
+                active:new FormControl(true)    
             });
         this.form.addValidators(CustomValidators.mustMatch('password', 'confirmPassword'));
     }
 
-    get phoneNumberValidationMessages() {
-        return PhoneNumberValidationMessages;
+    get usernameValidationsValidationMessages() {
+        return UsernameValidationsValidationMessages;
+    }  
+    get emailValidationMessages() {
+        return EmailValidationMessages;
     }
     get passwordValidationMessages() {
         return PasswordValidationMessages;

@@ -35,7 +35,7 @@ namespace IPass.WebApp.Controllers
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<FinalResponseDTO<TokenResultDto>>> BasicLoginServicemanAsync(BasicLoginInputDto input)
+        public async Task<ActionResult<FinalResponseDTO<TokenResultDto>>> BasicLoginAsync(BasicLoginInputDto input)
         {
             return await WithLoggingFinalResponse(input, async () =>
             {
@@ -150,7 +150,7 @@ namespace IPass.WebApp.Controllers
         }
 
         [HttpGet("ext-callback")] 
-        public async Task<ActionResult<FinalResponseDTO<TokenResultDto>>> ServicemanExternalCallbackAsync(
+        public async Task<ActionResult<FinalResponseDTO<TokenResultDto>>> ExternalCallbackAsync(
          string t = null,
          bool allowToCommunicate = false,
          int e = 0,
@@ -159,7 +159,7 @@ namespace IPass.WebApp.Controllers
          bool acv = false,
          bool pc = false)
         {
-            var input = new CreateServicemanAfterRegistrationInputDto
+            var input = new CreateUserAfterRegistrationInputDto
             {
                 AllowCommunication = allowToCommunicate,
             };
@@ -179,48 +179,5 @@ namespace IPass.WebApp.Controllers
                 };
             });
         }
-
-        /*
-
-        [HttpGet("google")]
-        [AllowAnonymous]
-        public IActionResult LoginWithGoogleAsync(string callBack)
-        {
-            return Redirect($"{Configuration.GatewayUrl}/identity/authorize/google-login?callback={callBack}");
-        }
-
-
-        [HttpGet("external-token")]
-        [AllowAnonymous]
-        public async Task<ActionResult<FinalResponseDTO<TokenResultDto>>> GetUserTokenAsync(
-           string t = null,
-           bool allowToCommunicate = true,
-           int e = 0,
-           string r = "",
-           bool acs = false,
-           bool acv = false,
-           bool pc = false)
-        {
-            var input = new CreateServicemanAfterRegistrationInputDto
-            {
-                AllowCommunication = allowToCommunicate,
-            };
-            return await WithLoggingFinalResponse(input, async () =>
-            {
-                AccountApplicationService.ApplicationUser = await GetUser(t);
-                await AccountApplicationService.CreateUserAfterRegistration(input);
-                return new TokenResultDto
-                {
-                    Token = t,
-                    ExpiresIn = e,
-                    RefreshToken = r,
-                    IsActivationCodeSent = acs,
-                    IsActivationCodeValidated = acv,
-                    IsProfileCompleted = pc,
-                    IsContractsAccepted = false
-                };
-            });
-        }
-        */
     }
 }

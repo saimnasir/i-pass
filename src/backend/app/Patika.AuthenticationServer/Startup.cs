@@ -195,7 +195,6 @@ namespace Patika.AuthenticationServer
 
             services.AddScoped<IUnitOfWorkHostWithInterface, MyMemoryDbContext>();
 
-            //services.AddScoped<IServicemanRepository, ServicemanRepository>();
             //services.AddScoped<IAppConfigRepository, AppConfigRepository>();
 
             //services.AddScoped<ISwearWordRepository, SwearWordRepository>();
@@ -212,9 +211,11 @@ namespace Patika.AuthenticationServer
             services.AddScoped<IIdentityServiceValidators, IdentityServiceValidators>();
 
             services.AddScoped<IPhoneNumberValidator, PhoneNumberValidator>();
+            services.AddScoped<IUserNameValidator, UserNameValidator>();
             services.AddScoped<IPasswordValidator, PasswordValidator>();
             services.AddScoped<IRegexValidator, RegexValidator>();
             services.AddScoped<IPhoneNumberExistanceValidator, PhoneNumberExistanceValidator>();
+            services.AddScoped<IUserNameExistanceValidator, UserNameExistanceValidator>();
             services.AddScoped<IValidateActivationCodeValidator, ValidateActivationCodeValidator>();
             services.AddScoped<ISendActivationCodeSmsValidator, SendActivationCodeSmsValidator>();
             services.AddScoped<IEmailValidator, EmailValidator>();

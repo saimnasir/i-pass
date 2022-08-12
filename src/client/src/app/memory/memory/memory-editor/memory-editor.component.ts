@@ -6,7 +6,7 @@ import { Option } from 'src/app/_model/option.model';
 import { EnvironmentTypeService } from 'src/app/_service/environment-type.service';
 import { MemoryTypeService } from 'src/app/_service/memory-type.service';
 import { OrganizationService } from 'src/app/_service/organization.service';
-import { ConfirmPasswordValidationMessages, EmailValidationsValidationMessages, MemoryOrganizationValidationMessages, MemoryTitleValidationMessages, MemoryTypeValidationMessages, PasswordValidationMessages, UsernameValidationsValidationMessages } from 'src/app/_static-data/consts';
+import { ConfirmPasswordValidationMessages, EmailValidationMessages, MemoryOrganizationValidationMessages, MemoryTitleValidationMessages, MemoryTypeValidationMessages, PasswordValidationMessages, UsernameValidationsValidationMessages } from 'src/app/_static-data/consts';
 import { MemoryService } from '../../../_service/memory.service';
 
 @Component({
@@ -114,7 +114,7 @@ export class MemoryEditorComponent implements OnInit {
   }
 
   get emailValidationsValidationMessages() {
-    return EmailValidationsValidationMessages;
+    return EmailValidationMessages;
   }
 
   get usernameValidationsValidationMessages() {

@@ -12,7 +12,8 @@ export class User {
 }
 
 export class RegisterModel{
-    phoneNumber: string;
+    userName: string;
+    email: string;
     password: string;
     confirmPassword: string;
     active: true;

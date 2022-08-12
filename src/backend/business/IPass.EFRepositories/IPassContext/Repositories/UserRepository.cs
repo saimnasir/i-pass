@@ -16,10 +16,10 @@ namespace IPass.EFRepositories.IPassContext.Repositories
         {
         }
 
-        public async Task AddOTPHistoryByPhoneAsync(string phoneNumber)
+        public async Task AddOTPHistoryByPhoneAsync(string userName)
         {
             var ctx = GetContext();
-            var user = await GetUserWithPhonenumberAsync(ctx, phoneNumber);
+            var user = await GetUserWithUserNameAsync(ctx, userName);
             user.OTPHistories.Add(new OTPHistory
             {
                 SentAt = DateTime.Now,
@@ -28,27 +28,27 @@ namespace IPass.EFRepositories.IPassContext.Repositories
             await UpdateOneAsync(user);
         } 
 
-        public async Task<int> GetSentTokenCountAsync(string phoneNumber)
+        public async Task<int> GetSentTokenCountAsync(string userName)
         {
             var ctx = GetContext();
-            var user = await GetUserWithPhonenumberAsync(ctx, phoneNumber);
+            var user = await GetUserWithUserNameAsync(ctx, userName);
 
             var today = DateTime.Now.Date;
             return user.OTPHistories.Where(m => m.SentAt.Date == today).ToList().Count;
         }
-        private async Task<User> GetUserWithPhonenumberAsync(MyMemoryDbContext ctx, string phoneNumber)
+        private async Task<User> GetUserWithUserNameAsync(MyMemoryDbContext ctx, string userName)
         {
 
-            var user = await GetDbSetWithIncludes(ctx).SingleOrDefaultAsync(m => m.PhoneNumber == phoneNumber);
+            var user = await GetDbSetWithIncludes(ctx).SingleOrDefaultAsync(m => m.UserName == userName);
             if (user == null)
                 throw new Exception("User Not Found");
             return user;
         }
 
-        public async Task<Guid?> GetIdByPhoneNumberAsync(string phoneNumber)
+        public async Task<Guid?> GetIdByUserNameAsync(string userName)
         {
             using var ctx = GetContext();
-            var userId = await ctx.Users.Where(m => m.PhoneNumber == phoneNumber).Select(m => m.Id).FirstOrDefaultAsync();
+            var userId = await ctx.Users.Where(m => m.UserName == userName).Select(m => m.Id).FirstOrDefaultAsync();
             return userId;
         }
 

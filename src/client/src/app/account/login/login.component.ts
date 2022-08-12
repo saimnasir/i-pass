@@ -3,9 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AccountService } from '../../_service/account.service';
 import { AlertService } from '../../_service/alert.service';
-import { User } from '../../_model/user.model';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ConfirmPasswordValidationMessages, PasswordRegex, PasswordValidationMessages, PhoneNumberValidationMessages, UsernameValidationsValidationMessages } from 'src/app/_static-data/consts';
+import { PasswordRegex, PasswordValidationMessages,  UsernameValidationsValidationMessages } from 'src/app/_static-data/consts';
 import { CustomValidators } from 'src/app/helpers/custom-validators';
 
 
@@ -45,7 +44,7 @@ export class LoginComponent implements OnInit {
     private initForm() {
         this.form = this.formBuilder.group
             ({
-                phoneNumber: new FormControl(null, [
+                userName: new FormControl(null, [
                     Validators.required,
                     Validators.minLength(10),
                     Validators.maxLength(10),
@@ -58,8 +57,8 @@ export class LoginComponent implements OnInit {
             });
     }
 
-    get phoneNumberValidationMessages() {
-        return PhoneNumberValidationMessages;
+    get usernameValidationsValidationMessages() {
+        return UsernameValidationsValidationMessages;
     }
 
     get passwordValidationMessages() {
@@ -78,7 +77,7 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.accountService.login(this.form.value.phoneNumber, this.form.value.password)
+        this.accountService.login(this.form.value.userName, this.form.value.password)
             .pipe(first())
             .subscribe(
                 response => {

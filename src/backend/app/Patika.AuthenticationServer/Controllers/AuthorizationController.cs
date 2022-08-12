@@ -84,7 +84,7 @@ namespace Patika.AuthenticationServer.Controllers
 
         [Produces("application/json")]
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterServiceman(UserRegistrationInputDto input)
+        public async Task<IActionResult> RegisterAsync(UserRegistrationInputDto input)
         {
             return await WithLogging(input, async (input) =>
             {
@@ -104,7 +104,7 @@ namespace Patika.AuthenticationServer.Controllers
         [HttpPost("connect/token")]
         public async Task<IActionResult> Exchange(BasicLoginInputDto input)
         {
-            var user = await IdentityApplicationService.GetByPhoneNumberAsync(input.PhoneNumber);
+            var user = await IdentityApplicationService.GetByUserNameAsync(input.UserName);
             
             if(user is null)
                 return Unauthorized("Kullanıcı bulunamadı");
@@ -335,11 +335,11 @@ namespace Patika.AuthenticationServer.Controllers
 		[Authorize(AuthenticationSchemes = AuthenticationScheme)]
 		public Task<IActionResult> GetTokenExpiresIn() => Task.FromResult(Content(User.FindFirstValue("exp")) as IActionResult);
 
-		[HttpGet("application-user-by-phone")]
+		[HttpGet("application-user-by-name")]
         [Authorize(AuthenticationSchemes = AuthenticationScheme)]
-        public async Task<IActionResult> GetApplicationUserByPhone(string phoneNumber)
+        public async Task<IActionResult> GetApplicationUserByName(string userName)
         {
-            var user = await IdentityApplicationService.GetByPhoneNumberAsync(phoneNumber);
+            var user = await IdentityApplicationService.GetByUserNameAsync(userName);
             var userDto = IdentityApplicationService.ApplicationUserMapToDtoAsync(user);
             return Json(userDto);
         }

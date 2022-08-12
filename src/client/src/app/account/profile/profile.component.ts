@@ -1,7 +1,7 @@
 ﻿import { Component, Input, OnInit } from '@angular/core';
 import { AccountService } from '../../_service/account.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PhoneNumberValidationMessages } from 'src/app/_static-data/consts';
+import { UsernameValidationsValidationMessages } from 'src/app/_static-data/consts';
 import { User } from 'src/app/_model/user.model';
 
 
@@ -26,8 +26,8 @@ export class ProfileComponent implements OnInit {
         private accountService: AccountService, 
     ) { }
 
-    get phoneNumberValidationMessages() {
-        return PhoneNumberValidationMessages;
+    get usernameValidationsValidationMessages() {
+        return UsernameValidationsValidationMessages;
     }
     
     ngOnInit() {
@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
         this.form = this.formBuilder.group
             ({
                 id: new FormControl(null),
-                phoneNumber: new FormControl(null, [
+                userName: new FormControl(null, [
                     Validators.required,
                     Validators.minLength(10),
                     Validators.maxLength(10),

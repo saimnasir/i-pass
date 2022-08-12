@@ -48,7 +48,7 @@ export var MemoryTitleValidationMessages = [
     maxLengthMessage('Title', 100),
 ]
 
-export var EmailValidationsValidationMessages = [
+export var EmailValidationMessages = [
     fieldRequiredMessage('Email'),
     minLengthMessage('Email', 10),
     maxLengthMessage('Email', 100),

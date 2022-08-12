@@ -17,7 +17,7 @@ namespace IPass.Application.Contracts.AccountDomain
         Task<string> RegisterApplicationAsync(ApplicationRegistrationInputDto input);
         ApplicationUserDto ApplicationUserMapToDtoAsync(ApplicationUser user);
         Task ResetPassword(ResetPasswordInputDto input);
-        Task<ApplicationUser> GetByPhoneNumberAsync(string phoneNumber);
+        Task<ApplicationUser> GetByUserNameAsync(string userName);
         Task AddRoleToUserAsync(ApplicationUser user, params string[] roles);
     }
 }

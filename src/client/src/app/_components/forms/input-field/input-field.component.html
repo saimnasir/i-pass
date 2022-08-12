@@ -28,7 +28,7 @@
                 *ngIf="control.hasError(validation.type) && (control.dirty || control.touched || showError)">
                 {{validation.message}}
             </mat-error>
-        </mat-error>
+        </mat-error> 
         <mat-hint class="hint" *ngIf="hint && !control.valid && (control.dirty || control.touched)" align="start">
             {{hint}}
         </mat-hint>

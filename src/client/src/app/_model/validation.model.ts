@@ -3,6 +3,5 @@ export class CustomValidation {
     constructor(t:string, m:string) {
         this.type  = t;
         this.message = m;
-        
     }
 }

@@ -46,7 +46,7 @@ namespace IPass.Application.AccountDomain
 
         public async Task<TokenResultDto> BasicLoginAsync(BasicLoginInputDto input)
         {
-            var userId = await UserRepository.GetIdByPhoneNumberAsync(input.PhoneNumber);
+            var userId = await UserRepository.GetIdByUserNameAsync(input.UserName);
 
             if (userId is null)
                 throw new Exception("User Not Found");
@@ -58,23 +58,27 @@ namespace IPass.Application.AccountDomain
 
         public async Task<TokenResultDto> BasicRegisterAsync(UserRegistrationInputDto input)
         {
-            var res = await HttpClientService.HttpPostJson<GeneralResponseDTO<TokenResultDto>>("identity/register", input);
-            if (res.ResultCode != LogStatus.Success)
+            return await WithLogging(input, GetType(), async () =>
             {
-                await LogWriter.AddExceptionLogAsync(input, res.Exception, GetType());
-                throw res.Exception;
-            }
-            else
-            {
-                ApplicationUser = Mapper.Map<ApplicationUser>(await GetApplicationInfoFromAuthServerAsync(res.Result));
-
-                await CreateUserAfterRegistration(new CreateServicemanAfterRegistrationInputDto
+                var res = await HttpClientService.HttpPostJson<GeneralResponseDTO<TokenResultDto>>("identity/register", input);
+                await LogWriter.AddCodeMileStoneLogAsync(input, "res: identity/register", GetType(), output: res);
+                if (res.ResultCode != LogStatus.Success)
                 {
-                    LogId = input.LogId,
-                });
-            }
+                    await LogWriter.AddExceptionLogAsync(input, res.Exception, GetType());
+                    throw res.Exception;
+                }
+                else
+                {
+                    ApplicationUser = Mapper.Map<ApplicationUser>(await GetApplicationInfoFromAuthServerAsync(res.Result));
 
-            return res.Result;
+                    await CreateUserAfterRegistration(new CreateUserAfterRegistrationInputDto
+                    {
+                        LogId = input.LogId,
+                    });
+                }
+
+                return res.Result;
+            });
         }
 
         public Task<TokenResultDto> ValidateAccountAsync(ValidateAccountInputDto input)
@@ -94,20 +98,21 @@ namespace IPass.Application.AccountDomain
             return userInfo;
         }
 
-        public async Task CreateUserAfterRegistration(CreateServicemanAfterRegistrationInputDto input)
+        public async Task CreateUserAfterRegistration(CreateUserAfterRegistrationInputDto input)
         {
             var id = new Guid(ApplicationUser.Id);
             var userExists = await UserRepository.GetByIdAsync(id);
             if (userExists == null)
             {
-                var serviceman = new User
+                var user = new User
                 {
                     Id = new Guid(ApplicationUser.Id),
                     FirstName = ApplicationUser.FirstName,
                     LastName = ApplicationUser.LastName,
-                    PhoneNumber = ApplicationUser.PhoneNumber
+                    UserName = ApplicationUser.UserName,
+
                 };
-                await UserRepository.InsertOneAsync(serviceman);
+                await UserRepository.InsertOneAsync(user);
             }
         }
     }

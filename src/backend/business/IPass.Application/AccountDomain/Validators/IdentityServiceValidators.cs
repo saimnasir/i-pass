@@ -17,8 +17,10 @@ namespace IPass.Application.AccountDomain.Validators
         IPhoneNumberValidator PhoneNumberValidator { get; }
         IPasswordValidator PasswordValidator { get; }
         IPhoneNumberExistanceValidator PhoneNumberExistanceValidator { get; }
+        IUserNameExistanceValidator UserNameExistanceValidator { get; }
         IValidateActivationCodeValidator ValidateActivationCodeValidator { get; }
         IEmailValidator EmailValidator { get; }
+        IUserNameValidator UserNameValidator { get; }
         IFirstNameValidator FirstNameValidator { get; }
         ILastNameValidator LastNameValidator { get; }
         IProfileAlreadyCompletedValidator ProfileAlreadyCompletedValidator { get; }
@@ -29,8 +31,10 @@ namespace IPass.Application.AccountDomain.Validators
             IPhoneNumberValidator phoneNumberValidator,
             IPasswordValidator passwordValidator,
             IPhoneNumberExistanceValidator phoneNumberExistanceValidator,
+            IUserNameExistanceValidator userNameExistanceValidator,
             IValidateActivationCodeValidator validateActivationCodeValidator,
             IEmailValidator emailValidator,
+            IUserNameValidator userNameValidator,
             IFirstNameValidator firstNameValidator,
             ILastNameValidator lastNameValidator,
             IProfileAlreadyCompletedValidator profileAlreadyCompletedValidator)
@@ -40,18 +44,19 @@ namespace IPass.Application.AccountDomain.Validators
             PhoneNumberValidator = phoneNumberValidator;
             PasswordValidator = passwordValidator;
             PhoneNumberExistanceValidator = phoneNumberExistanceValidator;
+            UserNameExistanceValidator = userNameExistanceValidator;
             ValidateActivationCodeValidator = validateActivationCodeValidator;
             EmailValidator = emailValidator;
+            UserNameValidator = userNameValidator;
             FirstNameValidator = firstNameValidator;
             LastNameValidator = lastNameValidator;
             ProfileAlreadyCompletedValidator = profileAlreadyCompletedValidator;
         }
-
-      
+              
 
         public async Task ValidateRegistrationInputAsync(UserRegistrationInputDto input)
-        {
-            await PhoneNumberValidator.ValidateAsync(input.PhoneNumber);
+        {       
+            await UserNameValidator.ValidateAsync(input.UserName);
 
             await PasswordValidator.ValidateAsync(new PasswordValidatorInput
             {
@@ -59,10 +64,10 @@ namespace IPass.Application.AccountDomain.Validators
                 ConfirmPassword = input.ConfirmPassword,
             });
 
-
-            await PhoneNumberExistanceValidator.ValidateAsync(new PhoneNumberExistanceValidatorInput
+            await UserNameExistanceValidator.ValidateAsync(new UserNameExistanceValidatorInput
             {
-                PhoneNumber = input.PhoneNumber
+                UserName = input.UserName,
+                Email   = input.Email
             });
         }
 
@@ -70,11 +75,10 @@ namespace IPass.Application.AccountDomain.Validators
         public async Task ValidateUpdateUserProfileInputAsync(UpdateUserProfileInputDto input, ApplicationUser user)
         {
             await ProfileAlreadyCompletedValidator.ValidateAsync(user.IsProfileCompleted);
-            await EmailValidator.ValidateAsync(input.Email);
+            await EmailValidator.ValidateAsync(input.Email); 
             await FirstNameValidator.ValidateAsync(input.FirstName);
             await LastNameValidator.ValidateAsync(input.LastName);
         }
-
      
     }
 

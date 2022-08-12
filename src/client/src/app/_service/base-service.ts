@@ -8,7 +8,7 @@ import { SingleResponse } from "../_model/single-response";
 
 
 export class BaseService<T, I> {
-    
+
     headers: HttpHeaders;
 
     authHeaders: HttpHeaders;
@@ -108,7 +108,7 @@ export class BaseService<T, I> {
         return this.http.get<FinalResponse<T>>(this.combineWithApiUrl(route), { headers: this.headers });
     }
 
-    getExternalLogin<T>(route: string, token: string): Observable<FinalResponse<T>> {
+    externalCallBack<T>(route: string, token: string): Observable<FinalResponse<T>> {
         this.authHeaders.delete("Authorization");
         this.authHeaders.set("Authorization", `Bearer ${token}`);
 

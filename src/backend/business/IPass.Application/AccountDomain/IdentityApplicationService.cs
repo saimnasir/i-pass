@@ -91,7 +91,7 @@ namespace IPass.Application.AccountDomain
 
         public async Task<ValidateAccountOutputResponse> ValidateAccountAsync(ValidateAccountInputDto input)
         {
-            var id = IdentityDbContext.Users.AsNoTracking().SingleOrDefault(m => m.PhoneNumber == input.PhoneNumber).Id;
+            var id = IdentityDbContext.Users.AsNoTracking().SingleOrDefault(m => m.UserName == input.UserName).Id;
             ApplicationUser = await UserManager.FindByIdAsync(id);
             if (ApplicationUser == null)
                 throw new UserNotFoundException();
@@ -141,20 +141,18 @@ namespace IPass.Application.AccountDomain
 
         public async Task<UserRegistrationOutputResponse> RegisterUserAsync(UserRegistrationInputDto input)
         {
-            await LogWriter.AddCodeMileStoneLogAsync(input, "Register Serviceman Started", GetType(), input);
-            await LogWriter.AddCodeMileStoneLogAsync(input, "Register Serviceman Input Validating", GetType());
+            await LogWriter.AddCodeMileStoneLogAsync(input, "Register User Started", GetType(), input);
+            await LogWriter.AddCodeMileStoneLogAsync(input, "Register User Input Validating", GetType());
 
             await AccountServiceValidators.ValidateRegistrationInputAsync(input);
-            await LogWriter.AddCodeMileStoneLogAsync(input, "Register Serviceman Input Validated", GetType());
+            await LogWriter.AddCodeMileStoneLogAsync(input, "Register User Input Validated", GetType());
 
-            input.PhoneNumber = input.PhoneNumber.Replace(" ", "").Replace("+", "");
-
-            var email = $"{input.PhoneNumber}@ipass.com";
+            input.Email = input.Email.Trim();
 
             var user = CreateUser();
-            await UserStore.SetUserNameAsync(user, input.PhoneNumber, CancellationToken.None);
-            await EmailStore.SetEmailAsync(user, email, CancellationToken.None);
-            user.PhoneNumber = input.PhoneNumber;
+            await UserStore.SetUserNameAsync(user, input.UserName, CancellationToken.None);
+            await EmailStore.SetEmailAsync(user, input.Email, CancellationToken.None);
+
             var result = await UserManager.CreateAsync(user, input.Password);
 
             if (result.Succeeded)
@@ -163,7 +161,7 @@ namespace IPass.Application.AccountDomain
                 await SetApplicationUserAsync(user);
                 return new UserRegistrationOutputResponse
                 {
-                    Email = email,
+                    Email = input.Email,
                     IsActivationCodeSent = false,
                     LogId = input.LogId,
                 };
@@ -176,7 +174,7 @@ namespace IPass.Application.AccountDomain
             var user = CreateUser();
             await UserStore.SetUserNameAsync(user, input.ApplicationName, CancellationToken.None);
             await EmailStore.SetEmailAsync(user, $"{input.ApplicationName}@patika.com", CancellationToken.None);
-            user.PhoneNumber = input.ApplicationName;
+            user.UserName = input.ApplicationName;
             var result = await UserManager.CreateAsync(user, input.Password);
 
             if (result.Succeeded)
@@ -221,8 +219,7 @@ namespace IPass.Application.AccountDomain
 
         public async Task ResetPassword(ResetPasswordInputDto input)
         {
-
-            var user = await IdentityDbContext.Users.FirstOrDefaultAsync(m => m.PhoneNumber == input.PhoneNumber);
+            var user = await IdentityDbContext.Users.FirstOrDefaultAsync(m => m.UserName == input.UserName);
             user = await UserManager.FindByIdAsync(user.Id);
             var token = await UserManager.GeneratePasswordResetTokenAsync(user);
 
@@ -235,8 +232,8 @@ namespace IPass.Application.AccountDomain
             }
         }
 
-        public async Task<ApplicationUser> GetByPhoneNumberAsync(string phoneNumber)
-            => await IdentityDbContext.Users.FirstOrDefaultAsync(m => m.PhoneNumber == phoneNumber);
+        public async Task<ApplicationUser> GetByUserNameAsync(string userName)
+            => await IdentityDbContext.Users.FirstOrDefaultAsync(m => m.UserName == userName);
 
         public async Task AddRoleToUserAsync(ApplicationUser user, params string[] roles)
         {

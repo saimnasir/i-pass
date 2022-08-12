@@ -5,6 +5,7 @@ using IPass.Domain.PasswordDomain.Entities;
 using IPass.Domain.PasswordDomain.Repositories;
 using IPass.Shared.DTO.CommonDomain;
 using IPass.Shared.DTO.PasswordDomain;
+using IPass.Shared.Extensions;
 using IPass.Shared.Services;
 using Patika.Application;
 using Patika.Shared.DTO;
@@ -109,7 +110,6 @@ namespace IPass.Application.PasswordDomain
                     PinCode = Mapper.Map<PinCodeDto>(pinCode),
                     User = Mapper.Map<UserDto>(user),
                 };
-                profileDto.User.UserName = ApplicationUser.UserName;
                 profileDto.User.Email = ApplicationUser.Email;
                 return new SingleResponse<ProfileDto>()
                 {

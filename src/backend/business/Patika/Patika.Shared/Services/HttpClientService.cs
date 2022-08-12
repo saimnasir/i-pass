@@ -55,7 +55,7 @@ namespace Patika.Shared.Services
                 var response = await HttpClient.PostAsJsonAsync(GetUrl("identity/connect/token"), new BasicLoginInputDto
                 {
                     Password = authenticationParams.ClientSecret,
-                    PhoneNumber = authenticationParams.ClientId
+                    UserName = authenticationParams.ClientId
                 });
 
                 var payload = await response.Content.ReadFromJsonAsync<TokenResultDto>();

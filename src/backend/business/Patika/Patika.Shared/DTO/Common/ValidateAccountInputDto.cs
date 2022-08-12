@@ -2,7 +2,7 @@
 {
     public class ValidateAccountInputDto : Patika.Shared.DTO.DTO
     {
-        public string PhoneNumber { get; set; }
+        public string UserName { get; set; }
         public string ActivationCode { get; set; }
     }
 }

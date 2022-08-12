@@ -44,7 +44,7 @@ namespace Patika.AuthenticationServer.Controllers
             {
                 var response = await IdentityApplicationService.ValidateAccountAsync(input);
                 if (response.IsSuccess) {
-                    var user = await IdentityApplicationService.GetByPhoneNumberAsync(input.PhoneNumber);
+                    var user = await IdentityApplicationService.GetByUserNameAsync(input.UserName);
                     var token = await AuthorizationController.MakeTokenAsync(user, UserManager, Configuration);
                     await AuthorizationController.SetUserRefreshToken(UserRefreshTokenRepository, user, token, Configuration);
                     return token;

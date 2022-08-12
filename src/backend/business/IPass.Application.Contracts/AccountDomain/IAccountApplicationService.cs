@@ -14,6 +14,6 @@ namespace IPass.Application.Contracts.AccountDomain
         Task<TokenResultDto> BasicRegisterAsync(UserRegistrationInputDto input);
         Task<TokenResultDto> ValidateAccountAsync(ValidateAccountInputDto input);
         Task<TokenResultDto> GetRefreshTokenAsync(RefreshTokenInputDto input);
-        Task CreateUserAfterRegistration(CreateServicemanAfterRegistrationInputDto input);
+        Task CreateUserAfterRegistration(CreateUserAfterRegistrationInputDto input);
     }
 }

@@ -4,9 +4,9 @@
         <mat-card-content class="card-content ">
             <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
                 <div fxFlex.lt-md="100" fxFlex="50">
-                    <app-input-field formControlName="phoneNumber" fxFlex="98" [class]="'example-form-field'"
-                        [label]="'Phone Number'" [type]="'text'" [placeholder]="'Enter Phone Number'"
-                        [control]="f['phoneNumber']" [validationMessages]="phoneNumberValidationMessages"
+                    <app-input-field formControlName="userName" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'User Name'" [type]="'text'" [placeholder]="'Enter User Name'"
+                        [control]="f['userName']" [validationMessages]="usernameValidationsValidationMessages"
                         [elevation]="'0'" [readOnly]="!editable">
                     </app-input-field>
                 </div>
@@ -21,14 +21,14 @@
                 <div fxFlex.lt-md="100" fxFlex="50">
                     <app-input-field formControlName="firstName" fxFlex="98" [class]="'example-form-field'"
                         [label]="'First Name'" [type]="'text'" [placeholder]="'Enter First Name'"
-                        [control]="f['firstName']" [validationMessages]="phoneNumberValidationMessages"
+                        [control]="f['firstName']" [validationMessages]="usernameValidationsValidationMessages"
                         [elevation]="'0'" [readOnly]="!editable">
                     </app-input-field>
                 </div>
                 <div fxFlex.lt-md="100" fxFlex="50">
                     <app-input-field formControlName="lastName" fxFlex="98" [class]="'example-form-field'"
                         [label]="'Last Name'" [type]="'text'" [placeholder]="'Enter Last Name'"
-                        [control]="f['lastName']" [validationMessages]="phoneNumberValidationMessages" [elevation]="'0'"
+                        [control]="f['lastName']" [validationMessages]="usernameValidationsValidationMessages" [elevation]="'0'"
                         [readOnly]="!editable">
                     </app-input-field>
                 </div>

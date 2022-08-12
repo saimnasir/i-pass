@@ -52,8 +52,8 @@ export class AccountService extends BaseService<User, string> {
     login(username: any, Password: any) {
         let route = `/api/account/login`;
         let model = {
-            phoneNumber: username,
-            Password: Password,
+            username: username,
+            password: Password,
         };
         return this.post<LoginResult>(route, model)
             .pipe(map(response => {
@@ -75,10 +75,10 @@ export class AccountService extends BaseService<User, string> {
         let pc = params['pc'];
 
         let loginResult = new LoginResult();
-        loginResult.accessToken = t; 
+        loginResult.accessToken = t;
         this.addToken(loginResult);
         let route = `/api/account/ext-callback?allowToCommunicate=${allowToCommunicate}&t=${t}&r=${r}&e=${e}&acs=${acs}&acv=${acv}&pc=${pc}`;
-        return this.getExternalLogin<LoginResult>(route, t)
+        return this.externalCallBack<LoginResult>(route, t)
             .pipe(map(response => {
                 if (response.success) {
                     this.addToken(response.data);
@@ -128,7 +128,7 @@ export class AccountService extends BaseService<User, string> {
                 return response;
             }
             return response;
-        }));
+        }));         
     }
 
     getProfile() {

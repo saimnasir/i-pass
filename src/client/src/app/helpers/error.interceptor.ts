@@ -3,11 +3,13 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AccountService } from '../_service/account.service';
+import { AlertService } from '../_service/alert.service';
  
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private accountService: AccountService) {}
+    constructor(private accountService: AccountService,
+        private alertService: AlertService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
@@ -18,6 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
             const error = err.error?.message || err.statusText;
             console.error(err);
+            this.alertService.error('deneme')
             return throwError(error);
         }))
     }
