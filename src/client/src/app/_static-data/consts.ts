@@ -24,6 +24,13 @@ export var PhoneNumberValidationMessages = [
     phoneNumberExists
 ];
 
+
+export var PinCodeValidationMessages = [
+    fieldRequiredMessage('Pin Code'),
+    minLengthMessage('Pin Code', 4),
+    maxLengthMessage('Pin Code', 4),
+];
+
 export var PasswordValidationMessages = [
     passwordRequired,
     passwordminlength,

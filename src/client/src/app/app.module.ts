@@ -9,12 +9,13 @@ import { AccountModule } from './account/account.module';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';  
 import { IPassCommonModule } from './ipass-common.module';
+import { LoadingComponent } from './common/loading/loading';
 
 @NgModule({
   declarations: [
     AppComponent,    
     HeaderToolbarComponent,
-    FooterToolbarComponent,   
+    FooterToolbarComponent, 
     //MediaQueryStatusComponent
   ],
   imports: [

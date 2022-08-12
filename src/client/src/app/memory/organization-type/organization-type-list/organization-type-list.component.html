@@ -1,13 +1,11 @@
+<app-loading [loading]="isLoadingResults || isRateLimitReached"></app-loading>
 <mat-card class="app-card mat-elevation-z0">
     <mat-card-header class="app-card-header mat-elevation-z8">
         <mat-card-title> Organization Types</mat-card-title>
         <mat-card-subtitle style="margin-bottom: 8px;"> Dev, Test, Prod etc.
         </mat-card-subtitle>
     </mat-card-header>
-
-    <div class="loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
-        <mat-spinner *ngIf="isLoadingResults">Loading..</mat-spinner>
-    </div>
+ 
 
     <mat-card-content class="app-card-content ">
 

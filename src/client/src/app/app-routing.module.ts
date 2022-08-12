@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'; 
 import { AccountComponent } from './account/account/account.component';
 import { ExternalComponent } from './account/external/external.component';
-import { ProfileComponent } from './account/profile/profile.component';
+import { MyProfileComponent} from './account/my-profile/my-profile.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { DashboardListComponent } from './memory/dashboard/memory-list/dashboard.component';
 import { EnvironmentTypeEditorComponent } from './memory/environment-type/environment-type-editor/environment-type-editor.component';
@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'environment-types/add', component: EnvironmentTypeEditorComponent , canActivate: [AuthGuard] },
   { path: 'environment-types/edit/:id', component: EnvironmentTypeEditorComponent , canActivate: [AuthGuard] },
 
-  { path: 'profile', component: ProfileComponent , canActivate: [AuthGuard] },
+  { path: 'profile', component: MyProfileComponent , canActivate: [AuthGuard] },
   { path: 'register/external', component: ExternalComponent  },
 
   // otherwise redirect to home

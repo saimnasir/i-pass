@@ -63,6 +63,7 @@ import { PinCodeService } from "./_service/pin-code.service";
 import { InputSelectComponent } from './_components/forms/input-select/input-select.component';
 import { InputSwitchComponent } from './_components/forms/input-switch/input-switch.component';
 import { TableSearchDialog } from './common/table-search/table-search-dialog';
+import { LoadingComponent } from './common/loading/loading';
 
 
 @NgModule({
@@ -111,7 +112,8 @@ import { TableSearchDialog } from './common/table-search/table-search-dialog';
 
         MatProgressSpinnerModule,
         MatProgressBarModule,
-        MatDialogModule
+        MatDialogModule, 
+        
     ],
     declarations: [
         InputFieldComponent,
@@ -120,15 +122,16 @@ import { TableSearchDialog } from './common/table-search/table-search-dialog';
         InputSelectComponent,
         InputSwitchComponent,
         
-        TableSearchDialog,
-        
+        TableSearchDialog,    
+        LoadingComponent      
     ],
     exports: [
         InputFieldComponent,
         InputSelectComponent,
         InputFieldExComponent,
         MediaQueryStatusComponent,
-        InputSwitchComponent,
+        InputSwitchComponent,   
+        LoadingComponent   ,
 
         BrowserAnimationsModule,
         BrowserModule,
@@ -173,7 +176,8 @@ import { TableSearchDialog } from './common/table-search/table-search-dialog';
 
         MatProgressSpinnerModule,
         MatProgressBarModule,
-        MatDialogModule
+        MatDialogModule,
+           
     ],
     providers:[
         MemoryService,

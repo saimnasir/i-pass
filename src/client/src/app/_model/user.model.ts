@@ -3,6 +3,7 @@ import { PinCodeModel } from "./pin-code.model";
 export class User {
     id: string;
     phoneNumber: string;
+    email: string;
     password: string;
     userName: string;
     firstName: string;
@@ -29,6 +30,6 @@ export class LoginResult {
 }
 
 export class ProfileModel{
-    user = new User();
-    pinCode = new PinCodeModel();
+    user: User ;
+    pinCode : PinCodeModel ;
 }

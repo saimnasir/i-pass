@@ -52,12 +52,14 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import {MatProgressBarModule} from '@angular/material/progress-bar';
  import { MatDialogModule } from '@angular/material/dialog';
-import { ProfileComponent } from './profile/profile.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 import { PinCodeService } from '../_service/pin-code.service';
 import { AccountService } from '../_service/account.service';
 import { ExternalComponent } from './external/external.component';
 import { IPassCommonModule } from '../ipass-common.module';
 import { AccountComponent } from './account/account.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SettingsComponent } from './settings/settings.component';
  
 
 @NgModule({
@@ -71,9 +73,11 @@ import { AccountComponent } from './account/account.component';
     declarations: [ 
         LoginComponent,
         RegisterComponent,
-        ProfileComponent,
+        MyProfileComponent,
         ExternalComponent,
-        AccountComponent
+        AccountComponent,
+        ProfileComponent,
+        SettingsComponent
     ]
 })
 export class AccountModule { }

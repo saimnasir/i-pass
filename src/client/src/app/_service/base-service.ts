@@ -8,8 +8,7 @@ import { SingleResponse } from "../_model/single-response";
 
 
 export class BaseService<T, I> {
-
-
+    
     headers: HttpHeaders;
 
     authHeaders: HttpHeaders;

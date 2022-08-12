@@ -11,7 +11,7 @@
                 [placeholder]="placeholder ? (placeholder) : (label)">{{value}}
             </textarea>
 
-            <mat-icon *ngIf="value && showClearButton &&  (control.dirty || control.touched)" matSuffix mat-icon-button
+            <mat-icon *ngIf="value && showClearButton && !readOnly &&  (control.dirty || control.touched)" matSuffix mat-icon-button
                 aria-label="Clear" (click)="clear()">close
             </mat-icon>
 
