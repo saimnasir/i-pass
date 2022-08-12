@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace IPass.WebApp.Controllers
 {
     [Route("api/[controller]/")]
-    [Authorize(Policy = Consts.USER_POLICY)]
+    [Authorize(Roles = $"{Consts.USER_ROLE}")]
     public class PinCodesController : GenericApiController
     {
         IProfileAppService ProfileAppService { get; }
@@ -26,8 +26,7 @@ namespace IPass.WebApp.Controllers
         }
 
         // POST api/pincodes/check
-        [HttpPost("check")]
-        [Authorize(Roles = $"{Consts.USER_ROLE}")]
+        [HttpPost("check")] 
         public async Task<ActionResult<FinalResponseDTO<SingleResponse<PinCodeDto>>>> CheckAsync([FromBody] CheckPinCodeInputDto input)
         {
             return await WithLoggingFinalResponse(input, async () =>
@@ -38,8 +37,7 @@ namespace IPass.WebApp.Controllers
         }
 
         // POST api/pincodes/
-        [HttpPost]
-        [Authorize(Roles = $"{Consts.USER_ROLE}")]
+        [HttpPost] 
         public async Task<ActionResult<FinalResponseDTO<SingleResponse<PinCodeDto>>>> CreateAsync([FromBody] CreatePinCodeInputDto input)
         { 
             return await WithLoggingFinalResponse(input, async () =>

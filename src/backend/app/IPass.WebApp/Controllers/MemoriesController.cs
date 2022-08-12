@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace IPass.WebApp.Controllers
 {
     [Route("api/[controller]/")]
-    [Authorize(Policy = Consts.USER_POLICY)]
+    [Authorize(Roles = $"{Consts.USER_ROLE}")]
     public class MemoriesController : GenericApiController
     {
         IMemoryAppService MemoryAppService { get; }
@@ -31,7 +31,6 @@ namespace IPass.WebApp.Controllers
 
         // GET api/values
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<FinalResponseDTO<ListResponse<MemoryDto>>>> GetListAsync([FromQuery] int? page, [FromQuery] int? pageSize, [FromQuery] string sortBy, [FromQuery] SortType sortType, [FromQuery] string searchText, bool? decode)
         {
             var input = new SearchMemoriesInputDto

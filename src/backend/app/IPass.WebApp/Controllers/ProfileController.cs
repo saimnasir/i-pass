@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace IPass.WebApp.Controllers
 {
     [Route("api/[controller]/")]
-    [Authorize(Policy = Consts.USER_POLICY)]
+    [Authorize(Roles = $"{Consts.USER_ROLE}")]
     public class ProfileController : GenericApiController
     {
         IProfileAppService ProfileAppService { get; }
@@ -25,8 +25,7 @@ namespace IPass.WebApp.Controllers
             ProfileAppService = profileAppService;
         }
          
-        [HttpGet]
-        [Authorize(Roles = $"{Consts.USER_ROLE}")]
+        [HttpGet] 
         public async Task<ActionResult<FinalResponseDTO<SingleResponse<ProfileDto>>>> GetProfileAsync()
         {
             var input = new DTO();

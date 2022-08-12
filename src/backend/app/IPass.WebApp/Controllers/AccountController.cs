@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 namespace IPass.WebApp.Controllers
 {
     [Route("api/[controller]/")]
+    [Authorize(Roles = $"{Consts.USER_ROLE}")]
     public class AccountController : GenericApiController
     {
         IAccountApplicationService AccountApplicationService { get; }
@@ -53,7 +54,6 @@ namespace IPass.WebApp.Controllers
         }
 
         [HttpPost("otp/forgot-password")]
-        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<object>>> SendValidationCodeAsync(SendActivationCodeInputDto input)
         {
             return await WithLoggingFinalResponse<object>(input, async () =>
@@ -64,7 +64,6 @@ namespace IPass.WebApp.Controllers
         }
 
         [HttpPost("forgot-password")]
-        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<object>>> ChangePasswordAsync(ResetPasswordInputDto input)
         {
             input.LogId = (await LogWriter.CreateLog(Configuration.ApplicationName)).Id.ToString();
@@ -75,7 +74,6 @@ namespace IPass.WebApp.Controllers
 
         [Route("otp/activation-code")]
         [HttpPost]
-        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<object>>> SendActivationCodeSmsAsync()
         {
             var input = new SendActivationCodeInputDto
@@ -93,7 +91,6 @@ namespace IPass.WebApp.Controllers
 
         [Route("activation-code")]
         [HttpPost]
-        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<TokenResultDto>>> ValidateActivationCodeAsync(ValidateAccountInputDto input)
         {
             return await WithLoggingFinalResponse(input, async () =>
@@ -105,7 +102,6 @@ namespace IPass.WebApp.Controllers
 
         [Route("refresh-token")]
         [HttpPost]
-        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<TokenResultDto>>> GetRefreshTokenAsync(RefreshTokenInputDto input)
         {
             return await WithLoggingFinalResponse(input, async () =>
@@ -115,7 +111,6 @@ namespace IPass.WebApp.Controllers
         }
 
         [HttpGet("profile")]
-        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<SingleResponse<ProfileDto>>>> GetProfileAsync()
         {
             var input = new DTO();
@@ -127,7 +122,6 @@ namespace IPass.WebApp.Controllers
         }
 
         [HttpPut("profile")]
-        [Authorize(Policy = Consts.USER_POLICY)]
         public async Task<ActionResult<FinalResponseDTO<object>>> UpdateProfileAsync(UserDto input)
         {
             return await WithLoggingFinalResponse<object>(input, async () =>
@@ -155,8 +149,7 @@ namespace IPass.WebApp.Controllers
             return Redirect($"{Configuration.GatewayUrl}/identity/authorize/facebook-login?callback={callback}");
         }
 
-        [HttpGet("ext-callback")]
-        [Authorize(Policy = Consts.USER_POLICY)]
+        [HttpGet("ext-callback")] 
         public async Task<ActionResult<FinalResponseDTO<TokenResultDto>>> ServicemanExternalCallbackAsync(
          string t = null,
          bool allowToCommunicate = false,
