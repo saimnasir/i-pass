@@ -14,6 +14,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{87277969-9102-4F26-941A-078E573A9795}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "business", "business", "{92DE156F-ABB7-40B9-BF00-553925E3A443}"
+	ProjectSection(SolutionItems) = preProject
+		src\backend\app\Patika.AuthenticationServer\Startup.cs = src\backend\app\Patika.AuthenticationServer\Startup.cs
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IPass.Application", "src\backend\business\IPass.Application\IPass.Application.csproj", "{04CA43C1-707D-4FAC-8249-4392E5196F49}"
 EndProject
