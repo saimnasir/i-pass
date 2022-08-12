@@ -1,0 +1,52 @@
+
+.app-card {
+  top: 60px;
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  overflow: auto;
+  height: calc(100vh - 120px);
+  background-color: #eefbf5;
+}
+
+.app-card-header {
+  position: fixed;
+  top: 60px;
+  height: 74px;
+  background-color: #cbf2df;   
+  padding: 10px;
+  padding-bottom: 0;
+  width: 100%;
+  z-index: 1000;  
+}
+
+.app-card-content { 
+  top: 80px; 
+  position: relative;
+  overflow: visible;
+  margin: 4px; 
+}  
+
+.card-header {
+  background: #C2DED1;
+}
+
+.card-content {
+  margin: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.card-footer {
+  text-align: center;
+  margin: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+.example-form-field{
+  padding: 20px;
+}
+.toogle{  
+  margin-right: 40px;
+} 

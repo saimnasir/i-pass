@@ -1,0 +1,36 @@
+﻿<app-loading [loading]="loading"></app-loading>
+<form [formGroup]="form">
+    <mat-card class="example-card mat-elevation-z0 container">
+        <mat-card-content class="card-content ">
+            <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                <div fxFlex.lt-md="100" fxFlex="100">
+                    <app-input-field formControlName="code" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Pin Code'" [type]="'text'" [placeholder]="'Enter Pin Code'" [control]="f['code']"
+                        [validationMessages]="pinCodeValidationMessages" [elevation]="'0'" [readOnly]="!editable">
+                    </app-input-field>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-footer class="app-card-footer   ">
+            <mat-card-actions *ngIf="errorMessage" class="card-footer-error  mat-elevation-z4 ">
+                <mat-card-title>{{errorMessage}}</mat-card-title>
+            </mat-card-actions>
+            <mat-card-actions fxFlexAlign="center" class=" ">
+                <div fxLayout="column" fxFlexFill>
+                    <div fxLayout="column" class=" ">
+                        <div fxLayout="row" fxFlexFill fxFlexAlign="center" class=" " fxFlex="100">
+                            <button *ngIf="editable" fxFlex="100" class="action-button" (click)="saveSettings()"
+                                mat-raised-button color="primary">
+                                <mat-icon>save</mat-icon> Save
+                            </button>
+                            <button *ngIf="!editable" fxFlex="100" class="action-button" (click)="editable = true"
+                                mat-raised-button color="primary">
+                                <mat-icon>edit</mat-icon> Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-actions>
+        </mat-card-footer>
+    </mat-card>
+</form>

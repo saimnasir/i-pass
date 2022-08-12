@@ -1,113 +1,61 @@
-﻿<mat-tab-group>
-    <mat-tab label="Profile">
-        <mat-card class="example-card">
-            <mat-card-header class="card-header ">
-                <mat-card-subtitle>
-                    Edit Your Profile
-                </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content class="card-content">
+﻿<app-loading [loading]="loading"></app-loading>
+<form [formGroup]="form">
+    <mat-card class="example-card mat-elevation-z0 container">
+        <mat-card-content class="card-content ">
+            <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                <div fxFlex.lt-md="100" fxFlex="50">
+                    <app-input-field formControlName="phoneNumber" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Phone Number'" [type]="'text'" [placeholder]="'Enter Phone Number'"
+                        [control]="f['phoneNumber']" [validationMessages]="phoneNumberValidationMessages"
+                        [elevation]="'0'" [readOnly]="!editable">
+                    </app-input-field>
+                </div>
+                <div fxFlex.lt-md="100" fxFlex="50">
+                    <app-input-field formControlName="email" fxLayoutGap="10px" fxFlex="98"
+                        [class]="'example-form-field'" [label]="'Email'" [type]="'email'" [placeholder]="'Enter email'"
+                        [control]="f['email']" [successValidation]="'Looks good!'" [elevation]="'0'" [readOnly]="true">
+                    </app-input-field>
+                </div>
+            </div>
+            <div class="container" fxLayout="row" fxLayout.lt-md="column" fxFlexFill>
+                <div fxFlex.lt-md="100" fxFlex="50">
+                    <app-input-field formControlName="firstName" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'First Name'" [type]="'text'" [placeholder]="'Enter First Name'"
+                        [control]="f['firstName']" [validationMessages]="phoneNumberValidationMessages"
+                        [elevation]="'0'" [readOnly]="!editable">
+                    </app-input-field>
+                </div>
+                <div fxFlex.lt-md="100" fxFlex="50">
+                    <app-input-field formControlName="lastName" fxFlex="98" [class]="'example-form-field'"
+                        [label]="'Last Name'" [type]="'text'" [placeholder]="'Enter Last Name'"
+                        [control]="f['lastName']" [validationMessages]="phoneNumberValidationMessages" [elevation]="'0'"
+                        [readOnly]="!editable">
+                    </app-input-field>
+                </div>
+            </div>
 
-                <mat-grid-list cols="2" rowHeight="60px">
-
-                    <mat-grid-tile>
-                        <mat-form-field class="example-form-field" appearance="outline">
-                            <mat-label>UserName</mat-label>
-                            <input matInput type="text" [(ngModel)]="model.user.userName" disabled >
-                            <!-- <button *ngIf="model.user.userName" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="model.user.userName=''">
-                                <mat-icon>close</mat-icon>
-                            </button> -->
-                            <mat-hint *ngIf="!model.user.userName">Enter userName.</mat-hint>
-                            <mat-error>UserName is required!</mat-error>
-                        </mat-form-field>
-                    </mat-grid-tile>
-
-                    <mat-grid-tile>
-                        <mat-form-field class="example-form-field" appearance="outline">
-                            <mat-label>Phone</mat-label>
-                            <input matInput type="text" [(ngModel)]="model.user.phoneNumber" disabled >
-                            <!-- <button *ngIf="model.user.phoneNumber" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="model.user.phoneNumber=''">
-                                <mat-icon>close</mat-icon>
-                            </button> -->
-                            <mat-hint *ngIf="!model.user.phoneNumber">Enter phone.</mat-hint>
-                            <mat-error>Phone is required!</mat-error>
-                        </mat-form-field>
-                    </mat-grid-tile>
-
-                    <mat-grid-tile>
-                        <mat-form-field class="example-form-field" appearance="outline">
-                            <mat-label>FirstName</mat-label>
-                            <input matInput type="text" [(ngModel)]="model.user.firstName" >
-                            <button *ngIf="model.user.firstName" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="model.user.firstName=''">
-                                <mat-icon>close</mat-icon>
+        </mat-card-content>
+        <mat-card-footer class="app-card-footer   ">
+            <mat-card-actions *ngIf="errorMessage" class="card-footer-error  mat-elevation-z4 ">
+                <mat-card-title>{{errorMessage}}</mat-card-title>
+            </mat-card-actions>
+            <mat-card-actions fxFlexAlign="center" class=" ">
+                <div fxLayout="column" fxFlexFill>
+                    <div fxLayout="column" class=" ">
+                        <div fxLayout="row" fxFlexFill fxFlexAlign="center" class=" " fxFlex="100">
+                            <button *ngIf="editable" fxFlex="100" class="action-button" (click)="saveProfile()"
+                                mat-raised-button color="primary">
+                                <mat-icon>save</mat-icon> Save
                             </button>
-                            <mat-hint *ngIf="!model.user.firstName">Enter firstName.</mat-hint>
-                            <mat-error>FirstName is required!</mat-error>
-                        </mat-form-field>
-                    </mat-grid-tile>
-
-                    <mat-grid-tile>
-                        <mat-form-field class="example-form-field" appearance="outline">
-                            <mat-label>LastName</mat-label>
-                            <input matInput type="text" [(ngModel)]="model.user.lastName" >
-                            <button *ngIf="model.user.lastName" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="model.user.lastName=''">
-                                <mat-icon>close</mat-icon>
+                            <button *ngIf="!editable" fxFlex="100" class="action-button" (click)="editable = true"
+                                mat-raised-button color="primary">
+                                <mat-icon>edit</mat-icon> Edit
                             </button>
-                            <mat-hint *ngIf="!model.user.lastName">Enter lastName.</mat-hint>
-                            <mat-error>LastName is required!</mat-error>
-                        </mat-form-field>
-                    </mat-grid-tile>
-                </mat-grid-list>
-                <label *ngIf="errorMessage"> {{errorMessage}} </label>
-            </mat-card-content>
-            <mat-card-footer>
-                <mat-card-actions class="card-footer">
-                    <div class="example-button-row">
-                        <button mat-raised-button color="primary" (click)="saveProfile()" [disabled]="!isUserChange()">Save Profile</button>
-                     </div>
-                </mat-card-actions>
-            </mat-card-footer>
-        </mat-card>
-    </mat-tab>
-    <mat-tab label="Pin Code">
-        <mat-card class="example-card">
-            <mat-card-header class="card-header ">
-                <mat-card-subtitle>
-                    Set Pin Code
-                </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content class="card-content">
 
-                <mat-grid-list cols="1" rowHeight="60px">
-
-                    <mat-grid-tile>
-                        <mat-form-field class="example-form-field" appearance="outline">
-                            <mat-label>Pin Code</mat-label>
-                            <input matInput type="number" [(ngModel)]="model.pinCode.code" required>
-                            <button *ngIf="model.pinCode.code" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="model.pinCode.code=''">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                            <mat-hint *ngIf="!model.pinCode.code">Enter pin code</mat-hint>
-                            <mat-error>Pin code is required!</mat-error>
-                        </mat-form-field>
-                    </mat-grid-tile>
-
-
-                </mat-grid-list>
-                <label *ngIf="errorMessage"> {{errorMessage}} </label>
-            </mat-card-content>
-            <mat-card-footer>
-                <mat-card-actions class="card-footer">
-                    <div class="example-button-row">
-                        <button mat-raised-button color="primary" (click)="savePinCode()" [disabled]="!isPinCodeChange()" >Save Pin</button>
-                     </div>
-                </mat-card-actions>
-            </mat-card-footer>
-        </mat-card>
-    </mat-tab> 
-</mat-tab-group>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-actions>
+        </mat-card-footer>
+    </mat-card>
+</form>

@@ -1,0 +1,35 @@
+﻿<app-loading [loading]="loading"></app-loading>
+<mat-card class="app-card mat-elevation-z0">
+    <mat-card-header class="app-card-header mat-elevation-z8">
+        <mat-card-title>
+            My Profile
+        </mat-card-title>
+        <mat-card-subtitle style="margin-bottom: 8px;">
+            Profile and settings
+        </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="app-card-content mat-elevation-z0">
+        <mat-card class="example-card mat-elevation-z8 container" fxFlexFill>
+            <mat-card-content class="card-content ">
+                <div fxLayout="column" fxFlexFill>
+                    <mat-tab-group [color]="'primary'">
+                        <mat-tab label="Profile">
+                            <div class="social-account"  *ngIf="this.model?.user">
+                              
+                               <app-profile [user]="this.model.user"></app-profile>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Settings">
+                            <div class="social-account" *ngIf="this.model?.pinCode">                              
+                                <app-settings [pinCode]="this.model.pinCode"></app-settings>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </mat-card-content>
+
+        </mat-card>
+
+    </mat-card-content>
+</mat-card>
