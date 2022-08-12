@@ -110,6 +110,7 @@ namespace IPass.Application.PasswordDomain
                     User = Mapper.Map<UserDto>(user),
                 };
                 profileDto.User.UserName = ApplicationUser.UserName;
+                profileDto.User.Email = ApplicationUser.Email;
                 return new SingleResponse<ProfileDto>()
                 {
                     Data = profileDto
