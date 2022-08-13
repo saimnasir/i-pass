@@ -39,15 +39,7 @@
    text-align: center; 
    margin-top: 20px; 
 } 
- 
-.card-footer-error { 
-  margin: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background: red;
-  color: wheat;
-}  
-
+  
 .card-content{ 
   background-color: white;   
 }

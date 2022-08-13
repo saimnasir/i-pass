@@ -9,19 +9,23 @@ import { AlertService } from '../_service/alert.service';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     constructor(private accountService: AccountService,
-        private alertService: AlertService) {}
+       ) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
+            console.log('cached err', err);
+            
             if ([401, 403].includes(err.status) && this.accountService.userValue) {
                 // auto logout if 401 or 403 response returned from api
                 this.accountService.logout();
             }
 
-            const error = err.error?.message || err.statusText;
             console.error(err);
-            this.alertService.error('deneme')
-            return throwError(error);
+            const errorMessage = err.error?.message || err.statusText;
+            this.accountService.alertService.error(errorMessage+'test');
+
+            let error = new Error(errorMessage);
+            return throwError(() => error);
         }))
     }
 }

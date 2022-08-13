@@ -233,6 +233,7 @@ namespace IPass.WebApp
             services.AddScoped<IAccountValidationValidator, AccountValidationValidator>();
             services.AddScoped<IPhoneNumberExistanceValidator, PhoneNumberExistanceValidatorOverHttp>();
             services.AddScoped<IUserNameExistanceValidator, UserNameExistanceValidatorOverHttp>();
+            services.AddScoped<IEmailExistanceValidator, EmailExistanceValidatorOverHttp>(); 
             services.AddScoped<IPhoneNumberValidator, PhoneNumberValidator>();
             services.AddScoped<IUserNameValidator, UserNameValidator>();
             services.AddScoped<IValidateActivationCodeValidator, ValidateActivationCodeValidator>();

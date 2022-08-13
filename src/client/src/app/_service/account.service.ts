@@ -11,6 +11,7 @@ import { environment } from '../../environments/environment';
 import { FinalResponse } from '../_model/final-response';
 import { SingleResponse } from '../_model/single-response';
 import { DOCUMENT } from '@angular/common';
+import { AlertService } from './alert.service';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService extends BaseService<User, string> {
@@ -20,7 +21,7 @@ export class AccountService extends BaseService<User, string> {
 
     private isUserLoggedIn: Observable<boolean>;
     private userLoggedSubject: BehaviorSubject<boolean>;
-    constructor(
+    constructor( public alertService: AlertService,
         private router: Router,
         @Inject(DOCUMENT) private document: Document,
         protected override http: HttpClient) {
@@ -125,8 +126,11 @@ export class AccountService extends BaseService<User, string> {
         .pipe(map(response => {
             if (response.success) {
                 this.addToken(response.data);
+                console.log('response sucess:', response);
+                
                 return response;
             }
+            console.log('response fail:', response);
             return response;
         }));         
     }

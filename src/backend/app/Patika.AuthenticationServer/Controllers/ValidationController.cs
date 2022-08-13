@@ -14,15 +14,18 @@ namespace Patika.AuthenticationServer.Controllers
 	{
 		IPhoneNumberExistanceValidator PhoneNumberExistanceValidator { get; }
         IUserNameExistanceValidator UserNameExistanceValidator { get; }
+        IEmailExistanceValidator EmailExistanceValidator { get; }
 
         public ValidationController(IPhoneNumberExistanceValidator phoneNumberExistanceValidator,
             IUserNameExistanceValidator userNameExistanceValidator,
+            IEmailExistanceValidator emailExistanceValidator,
 			Configuration configuration,
 			ILogWriter logWriter
 			) : base(logWriter, configuration)
 		{
 		    PhoneNumberExistanceValidator = phoneNumberExistanceValidator;
             UserNameExistanceValidator = userNameExistanceValidator;
+            EmailExistanceValidator = emailExistanceValidator;
         }
 
 		[HttpPost("~/identity/validate/is-phone-number-exists")]
@@ -77,6 +80,52 @@ namespace Patika.AuthenticationServer.Controllers
             try
             {
                 await UserNameExistanceValidator.ValidateAsync(input);
+                return Json(new { Message = "", Result = true, ResultCode = $"{LogStatus.Success}", JobId = input.LogId ?? Guid.Empty.ToString() });
+            }
+            catch (BaseApplicationException ex)
+            {
+                return Json(new
+                {
+                    resultCode = $"{LogStatus.Exception}",
+                    exception = new
+                    {
+                        code = ex.Code,
+                        message = ex.Message,
+                        innerException = ex.InnerException?.Message ?? "",
+                        source = ex.Source
+                    },
+                    done = false,
+                    message = ex.Message,
+                    jobId = input.LogId ?? Guid.Empty.ToString(),
+                    result = new { }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    resultCode = $"{LogStatus.Exception}",
+                    exception = new
+                    {
+                        code = new GeneralException(ex).Code,
+                        message = ex.Message,
+                        innerException = ex.InnerException?.Message ?? "",
+                        source = ex.Source
+                    },
+                    done = false,
+                    message = ex.Message,
+                    jobId = input.LogId,
+                    result = new { }
+                });
+            }
+        } 
+        
+        [HttpPost("~/identity/validate/is-email-exists")]
+		public async Task<IActionResult> IsEmailExistsAsync(EmailExistanceValidatorInput input)
+		{
+            try
+            {
+                await EmailExistanceValidator.ValidateAsync(input);
                 return Json(new { Message = "", Result = true, ResultCode = $"{LogStatus.Success}", JobId = input.LogId ?? Guid.Empty.ToString() });
             }
             catch (BaseApplicationException ex)

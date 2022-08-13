@@ -216,6 +216,7 @@ namespace Patika.AuthenticationServer
             services.AddScoped<IRegexValidator, RegexValidator>();
             services.AddScoped<IPhoneNumberExistanceValidator, PhoneNumberExistanceValidator>();
             services.AddScoped<IUserNameExistanceValidator, UserNameExistanceValidator>();
+            services.AddScoped<IEmailExistanceValidator, EmailExistanceValidator>();
             services.AddScoped<IValidateActivationCodeValidator, ValidateActivationCodeValidator>();
             services.AddScoped<ISendActivationCodeSmsValidator, SendActivationCodeSmsValidator>();
             services.AddScoped<IEmailValidator, EmailValidator>();

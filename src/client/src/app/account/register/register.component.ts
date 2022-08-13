@@ -20,8 +20,9 @@ export class RegisterComponent implements OnInit {
     loading = false;
     submitted = false;
 
-    errorMessage: string | null;
     showError: boolean = false;
+
+    returnUrl = 'profile';
     constructor(private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
@@ -60,7 +61,7 @@ export class RegisterComponent implements OnInit {
                 confirmPassword: new FormControl(null, [
                     Validators.required,
                 ]),
-                active:new FormControl(true)    
+                active:new FormControl(true)
             });
         this.form.addValidators(CustomValidators.mustMatch('password', 'confirmPassword'));
     }
@@ -81,21 +82,26 @@ export class RegisterComponent implements OnInit {
 
     register() { 
         this.showError = !this.form.valid;
-        console.log('form', this.form.value);
-
-        this.errorMessage = null;
+        console.log('form', this.form.value); 
+       
         if (!this.form.valid) {
-            this.errorMessage = 'Please check invalid fields!'
+            this.alertService.success('Please check invalid fields!'); 
+
             return;
         }
 
         this.loading = true;
         this.accountService.register(this.form.value)
-            .pipe(first())
             .subscribe(
-                data => {
-                    this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-                    this.router.navigate(['/profile']);
+                response => {
+                    if (response?.success) {
+                        this.alertService.success('Wellcome!'); 
+                        this.router.navigate([this.returnUrl]);
+
+                    } else {
+                        this.alertService.success(response?.message); 
+                    }
+                    this.loading = false;
                 },
                 error => {
                     this.alertService.error(error);

@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
     submitted = false;
     returnUrl: string;
 
-    errorMessage: string | null;
     showError: boolean = false;
     phonePattern: string | RegExp = new RegExp('^[0-9]{10}$');
     constructor(private formBuilder: FormBuilder,
@@ -69,10 +68,9 @@ export class LoginComponent implements OnInit {
 
         this.showError = !this.form.valid;
         console.log('form', this.form.value);
-
-        this.errorMessage = null;
+ 
         if (!this.form.valid) {
-            this.errorMessage = 'Please check invalid fields!'
+            this.alertService.success('Please check invalid fields!'); 
             return;
         }
 
@@ -82,13 +80,16 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 response => {
                     if (response?.success) {
+                        this.alertService.success('Wellcome back!');
                         this.router.navigate([this.returnUrl]);
-                    } else {
-                        this.errorMessage = response?.message;
+                    } 
+                    else { 
+                       this.alertService.success(response?.message);  
                     }
+                    this.loading = false;
                 },
                 error => {
-                    this.alertService.error(error);
+                    // this.alertService.error(error);
                     this.loading = false;
                 });
     }

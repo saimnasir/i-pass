@@ -18,6 +18,7 @@ namespace IPass.Application.AccountDomain.Validators
         IPasswordValidator PasswordValidator { get; }
         IPhoneNumberExistanceValidator PhoneNumberExistanceValidator { get; }
         IUserNameExistanceValidator UserNameExistanceValidator { get; }
+        IEmailExistanceValidator EmailExistanceValidator { get; }
         IValidateActivationCodeValidator ValidateActivationCodeValidator { get; }
         IEmailValidator EmailValidator { get; }
         IUserNameValidator UserNameValidator { get; }
@@ -32,6 +33,7 @@ namespace IPass.Application.AccountDomain.Validators
             IPasswordValidator passwordValidator,
             IPhoneNumberExistanceValidator phoneNumberExistanceValidator,
             IUserNameExistanceValidator userNameExistanceValidator,
+            IEmailExistanceValidator emailExistanceValidator,
             IValidateActivationCodeValidator validateActivationCodeValidator,
             IEmailValidator emailValidator,
             IUserNameValidator userNameValidator,
@@ -45,6 +47,7 @@ namespace IPass.Application.AccountDomain.Validators
             PasswordValidator = passwordValidator;
             PhoneNumberExistanceValidator = phoneNumberExistanceValidator;
             UserNameExistanceValidator = userNameExistanceValidator;
+            EmailExistanceValidator = emailExistanceValidator;
             ValidateActivationCodeValidator = validateActivationCodeValidator;
             EmailValidator = emailValidator;
             UserNameValidator = userNameValidator;
@@ -56,7 +59,9 @@ namespace IPass.Application.AccountDomain.Validators
 
         public async Task ValidateRegistrationInputAsync(UserRegistrationInputDto input)
         {       
+            await EmailValidator.ValidateAsync(input.Email);
             await UserNameValidator.ValidateAsync(input.UserName);
+
 
             await PasswordValidator.ValidateAsync(new PasswordValidatorInput
             {
@@ -68,6 +73,11 @@ namespace IPass.Application.AccountDomain.Validators
             {
                 UserName = input.UserName,
                 Email   = input.Email
+            });
+
+            await EmailExistanceValidator.ValidateAsync(new EmailExistanceValidatorInput
+            { 
+                Email = input.Email
             });
         }
 
