@@ -824,7 +824,7 @@ mat-expansion-panel {
 
 .info {
   color: white;
-  background-color: #A0C2FF;
+  background-color: #709ff8;
   max-width: 100% !important;
 }
 
@@ -935,5 +935,43 @@ mwl-gauge > .gauge > .dial {
 .mat-form-field-label{
   color: brown !important;
 }
+ 
+.mat-simple-snackbar-action{
+  color: black !important;
+  background-color: white !important;
+}
+
+.warning  .mat-simple-snackbar-action {
+  color: #FBC757 !important;
+  background-color: white !important;
+}
+
+.success  .mat-simple-snackbar-action {
+  color: #76CB66 !important;
+  background-color: white !important;
+}
+
+.error  .mat-simple-snackbar-action {
+  color: #BA0001 !important;
+  background-color: white !important;
+}
+
+.info  .mat-simple-snackbar-action {
+  color: #709ff8 !important;
+  background-color: white !important;
+}
+
+
+.mat-snack-bar-container .flex {
+  display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.basic-container {
+  padding: 30px;
+}
+ 
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

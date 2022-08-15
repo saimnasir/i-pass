@@ -5,6 +5,7 @@ import { environment } from "src/environments/environment";
 import { FinalResponse } from "../_model/final-response";
 import { ListResponse } from "../_model/list-response";
 import { SingleResponse } from "../_model/single-response";
+import { AlertService } from "./alert.service";
 
 
 export class BaseService<T, I> {
@@ -14,7 +15,7 @@ export class BaseService<T, I> {
     authHeaders: HttpHeaders;
     genericError = "Bir hata oluştu. Tekrarı durumunda yönetime bildiriniz.";
 
-    constructor(protected http: HttpClient) {
+    constructor(protected http: HttpClient, private alertService: AlertService) {
         this.headers = new HttpHeaders({
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -29,6 +30,28 @@ export class BaseService<T, I> {
             'Access-Control-Allow-Origin': '*',
             "Authorization": `Bearer `
         });
+    }
+    
+    // convenience methods
+    successMulti(messages: Array<string>) {
+        this.alertService.successMulti(messages);
+    }
+
+    // convenience methods
+    success(message: string) {
+        this.alertService.success(message);
+    }
+
+    error(message: string) {
+        this.alertService.error(message);
+    }
+
+    info(message: string) {
+        this.alertService.info(message);
+    }
+
+    warn(message: string) {
+        this.alertService.warn(message);
     }
 
     public combineWithApiUrl(route: string): string {
@@ -49,9 +72,9 @@ export class BaseService<T, I> {
         return null;
     }
     getAllPaginated(route: string, sortBy: string, sortType: SortDirection, page: number, pageSize: number, searchText: string = '', decode: boolean = false): Observable<FinalResponse<ListResponse<T>>> {
-      
-        let sortDirection :string = sortType.toString();
-        if(sortDirection == ''){
+
+        let sortDirection: string = sortType.toString();
+        if (sortDirection == '') {
             sortDirection = 'none';
         }
         const params = new HttpParams()

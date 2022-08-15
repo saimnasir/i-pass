@@ -19,13 +19,12 @@ export class AccountService extends BaseService<User, string> {
     public user: Observable<LoginResult>;
     private userSubject: BehaviorSubject<LoginResult>;
 
-    private isUserLoggedIn: Observable<boolean>;
     private userLoggedSubject: BehaviorSubject<boolean>;
-    constructor( public alertService: AlertService,
+    constructor(alertService: AlertService,
         private router: Router,
         @Inject(DOCUMENT) private document: Document,
         protected override http: HttpClient) {
-        super(http);
+        super(http, alertService);
         let userStr = localStorage.getItem('user');
         if (userStr) {
             this.userSubject = new BehaviorSubject<LoginResult>(JSON.parse(userStr));
@@ -35,7 +34,6 @@ export class AccountService extends BaseService<User, string> {
             this.userLoggedSubject = new BehaviorSubject<boolean>(false);
         }
         this.user = this.userSubject.asObservable();
-        this.isUserLoggedIn = this.userLoggedSubject.asObservable();
     }
     route = `/api/account`;
 
@@ -123,16 +121,16 @@ export class AccountService extends BaseService<User, string> {
     register(user: RegisterModel) {
         let route = `/api/account/register`;
         return this.post<LoginResult>(route, user)
-        .pipe(map(response => {
-            if (response.success) {
-                this.addToken(response.data);
-                console.log('response sucess:', response);
-                
+            .pipe(map(response => {
+                if (response.success) {
+                    this.addToken(response.data);
+                    console.log('response sucess:', response);
+
+                    return response;
+                }
+                console.log('response fail:', response);
                 return response;
-            }
-            console.log('response fail:', response);
-            return response;
-        }));         
+            }));
     }
 
     getProfile() {

@@ -4,7 +4,7 @@ import { first } from 'rxjs/operators';
 import { AccountService } from '../../_service/account.service';
 import { AlertService } from '../../_service/alert.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PasswordRegex, PasswordValidationMessages,  UsernameValidationsValidationMessages } from 'src/app/_static-data/consts';
+import { PasswordRegex, PasswordValidationMessages, UsernameValidationsValidationMessages } from 'src/app/_static-data/consts';
 import { CustomValidators } from 'src/app/helpers/custom-validators';
 
 
@@ -14,9 +14,8 @@ import { CustomValidators } from 'src/app/helpers/custom-validators';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    form: FormGroup; 
+    form: FormGroup;
     loading = false;
-    submitted = false;
     returnUrl: string;
 
     showError: boolean = false;
@@ -24,8 +23,7 @@ export class LoginComponent implements OnInit {
     constructor(private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private accountService: AccountService,
-        private alertService: AlertService
+        private accountService: AccountService
     ) { }
 
     ngOnInit() {
@@ -46,7 +44,7 @@ export class LoginComponent implements OnInit {
                 userName: new FormControl(null, [
                     Validators.required,
                     Validators.minLength(10),
-                    Validators.maxLength(10),
+                    Validators.maxLength(100),
                 ]),
                 password: new FormControl(null, [
                     Validators.required,
@@ -65,33 +63,34 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-
         this.showError = !this.form.valid;
-        console.log('form', this.form.value);
- 
+
         if (!this.form.valid) {
-            this.alertService.success('Please check invalid fields!'); 
+            this.accountService.error('Please check invalid fields!');
+            // this.accountService.successMulti(['Wellcome back!', 'Deneme', 'üçüncü']);
             return;
         }
 
         this.loading = true;
+
         this.accountService.login(this.form.value.userName, this.form.value.password)
-            .pipe(first())
-            .subscribe(
-                response => {
-                    if (response?.success) {
-                        this.alertService.success('Wellcome back!');
+            .subscribe({
+                next: (response) => {
+                    if (response.success) {
+                        this.accountService.success('Wellcome back!');
+
                         this.router.navigate([this.returnUrl]);
-                    } 
-                    else { 
-                       this.alertService.success(response?.message);  
+                    } else {
+                        this.accountService.info(response.message);
                     }
+                },
+                error: (err) => {
                     this.loading = false;
                 },
-                error => {
-                    // this.alertService.error(error);
+                complete: () => {
                     this.loading = false;
-                });
+                }
+            });
     }
 
     reset() {

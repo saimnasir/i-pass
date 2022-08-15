@@ -1,0 +1,28 @@
+<div class="flex" hidden>
+    <div class="flex">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">
+            notifications
+        </mat-icon>
+        <strong style="font-size: xx-large;"> Notification </strong>
+        <button mat-icon-button (click)="snackBarRef.dismiss()">
+            <mat-icon>close</mat-icon>
+
+        </button>
+    </div>
+    <div class="data flex">{{data}}</div>
+</div>
+
+
+<div fxLayout="column" fxFlexFill (click)="snackBarRef.dismiss()" style="cursor:pointer ;"  matTooltip="Click to dismis"
+aria-label="Click to dismis">
+    <div fxLayout="row" fxFlexFill fxFlexAlign="end" fxFlex="100" style="margin: 4px;">
+        <mat-icon fxFlex  mat-icon-button aria-hidden="false" aria-label="Example home icon">
+            notifications
+        </mat-icon>
+        <strong fxFlex="90" style="font-size: x-large;"> Notification </strong>
+        <mat-icon fxFlex  mat-icon-button (click)="snackBarRef.dismiss()" aria-hidden="false"
+            aria-label="Example home icon">
+            close</mat-icon>
+    </div>
+    <div fxLayout="row" fxFlexFill fxFlexAlign="center" fxFlex="100">{{data}}</div>
+</div>

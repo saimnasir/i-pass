@@ -15,24 +15,18 @@ import { PasswordValidationMessages, ConfirmPasswordValidationMessages, Password
 })
 export class RegisterComponent implements OnInit {
     form: FormGroup;
-
-    // model = new RegisterModel();
     loading = false;
     submitted = false;
-
     showError: boolean = false;
-
     returnUrl = 'profile';
+
     constructor(private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
         private router: Router,
-        private accountService: AccountService,
-        private alertService: AlertService
+        private accountService: AccountService
     ) { }
 
     ngOnInit() {
         this.initForm();
-        // this.form.addValidators( CustomValidators.mustMatch('password', 'confirmPassword'));
     }
 
     // convenience getter for easy access to form fields
@@ -82,11 +76,9 @@ export class RegisterComponent implements OnInit {
 
     register() { 
         this.showError = !this.form.valid;
-        console.log('form', this.form.value); 
        
         if (!this.form.valid) {
-            this.alertService.success('Please check invalid fields!'); 
-
+            this.accountService.warn('Please check invalid fields!'); 
             return;
         }
 
@@ -95,28 +87,20 @@ export class RegisterComponent implements OnInit {
             .subscribe(
                 response => {
                     if (response?.success) {
-                        this.alertService.success('Wellcome!'); 
+                        this.accountService.success('Wellcome!'); 
                         this.router.navigate([this.returnUrl]);
 
                     } else {
-                        this.alertService.success(response?.message); 
+                        this.accountService.success(response?.message); 
                     }
                     this.loading = false;
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.accountService.error(error);
                     this.loading = false;
                 });
     }
-
-    loginWithGoogle() {
-        this.accountService.loginWithGoogle();
-    }
-
-    loginWithFacebook() {
-        this.accountService.loginWithFacebook();
-    }
-
+ 
     reset() {
         this.initForm();
     }

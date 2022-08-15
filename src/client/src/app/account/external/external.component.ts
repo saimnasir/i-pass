@@ -10,17 +10,16 @@ import { AlertService } from 'src/app/_service/alert.service';
   styleUrls: ['./external.component.css']
 })
 export class ExternalComponent implements OnInit {
-  returnUrl: string;
-  errorMessage: string | undefined;
-
+  returnUrl: string; 
+  loading :boolean;
   constructor(
     private accountService: AccountService,
     private route: ActivatedRoute,
-    private router: Router,
-    private alertService: AlertService) {
+    private router: Router) {
 
   }
   ngOnInit() {
+    this.loading = true;
     // get return url from route parameters or default to '/'
     this.accountService.removeToken();
     
@@ -30,12 +29,14 @@ export class ExternalComponent implements OnInit {
         response => {
           if (response?.success) {
             this.router.navigate(['/']);
-          } else {
-            this.errorMessage = response?.message;
+          } else { 
+            this.accountService.warn(response?.message);
           }
+          this.loading = false;
         },
         error => {
-          this.alertService.error(error);
+          this.accountService.error(error);
+          this.loading = false;
         })
       ;
   } 

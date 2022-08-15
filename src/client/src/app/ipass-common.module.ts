@@ -64,6 +64,7 @@ import { InputSelectComponent } from './_components/forms/input-select/input-sel
 import { InputSwitchComponent } from './_components/forms/input-switch/input-switch.component';
 import { TableSearchDialog } from './common/table-search/table-search-dialog';
 import { LoadingComponent } from './common/loading/loading';
+import { MatSnackBarComponent, SnackerComponent } from './common/snack-bar/mat-snack-bar.component';
 
 
 @NgModule({
@@ -123,7 +124,9 @@ import { LoadingComponent } from './common/loading/loading';
         InputSwitchComponent,
         
         TableSearchDialog,    
-        LoadingComponent      
+        LoadingComponent   ,
+        MatSnackBarComponent   ,
+        SnackerComponent
     ],
     exports: [
         InputFieldComponent,
@@ -132,6 +135,7 @@ import { LoadingComponent } from './common/loading/loading';
         MediaQueryStatusComponent,
         InputSwitchComponent,   
         LoadingComponent   ,
+        MatSnackBarComponent,
 
         BrowserAnimationsModule,
         BrowserModule,
@@ -185,7 +189,8 @@ import { LoadingComponent } from './common/loading/loading';
         OrganizationTypeService,
         MemoryTypeService,
         EnvironmentTypeService,
-        PinCodeService
+        PinCodeService,
+        MatSnackBarComponent
     ]
 })
 export class IPassCommonModule {

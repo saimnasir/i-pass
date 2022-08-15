@@ -1,9 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { AccountService } from '../../_service/account.service';
-import { AlertService } from '../../_service/alert.service';
 import { ProfileModel } from '../../_model/user.model';
-import { PinCodeService } from 'src/app/_service/pin-code.service';
 import { PinCodeModel } from 'src/app/_model/pin-code.model';
 
 
@@ -13,20 +10,19 @@ import { PinCodeModel } from 'src/app/_model/pin-code.model';
     styleUrls: ['./my-profile.component.css']
 })
 export class MyProfileComponent implements OnInit {
-    model = new ProfileModel();   
+    model = new ProfileModel();
     loading = false;
     returnUrl: string;
-    errorMessage: string | undefined;
+
     constructor(
         private accountService: AccountService,
-        private alertService: AlertService
     ) { }
 
-    ngOnInit() {  
+    ngOnInit() {
         this.getModel();
     }
-  
-    get user(){
+
+    get user() {
         return this.model?.user;
     }
 
@@ -39,12 +35,16 @@ export class MyProfileComponent implements OnInit {
                     if (!this.model.pinCode) {
                         this.model.pinCode = new PinCodeModel();
                     }
+                } else {
+                    this.accountService.error(response.message);
                 }
             },
-            error: (e) => console.error(e),
+            error: (e) => {
+                console.error(e);
+                this.accountService.error(e);
+            },
             complete: () => {
                 this.loading = false;
-                console.info('complete');
             }
         });
     }
