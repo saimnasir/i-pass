@@ -3,6 +3,7 @@ import { AccountService } from '../../_service/account.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsernameValidationsValidationMessages } from 'src/app/_static-data/consts';
 import { User } from 'src/app/_model/user.model';
+import { AlertService } from 'src/app/_service/alert.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class ProfileComponent implements OnInit {
     @Input() user: User;
     constructor(private formBuilder: FormBuilder,
         private accountService: AccountService,
+        private alertService: AlertService
     ) { }
 
     get usernameValidationsValidationMessages() {
@@ -62,13 +64,13 @@ export class ProfileComponent implements OnInit {
                 if (response.success) {
                     console.info('updated');
                 } else {
-                    this.accountService.error(response.message);
+                    this.alertService.error(response.message);
                 }
                 this.editable = false;
             },
             error: (e) => {
                 console.error(e);                
-                this.accountService.error(e);
+                this.alertService.error(e);
             },
             complete: () => {
                 console.info('complete');

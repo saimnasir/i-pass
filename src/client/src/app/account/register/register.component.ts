@@ -22,7 +22,8 @@ export class RegisterComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
         private router: Router,
-        private accountService: AccountService
+        private accountService: AccountService,
+        private alertService: AlertService,
     ) { }
 
     ngOnInit() {
@@ -78,7 +79,7 @@ export class RegisterComponent implements OnInit {
         this.showError = !this.form.valid;
        
         if (!this.form.valid) {
-            this.accountService.warn('Please check invalid fields!'); 
+            this.alertService.warn('Please check invalid fields!'); 
             return;
         }
 
@@ -87,16 +88,16 @@ export class RegisterComponent implements OnInit {
             .subscribe(
                 response => {
                     if (response?.success) {
-                        this.accountService.success('Wellcome!'); 
+                        this.alertService.success('Wellcome!'); 
                         this.router.navigate([this.returnUrl]);
 
                     } else {
-                        this.accountService.success(response?.message); 
+                        this.alertService.success(response?.message); 
                     }
                     this.loading = false;
                 },
                 error => {
-                    this.accountService.error(error);
+                    this.alertService.error(error);
                     this.loading = false;
                 });
     }

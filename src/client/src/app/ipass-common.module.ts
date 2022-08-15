@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 
 import { AvatarModule } from "primeng/avatar";
@@ -21,7 +21,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatButtonModule } from "@angular/material/button";
 import { MatListModule } from "@angular/material/list";
 import { MatToolbarModule } from "@angular/material/toolbar";
-import {MatTreeModule} from '@angular/material/tree';
+import { MatTreeModule } from '@angular/material/tree';
 
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatInputModule } from "@angular/material/input";
@@ -51,7 +51,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { InputFieldComponent } from "./_components/forms/input-field/input-field.component";
-import { InputFieldExComponent } from "./_components/forms/input-field-ex/input-field-ex.component"; 
+import { InputFieldExComponent } from "./_components/forms/input-field-ex/input-field-ex.component";
 import { MediaQueryStatusComponent } from "./_components/media-query-status.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { MemoryService } from "./_service/memory.service";
@@ -64,7 +64,13 @@ import { InputSelectComponent } from './_components/forms/input-select/input-sel
 import { InputSwitchComponent } from './_components/forms/input-switch/input-switch.component';
 import { TableSearchDialog } from './common/table-search/table-search-dialog';
 import { LoadingComponent } from './common/loading/loading';
-import { MatSnackBarComponent, SnackerComponent } from './common/snack-bar/mat-snack-bar.component';
+import { MatSnackBarComponent } from './common/snack-bar/mat-snack-bar.component';
+import { AlertComponent } from './common/alert/alert.component';
+import { SnackBarSuccessComponent } from './common/snack-bar/snack-bar-succes/snack-bar-success';
+import { SnackBarErrorComponent } from './common/snack-bar/snack-bar-error/snack-bar-error';
+import { SnackBarInfoComponent } from './common/snack-bar/snack-bar-info/snack-bar-info';
+import { SnackBarWarningComponent } from './common/snack-bar/snack-bar-warning/snack-bar-warning';
+import { SnackBarBaseComponent } from './common/snack-bar/snack-bar-base/snack-bar-base';
 
 
 @NgModule({
@@ -113,8 +119,8 @@ import { MatSnackBarComponent, SnackerComponent } from './common/snack-bar/mat-s
 
         MatProgressSpinnerModule,
         MatProgressBarModule,
-        MatDialogModule, 
-        
+        MatDialogModule,
+
     ],
     declarations: [
         InputFieldComponent,
@@ -122,20 +128,26 @@ import { MatSnackBarComponent, SnackerComponent } from './common/snack-bar/mat-s
         MediaQueryStatusComponent,
         InputSelectComponent,
         InputSwitchComponent,
-        
-        TableSearchDialog,    
-        LoadingComponent   ,
-        MatSnackBarComponent   ,
-        SnackerComponent
+
+        TableSearchDialog,
+        LoadingComponent,
+        MatSnackBarComponent,
+        SnackBarBaseComponent,
+        SnackBarSuccessComponent,
+        SnackBarErrorComponent,
+        SnackBarInfoComponent,
+        SnackBarWarningComponent,
+        AlertComponent
     ],
     exports: [
         InputFieldComponent,
         InputSelectComponent,
         InputFieldExComponent,
         MediaQueryStatusComponent,
-        InputSwitchComponent,   
-        LoadingComponent   ,
+        InputSwitchComponent,
+        LoadingComponent,
         MatSnackBarComponent,
+        AlertComponent,
 
         BrowserAnimationsModule,
         BrowserModule,
@@ -146,7 +158,7 @@ import { MatSnackBarComponent, SnackerComponent } from './common/snack-bar/mat-s
         FormsModule,
         ReactiveFormsModule,
         FlexLayoutModule,
-        
+
         MatTreeModule,
         MatMenuModule,
         MatIconModule,
@@ -181,9 +193,9 @@ import { MatSnackBarComponent, SnackerComponent } from './common/snack-bar/mat-s
         MatProgressSpinnerModule,
         MatProgressBarModule,
         MatDialogModule,
-           
+
     ],
-    providers:[
+    providers: [
         MemoryService,
         OrganizationService,
         OrganizationTypeService,

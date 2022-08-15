@@ -1,5 +1,10 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { MatSnackBar, MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
+import { Alert, AlertSettings } from 'src/app/_service/alert.service';
+import { SnackBarErrorComponent } from './snack-bar-error/snack-bar-error';
+import { SnackBarInfoComponent } from './snack-bar-info/snack-bar-info';
+import { SnackBarSuccessComponent } from './snack-bar-succes/snack-bar-success';
+import { SnackBarWarningComponent } from './snack-bar-warning/snack-bar-warning';
 
 @Component({
 	selector: 'app-mat-snack-bar',
@@ -10,30 +15,60 @@ export class MatSnackBarComponent {
 	duration = 2000;
 	constructor(public snackBar: MatSnackBar) { }
 
-	openSnackBar(message: string, className: string, duration: number | undefined = undefined) {
-		this.snackBar.openFromComponent(SnackerComponent, {
+	openSnackBar(alert: Alert, duration: number | undefined = undefined) {
+		switch (alert.alertType) {
+			case AlertSettings.SUCCESS:
+				this.openSnackBarSuccess(alert.message, duration);
+				break;
+			case AlertSettings.ERROR:
+				this.openSnackBarError(alert.message, duration);
+				break;
+			case AlertSettings.WARNING:
+				this.openSnackBarWarning(alert.message, duration);
+				break;
+			default:
+				this.openSnackBarInfo(alert.message, duration);
+				break;
+		}
+	}
+
+	openSnackBarSuccess(message: string, duration: number | undefined = undefined) {
+		this.snackBar.openFromComponent(SnackBarSuccessComponent, {
 			data: message,
 			duration: duration,
 			verticalPosition: 'bottom',
 			horizontalPosition: 'center',
-			panelClass: [className],
+			panelClass: ['success'],
 		});
 	}
 
-	openSnackBars(messages: string[], className: string) {
-		messages.forEach((message, index) => {
-			setTimeout(() => {
-				this.openSnackBar(message, className, this.duration);
-			}, index * (this.duration + 500)); // 500 - timeout between two messages
+	openSnackBarError(message: string, duration: number | undefined = undefined) {
+		this.snackBar.openFromComponent(SnackBarErrorComponent, {
+			data: message,
+			duration: duration,
+			verticalPosition: 'bottom',
+			horizontalPosition: 'center',
+			panelClass: ['error'],
 		});
 	}
-}
 
-@Component({
-	selector: 'app-snack-bar',
-	templateUrl: 'snack-bar-component-example-snack.html',
-	styles: [` 	`,],
-})
-export class SnackerComponent {
-	constructor(public snackBarRef: MatSnackBarRef<SnackerComponent>, @Inject(MAT_SNACK_BAR_DATA) public data: string) { }
-}
+	openSnackBarInfo(message: string, duration: number | undefined = undefined) {
+		this.snackBar.openFromComponent(SnackBarInfoComponent, {
+			data: message,
+			duration: duration,
+			verticalPosition: 'bottom',
+			horizontalPosition: 'center',
+			panelClass: ['info'],
+		});
+	}
+
+	openSnackBarWarning(message: string, duration: number | undefined = undefined) {
+		this.snackBar.openFromComponent(SnackBarWarningComponent, {
+			data: message,
+			duration: duration,
+			verticalPosition: 'bottom',
+			horizontalPosition: 'center',
+			panelClass: ['warning'],
+		});
+	}
+} 

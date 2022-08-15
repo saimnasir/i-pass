@@ -14,6 +14,7 @@ export class ExternalComponent implements OnInit {
   loading :boolean;
   constructor(
     private accountService: AccountService,
+    private alertService: AlertService,
     private route: ActivatedRoute,
     private router: Router) {
 
@@ -30,12 +31,12 @@ export class ExternalComponent implements OnInit {
           if (response?.success) {
             this.router.navigate(['/']);
           } else { 
-            this.accountService.warn(response?.message);
+            this.alertService.warn(response?.message);
           }
           this.loading = false;
         },
         error => {
-          this.accountService.error(error);
+          this.alertService.error(error);
           this.loading = false;
         })
       ;

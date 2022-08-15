@@ -23,10 +23,13 @@ export class LoginComponent implements OnInit {
     constructor(private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private accountService: AccountService
+        private accountService: AccountService,
+        private alertService: AlertService
     ) { }
 
     ngOnInit() {
+
+        this.alertService.clear();
         // get return url from route parameters or default to '/'
         this.accountService.removeToken();
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -62,12 +65,46 @@ export class LoginComponent implements OnInit {
         return PasswordValidationMessages;
     }
 
+    // private error(message: string) {
+    //     this.alertService.error(message,
+    //         { fade: false }
+    //     );
+    // }
+    // private success(message: string) {
+    //     this.alertService.success(message,
+    //         { fade: true }
+    //     );
+    // }
+    // private warn(message: string) {
+    //     this.alertService.warn(message,
+    //         { autoClose: false }
+    //     );
+    // }
+    // private info(message: string) {
+    //     this.alertService.info(message,
+    //         { fade: false }
+    //     );
+    // }
+
     login() {
+        // this.alertService.error('Please check invalid fields 1!');
+        // this.alertService.success('Please check invalid fields 2!');
+        // this.alertService.info('Please check invalid fields 3!');
+        // this.alertService.warn('Please check invalid fields 4!');
+        // this.alertService.success('Please check invalid fields 3!');
+        // this.alertService.info('Please check invalid fields 4!');
+        // this.alertService.success('Please check invalid fields 5!');
+
+        // this.alertService.error('Please check invalid fields 6!');
+        // this.alertService.warn('Please check invalid fields 7!');
+        // this.alertService.success('Please check invalid fields 8!');
+        // this.alertService.info('Please check invalid fields 9!');
+        // this.alertService.success('Please check invalid fields 10!');
+
         this.showError = !this.form.valid;
 
         if (!this.form.valid) {
-            this.accountService.error('Please check invalid fields!');
-            // this.accountService.successMulti(['Wellcome back!', 'Deneme', 'üçüncü']);
+            this.alertService.error('Please check invalid fields!');
             return;
         }
 
@@ -77,11 +114,10 @@ export class LoginComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     if (response.success) {
-                        this.accountService.success('Wellcome back!', 2000);
-
+                        this.alertService.success('Wellcome back!');
                         this.router.navigate([this.returnUrl]);
                     } else {
-                        this.accountService.info(response.message, 2000);
+                        this.alertService.info(response.message);
                     }
                 },
                 error: (err) => {

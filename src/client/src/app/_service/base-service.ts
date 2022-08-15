@@ -30,30 +30,8 @@ export class BaseService<T, I> {
             'Access-Control-Allow-Origin': '*',
             "Authorization": `Bearer `
         });
-    }
-
-    // convenience methods
-    successMulti(messages: Array<string>) {
-        this.alertService.successMulti(messages);
-    }
-
-    // convenience methods
-    success(message: string, duration : number| undefined= undefined) {
-        this.alertService.success(message, duration);
-    }
-
-    error(message: string, duration : number| undefined= undefined) {
-        this.alertService.error(message, duration);
-    }
-
-    info(message: string, duration : number| undefined= undefined) {
-        this.alertService.info(message, duration);
-    }
-
-    warn(message: string, duration : number| undefined= undefined) {
-        this.alertService.warn(message, duration);
-    }
-
+    } 
+ 
     public combineWithApiUrl(route: string): string {
         if (route.startsWith('/')) {
             return `${environment.apiURL}${route}`;

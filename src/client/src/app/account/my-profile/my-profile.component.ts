@@ -2,6 +2,7 @@
 import { AccountService } from '../../_service/account.service';
 import { ProfileModel } from '../../_model/user.model';
 import { PinCodeModel } from 'src/app/_model/pin-code.model';
+import { AlertService } from 'src/app/_service/alert.service';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class MyProfileComponent implements OnInit {
 
     constructor(
         private accountService: AccountService,
+        private alertService: AlertService
     ) { }
 
     ngOnInit() {
@@ -36,12 +38,12 @@ export class MyProfileComponent implements OnInit {
                         this.model.pinCode = new PinCodeModel();
                     }
                 } else {
-                    this.accountService.error(response.message);
+                    this.alertService.error(response.message);
                 }
             },
             error: (e) => {
                 console.error(e);
-                this.accountService.error(e);
+                this.alertService.error(e);
             },
             complete: () => {
                 this.loading = false;

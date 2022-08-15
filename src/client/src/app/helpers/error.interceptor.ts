@@ -3,11 +3,13 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AccountService } from '../_service/account.service';
+import { AlertService } from '../_service/alert.service';
 
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     constructor(private accountService: AccountService,
+        private alertService: AlertService
     ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -25,7 +27,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 // server-side error
                 errorMessage = `${ error.status } \nMessage: ${ error.message }`;
             }           
-            this.accountService.error(errorMessage);
+            this.alertService.error(errorMessage);
 
             return next.handle(request);
         }))

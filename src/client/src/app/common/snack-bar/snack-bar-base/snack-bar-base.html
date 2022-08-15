@@ -1,0 +1,14 @@
+<div fxLayout="column" fxFlexFill (click)="snackBarRef.dismiss()" style="cursor:pointer ;" matTooltip="Click to dismis"
+    aria-label="Click to dismis">
+    <div fxLayout="row" fxFlexFill fxFlexAlign="end" fxFlex="100" style="margin: 4px;">
+        <mat-icon style="margin-right: 4px;"  fxFlex mat-icon-button aria-hidden="false" aria-label="Example home icon">
+            {{icon}}
+        </mat-icon>
+        <strong fxFlex="90" style="font-size: x-large;"> {{title}} </strong>
+        <mat-icon fxFlex mat-icon-button (click)="snackBarRef.dismiss()" aria-hidden="false"
+            aria-label="Example home icon">
+            close</mat-icon>
+    </div>
+    <mat-divider style="margin: 10px;"></mat-divider>
+    <div fxLayout="row" fxFlexFill fxFlexAlign="center" fxFlex="100">{{data}}</div>
+</div>
