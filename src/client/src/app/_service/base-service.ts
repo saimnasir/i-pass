@@ -31,27 +31,27 @@ export class BaseService<T, I> {
             "Authorization": `Bearer `
         });
     }
-    
+
     // convenience methods
     successMulti(messages: Array<string>) {
         this.alertService.successMulti(messages);
     }
 
     // convenience methods
-    success(message: string) {
-        this.alertService.success(message);
+    success(message: string, duration : number| undefined= undefined) {
+        this.alertService.success(message, duration);
     }
 
-    error(message: string) {
-        this.alertService.error(message);
+    error(message: string, duration : number| undefined= undefined) {
+        this.alertService.error(message, duration);
     }
 
-    info(message: string) {
-        this.alertService.info(message);
+    info(message: string, duration : number| undefined= undefined) {
+        this.alertService.info(message, duration);
     }
 
-    warn(message: string) {
-        this.alertService.warn(message);
+    warn(message: string, duration : number| undefined= undefined) {
+        this.alertService.warn(message, duration);
     }
 
     public combineWithApiUrl(route: string): string {

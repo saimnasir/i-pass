@@ -8,24 +8,24 @@ export class AlertService {
     }
 
     // convenience methods
-    success(message: string ) {
-        this.snackBar.openSnackBar(message,  'success');
+    success(message: string, duration : number| undefined= undefined ) {
+        this.snackBar.openSnackBar(message,  'success', duration);
     } 
     // convenience methods
     successMulti(messages: Array<string> ) {
         this.snackBar.openSnackBars(messages,  'success');
     }
 
-    error(message: string) {
-        this.snackBar.openSnackBar(message, 'error');
+    error(message: string, duration : number| undefined= undefined) {
+        this.snackBar.openSnackBar(message, 'error',duration);
     }
 
-    info(message: string) {
+    info(message: string, duration : number| undefined= undefined) {
 
-        this.snackBar.openSnackBar(message, 'info');
+        this.snackBar.openSnackBar(message, 'info',duration);
     }
 
-    warn(message: string) {
-        this.snackBar.openSnackBar(message,  'warning');
+    warn(message: string, duration : number| undefined= undefined) {
+        this.snackBar.openSnackBar(message,  'warning',duration);
     }
 }

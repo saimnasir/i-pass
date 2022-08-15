@@ -13,14 +13,14 @@ export class MatSnackBarComponent {
 	openSnackBar(message: string, className: string, duration: number | undefined = undefined) {
 		this.snackBar.openFromComponent(SnackerComponent, {
 			data: message,
-			duration: 2000,
+			duration: duration,
 			verticalPosition: 'bottom',
 			horizontalPosition: 'center',
 			panelClass: [className],
 		});
 	}
 
-	openSnackBars(messages: string[],  className: string) {
+	openSnackBars(messages: string[], className: string) {
 		messages.forEach((message, index) => {
 			setTimeout(() => {
 				this.openSnackBar(message, className, this.duration);
@@ -32,13 +32,7 @@ export class MatSnackBarComponent {
 @Component({
 	selector: 'app-snack-bar',
 	templateUrl: 'snack-bar-component-example-snack.html',
-	styles: [
-		`
-	  .example-pizza-party {
-		color: hotpink;
-	  }
-	`,
-	],
+	styles: [` 	`,],
 })
 export class SnackerComponent {
 	constructor(public snackBarRef: MatSnackBarRef<SnackerComponent>, @Inject(MAT_SNACK_BAR_DATA) public data: string) { }

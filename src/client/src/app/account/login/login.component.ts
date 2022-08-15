@@ -77,11 +77,11 @@ export class LoginComponent implements OnInit {
             .subscribe({
                 next: (response) => {
                     if (response.success) {
-                        this.accountService.success('Wellcome back!');
+                        this.accountService.success('Wellcome back!', 2000);
 
                         this.router.navigate([this.returnUrl]);
                     } else {
-                        this.accountService.info(response.message);
+                        this.accountService.info(response.message, 2000);
                     }
                 },
                 error: (err) => {
