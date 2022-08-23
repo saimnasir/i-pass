@@ -64,13 +64,8 @@ import { InputSelectComponent } from './_components/forms/input-select/input-sel
 import { InputSwitchComponent } from './_components/forms/input-switch/input-switch.component';
 import { TableSearchDialog } from './common/table-search/table-search-dialog';
 import { LoadingComponent } from './common/loading/loading';
-import { MatSnackBarComponent } from './common/snack-bar/mat-snack-bar.component';
 import { AlertComponent } from './common/alert/alert.component';
-import { SnackBarSuccessComponent } from './common/snack-bar/snack-bar-succes/snack-bar-success';
-import { SnackBarErrorComponent } from './common/snack-bar/snack-bar-error/snack-bar-error';
-import { SnackBarInfoComponent } from './common/snack-bar/snack-bar-info/snack-bar-info';
-import { SnackBarWarningComponent } from './common/snack-bar/snack-bar-warning/snack-bar-warning';
-import { SnackBarBaseComponent } from './common/snack-bar/snack-bar-base/snack-bar-base';
+import { SnackBarComponent } from './common/snack-bar/snack-bar';
 
 
 @NgModule({
@@ -130,13 +125,8 @@ import { SnackBarBaseComponent } from './common/snack-bar/snack-bar-base/snack-b
         InputSwitchComponent,
 
         TableSearchDialog,
-        LoadingComponent,
-        MatSnackBarComponent,
-        SnackBarBaseComponent,
-        SnackBarSuccessComponent,
-        SnackBarErrorComponent,
-        SnackBarInfoComponent,
-        SnackBarWarningComponent,
+        LoadingComponent, 
+        SnackBarComponent, 
         AlertComponent
     ],
     exports: [
@@ -145,8 +135,7 @@ import { SnackBarBaseComponent } from './common/snack-bar/snack-bar-base/snack-b
         InputFieldExComponent,
         MediaQueryStatusComponent,
         InputSwitchComponent,
-        LoadingComponent,
-        MatSnackBarComponent,
+        LoadingComponent, 
         AlertComponent,
 
         BrowserAnimationsModule,
@@ -201,8 +190,7 @@ import { SnackBarBaseComponent } from './common/snack-bar/snack-bar-base/snack-b
         OrganizationTypeService,
         MemoryTypeService,
         EnvironmentTypeService,
-        PinCodeService,
-        MatSnackBarComponent
+        PinCodeService, 
     ]
 })
 export class IPassCommonModule {

@@ -2,13 +2,13 @@
     aria-label="Click to dismis">
     <div fxLayout="row" fxFlexFill fxFlexAlign="end" fxFlex="100" style="margin: 4px;">
         <mat-icon style="margin-right: 4px;"  fxFlex mat-icon-button aria-hidden="false" aria-label="Example home icon">
-            {{icon}}
+            {{Icon}}
         </mat-icon>
-        <strong fxFlex="90" style="font-size: x-large;"> {{title}} </strong>
+        <strong fxFlex="90" style="font-size: x-large;"> {{Title}} </strong>
         <mat-icon fxFlex mat-icon-button (click)="snackBarRef.dismiss()" aria-hidden="false"
             aria-label="Example home icon">
             close</mat-icon>
     </div>
-    <mat-divider style="margin: 10px;"></mat-divider>
+    <mat-progress-bar id="progress-bar" mode="buffer" [value]="progress" ></mat-progress-bar>
     <div fxLayout="row" fxFlexFill fxFlexAlign="center" fxFlex="100">{{data}}</div>
 </div>

@@ -18,19 +18,19 @@ export class AlertService {
     }
 
     success(message: string, options?: any) {
-        this.alert(new Alert({ ...options, alertType: AlertSettings.SUCCESS, message }));
+        this.alert(new Alert({ ...options, alertType: AlertType.SUCCESS, message }));
     }
 
     error(message: string, options?: any) {
-        this.alert(new Alert({ ...options, alertType: AlertSettings.ERROR, message }));
+        this.alert(new Alert({ ...options, alertType: AlertType.ERROR, message }));
     }
 
     info(message: string, options?: any) {
-        this.alert(new Alert({ ...options, alertType: AlertSettings.INFO, message }));
+        this.alert(new Alert({ ...options, alertType: AlertType.INFO, message }));
     }
 
     warn(message: string, options?: any) {
-        this.alert(new Alert({ ...options, alertType: AlertSettings.WARNING, message }));
+        this.alert(new Alert({ ...options, alertType: AlertType.WARNING, message }));
     }
 
     alert(alert: Alert) { 
@@ -48,12 +48,13 @@ export class Alert {
     message: string; 
     fade: boolean = true;
     alertType: string;
+    expiraAt: Date;
 
     constructor(init?: Partial<Alert>) {
         Object.assign(this, init);
     }
 }
-export class AlertSettings {
+export class AlertType {
     public static SUCCESS = "success";
     public static ERROR = "error";
     public static INFO = "info";

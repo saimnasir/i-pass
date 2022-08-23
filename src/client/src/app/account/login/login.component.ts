@@ -87,10 +87,10 @@ export class LoginComponent implements OnInit {
     // }
 
     login() {
-        // this.alertService.error('Please check invalid fields 1!');
-        // this.alertService.success('Please check invalid fields 2!');
-        // this.alertService.info('Please check invalid fields 3!');
-        // this.alertService.warn('Please check invalid fields 4!');
+        this.alertService.error('Please ...');
+        this.alertService.success('Please ...');
+        this.alertService.info('Please ...');
+        this.alertService.warn('Please ...');
         // this.alertService.success('Please check invalid fields 3!');
         // this.alertService.info('Please check invalid fields 4!');
         // this.alertService.success('Please check invalid fields 5!');
@@ -101,10 +101,11 @@ export class LoginComponent implements OnInit {
         // this.alertService.info('Please check invalid fields 9!');
         // this.alertService.success('Please check invalid fields 10!');
 
+        return;
         this.showError = !this.form.valid;
 
         if (!this.form.valid) {
-            this.alertService.error('Please check invalid fields!');
+            this.alertService.error('Please check invalid fields!', { fade: false });
             return;
         }
 
@@ -117,7 +118,7 @@ export class LoginComponent implements OnInit {
                         this.alertService.success('Wellcome back!');
                         this.router.navigate([this.returnUrl]);
                     } else {
-                        this.alertService.info(response.message);
+                        this.alertService.info(response.message, { fade: false });
                     }
                 },
                 error: (err) => {
