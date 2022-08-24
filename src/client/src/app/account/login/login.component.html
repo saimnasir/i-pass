@@ -2,7 +2,7 @@
 <form [formGroup]="form">
     <mat-card class="example-card mat-elevation-z0 container">
         <mat-card-content class="card-content ">
-           
+
             <div fxLayout="column" fxFlexFill>
                 <div fxFlex="100">
                     <app-input-field formControlName="userName" fxFlex="98" [class]="'example-form-field'"
@@ -20,26 +20,25 @@
                     </app-input-field>
                 </div>
             </div>
-            <div class="alert-section">
-                <alert></alert>
-              </div>
         </mat-card-content>
         <mat-card-footer class="app-card-footer   ">
-            
+
             <mat-card-actions fxFlexAlign="center" class=" ">
                 <div fxLayout="column" fxFlexFill>
-                    <div fxLayout="column"  class=" "> 
+                    <div fxLayout="column" class=" ">
                         <div fxLayout="row" fxFlexFill fxFlexAlign="center" class=" " fxFlex="100">
-                            <button fxFlex="50" class="action-button" (click)="login()" mat-raised-button color="primary">
+                            <button fxFlex="50" class="action-button" (click)="login()" mat-raised-button
+                                color="primary">
                                 <mat-icon>login</mat-icon> Login
                             </button>
-                            <button  fxFlex="50" class="action-button" mat-raised-button color="warn" type="button" (click)="reset()">
+                            <button fxFlex="50" class="action-button" mat-raised-button color="warn" type="button"
+                                (click)="reset()">
                                 <mat-icon>settings_backup_restore</mat-icon>&nbsp;Reset
                             </button>
                         </div>
                     </div>
-                </div> 
-            </mat-card-actions> 
+                </div>
+            </mat-card-actions>
         </mat-card-footer>
     </mat-card>
 </form>

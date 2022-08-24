@@ -63,8 +63,7 @@ import { PinCodeService } from "./_service/pin-code.service";
 import { InputSelectComponent } from './_components/forms/input-select/input-select.component';
 import { InputSwitchComponent } from './_components/forms/input-switch/input-switch.component';
 import { TableSearchDialog } from './common/table-search/table-search-dialog';
-import { LoadingComponent } from './common/loading/loading';
-import { AlertComponent } from './common/alert/alert.component';
+import { LoadingComponent } from './common/loading/loading'; 
 import { SnackBarComponent } from './common/snack-bar/snack-bar';
 
 
@@ -126,8 +125,7 @@ import { SnackBarComponent } from './common/snack-bar/snack-bar';
 
         TableSearchDialog,
         LoadingComponent, 
-        SnackBarComponent, 
-        AlertComponent
+        SnackBarComponent 
     ],
     exports: [
         InputFieldComponent,
@@ -136,7 +134,6 @@ import { SnackBarComponent } from './common/snack-bar/snack-bar';
         MediaQueryStatusComponent,
         InputSwitchComponent,
         LoadingComponent, 
-        AlertComponent,
 
         BrowserAnimationsModule,
         BrowserModule,

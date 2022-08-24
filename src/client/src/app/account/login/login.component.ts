@@ -28,8 +28,7 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
-        this.alertService.clear();
+ 
         // get return url from route parameters or default to '/'
         this.accountService.removeToken();
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -87,19 +86,19 @@ export class LoginComponent implements OnInit {
     // }
 
     login() {
-        this.alertService.error('Please ...');
         this.alertService.success('Please ...');
+        this.alertService.error('Please ...', { fade: false });
         this.alertService.info('Please ...');
-        this.alertService.warn('Please ...');
-        // this.alertService.success('Please check invalid fields 3!');
-        // this.alertService.info('Please check invalid fields 4!');
-        // this.alertService.success('Please check invalid fields 5!');
+        this.alertService.warn('Please ...', { fade: false });
+        this.alertService.success('Please check invalid fields 3!');
+        this.alertService.info('Please check invalid fields 4!');
+        this.alertService.success('Please check invalid fields 5!');
 
-        // this.alertService.error('Please check invalid fields 6!');
-        // this.alertService.warn('Please check invalid fields 7!');
-        // this.alertService.success('Please check invalid fields 8!');
-        // this.alertService.info('Please check invalid fields 9!');
-        // this.alertService.success('Please check invalid fields 10!');
+        this.alertService.error('Please check invalid fields 6!');
+        this.alertService.warn('Please check invalid fields 7!');
+        this.alertService.success('Please check invalid fields 8!');
+        this.alertService.info('Please check invalid fields 9!');
+        this.alertService.success('Please check invalid fields 10!');
 
         return;
         this.showError = !this.form.valid;

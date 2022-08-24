@@ -1,4 +1,5 @@
 import { Component, Inject, Input } from "@angular/core";
+import { ProgressBarMode } from "@angular/material/progress-bar";
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from "@angular/material/snack-bar";
 import { AlertType } from "src/app/_service/alert.service";
 
@@ -8,20 +9,19 @@ import { AlertType } from "src/app/_service/alert.service";
 	templateUrl: 'snack-bar.html',
 	styles: [` 	`,],
 })
-export class SnackBarComponent { 
-	snackType:  any;
+export class SnackBarComponent {
+	snackType: any;
 
 	progress = 100;
+	mode: ProgressBarMode;
 	private currentIntervalId: any;
-	constructor( @Inject(MAT_SNACK_BAR_DATA) public data: any,
-    public snackBarRef: MatSnackBarRef<SnackBarComponent>) {
+	constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any,
+		public snackBarRef: MatSnackBarRef<SnackBarComponent>) {
 		this.snackBarRef.afterOpened().subscribe(
 			() => {
 				const duration = this.snackBarRef.containerInstance.snackBarConfig.duration;
 				this.snackType = this.snackBarRef.containerInstance.snackBarConfig.panelClass;
-				console.log('duration',duration);
-				console.log('snackType',this.snackType);
-				
+				this.mode =  duration ? 'buffer' : 'query';
 				this.runProgressBar(duration ?? 2000);
 			},
 			error => console.error(error)
@@ -50,9 +50,10 @@ export class SnackBarComponent {
 
 	cleanProgressBarInterval() {
 		clearInterval(this.currentIntervalId);
-		console.log("progress bar interval(...) cleaned!");
 	}
 
+ 
+	
 	get Title() {
 		switch (this.snackType) {
 			case AlertType.ERROR: return 'Error';
